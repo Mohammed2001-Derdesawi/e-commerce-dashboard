@@ -241,7 +241,12 @@ License: For each use you must have a valid license purchased only from above li
 											<!--end::Menu item-->
 											<!--begin::Menu item-->
 											<div class="menu-item px-5">
-												<a href="../../demo8/dist/authentication/flows/basic/sign-in.html" class="menu-link px-5">Sign Out</a>
+												<form action="{{ route('admin.logout') }}" method="post">
+													@csrf
+													@method('POST')
+													<button type="submit" class="menu-link px-5">Sign Out</button>
+												</form>
+												
 											</div>
 											<!--end::Menu item-->
 											<!--begin::Menu separator-->

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Admin\Repositories\Admin\Interfaces;
+namespace Modules\Admin\Repositories\Admin\Authorazition;
 
 interface AuthorzationInterface {
     public function getRoles();

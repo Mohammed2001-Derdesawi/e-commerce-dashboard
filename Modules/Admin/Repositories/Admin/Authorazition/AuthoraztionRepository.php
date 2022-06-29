@@ -1,5 +1,5 @@
 <?php
-namespace Modules\Admin\Repositories\Admin;
+namespace Modules\Admin\Repositories\Admin\Authorazition;
 
 
 use Modules\Admin\Entities\Authorization\Role;
