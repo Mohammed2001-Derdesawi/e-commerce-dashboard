@@ -5,7 +5,9 @@ namespace Modules\Admin\Http\Controllers\Authorzation;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Admin\Repositories\Admin\Interfaces\AuthorzationInterface;
+use Modules\Admin\Repositories\Admin\AdminInterface;
+use Modules\Admin\Repositories\Admin\authorazation\AuthoraztionInterface;
+use Modules\Admin\Transformers\Authorzation\PermissionResource;
 
 class RoleController extends Controller
 {
@@ -14,56 +16,35 @@ class RoleController extends Controller
      * @return Renderable
      */
     private $roleRepository;
-     public function __construct(AuthorzationInterface $authorationinterface)
+     public function __construct(AuthoraztionInterface $authorationinterface)
 
      {
         $this->roleRepository=$authorationinterface;
 
      }
+
     public function index()
     {
+
         $roles=$this->roleRepository->getRoles();
-        dd($roles);
-        return view('admin::index');
+
+        return view('admin::Admin.authorization.index',compact('roles'));
+    }
+    public function show($role)
+    {
+        $role=$this->roleRepository->findRole($role,['permissions:name','users']);
+        return view('admin::Admin.authorization.show',compact('role'));
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('admin::create');
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('admin::show');
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
+    public function edit($role)
     {
-        return view('admin::edit');
+        $role=$this->roleRepository->findRole($role,['permissions:id']);
+        $permissions=$this->roleRepository->getAllPermission();
+        return view('admin::Admin.authorization.edit',compact('role','permissions'));
     }
 
     /**
@@ -72,18 +53,28 @@ class RoleController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $role)
     {
-        //
+         $validated=$request->validate([
+            'name'=>'required|min:5|max:15|string|unique:roles,name,'.$request->name.',name',
+
+         ]);
+         if(!$validated)
+         return redirect()->route('admin.roles.edit',$role)->withErrors($validated);
+
+         $role=$this->roleRepository->findRole($role);
+         $role=$this->roleRepository->updateRole($role,$request);
+         return redirect()->route('admin.roles.edit',$role->id)->with('success','Role Updated Successfull');
+
+    }
+    public function destroy($role){
+        $role=$this->roleRepository->deleteRole($role);
+        if(str_starts_with($role,'No'))
+        return redirect()->route('admin.roles')->with('faild',$role);
+
+        return redirect()->route('admin.roles')->with('success',$role);
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
-    }
+
 }

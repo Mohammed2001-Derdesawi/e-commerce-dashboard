@@ -13,11 +13,12 @@ License: For each use you must have a valid license purchased only from above li
 <html lang="en">
 	<!--begin::Head-->
 	<head><base href="">
-		<title>@yield('Page_title')</title>
+		<title>@yield('page_title')</title>
 		<meta charset="utf-8" />
 		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
 		<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="csrf-token" value="{{ csrf_token() }}"/>
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:type" content="article" />
 		<meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
@@ -29,6 +30,7 @@ License: For each use you must have a valid license purchased only from above li
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
 		<!--begin::Page Vendor Stylesheets(used by this page)-->
+        <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
 		<link href="{{asset('assets/Admin/plugins/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('assets/Admin/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<!--end::Page Vendor Stylesheets-->
@@ -241,7 +243,12 @@ License: For each use you must have a valid license purchased only from above li
 											<!--end::Menu item-->
 											<!--begin::Menu item-->
 											<div class="menu-item px-5">
-												<a href="../../demo8/dist/authentication/flows/basic/sign-in.html" class="menu-link px-5">Sign Out</a>
+                                                <form action="{{route('admin.logout')}}" class="menu-item px-5 my-1" method="post">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <button type="submit" class="menu-link px-5">Sign Out</button>
+                                                </form>
+
 											</div>
 											<!--end::Menu item-->
 											<!--begin::Menu separator-->
@@ -1021,7 +1028,7 @@ License: For each use you must have a valid license purchased only from above li
 											</span>
 											<!--end::Svg Icon-->
 										</span>
-										<span class="menu-title">Ecommerce</span>
+										<span class="menu-title">E-commerce</span>
 										<span class="menu-arrow"></span>
 									</span>
 									<div class="menu-sub menu-sub-accordion">
@@ -1216,8 +1223,80 @@ License: For each use you must have a valid license purchased only from above li
 									</div>
 								</div>
 							</div>
+
+                             	<!--begin::Menu-->
+							<div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
+								<div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+									<span class="menu-link">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+											<span class="svg-icon svg-icon-2">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+													<rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor" />
+													<rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="currentColor" />
+													<rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="currentColor" />
+													<rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="currentColor" />
+												</svg>
+											</span>
+											<!--end::Svg Icon-->
+										</span>
+										<span class="menu-title">Authorization</span>
+										<span class="menu-arrow"></span>
+									</span>
+									<div class="menu-sub menu-sub-accordion">
+										<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+											<span class="menu-link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Roles</span>
+												<span class="menu-arrow"></span>
+											</span>
+											<div class="menu-sub menu-sub-accordion">
+												<div class="menu-item">
+													<a class="menu-link" href="{{route('admin.roles')}}">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">Roles List</span>
+													</a>
+												</div>
+
+
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+
+
+
+
+                            <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
+								<div  class="menu-item here show menu-accordion">
+									<span class="menu-link">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+											<span class="svg-icon svg-icon-2">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+													<rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor" />
+													<rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="currentColor" />
+													<rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="currentColor" />
+													<rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="currentColor" />
+												</svg>
+											</span>
+											<!--end::Svg Icon-->
+										</span>
+										<a  href="{{route('admin.index')}}" class="menu-title">Admins</a>
+									</span>
+
+								</div>
+							</div>
 							<!--end::Menu-->
 						</div>
+
 						<!--end::Aside Menu-->
 					</div>
 					<!--end::Aside menu-->
@@ -1321,7 +1400,10 @@ License: For each use you must have a valid license purchased only from above li
 					<!--end::Header-->
 					<!--begin::Content-->
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-						@yield('content')
+                        <div id="app">
+                            @yield('content')
+                        </div>
+
 					</div>
 					<!--end::Content-->
 					<!--begin::Footer-->
@@ -4414,23 +4496,19 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Modal - Users Search-->
 		<!--end::Modals-->
 		<!--begin::Javascript-->
-		<script>var hostUrl = "assets/";</script>
+		{{-- <script>var hostUrl = "assets/";</script> --}}
+
 		<!--begin::Global Javascript Bundle(used by all pages)-->
 		<script src="{{asset('assets/Admin/plugins/global/plugins.bundle.js')}}"></script>
 		<script src="{{asset('assets/Admin/js/scripts.bundle.js')}}"></script>
 		<!--end::Global Javascript Bundle-->
-		<!--begin::Page Vendors Javascript(used by this page)-->
-		<script src="{{asset('assets/Admin/plugins/custom/fullcalendar/fullcalendar.bundle.js')}}"></script>
-		<script src="{{asset('assets/Admin/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-		<!--end::Page Vendors Javascript-->
-		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="{{asset('assets/Admin/js/widgets.bundle.js')}}"></script>
-		<script src="{{asset('assets/Admin/js/custom/widgets.js')}}"></script>
-		<script src="{{asset('assets/Admin/js/custom/apps/chat/chat.js')}}"></script>
-		<script src="{{asset('assets/Admin/js/custom/utilities/modals/users-search.js')}}"></script>
+
 		<!--end::Page Custom Javascript-->
-		<!--end::Javascript-->
         @yield('js')
+
+		<!--end::Javascript-->
+        <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
+
 	</body>
 	<!--end::Body-->
 </html>

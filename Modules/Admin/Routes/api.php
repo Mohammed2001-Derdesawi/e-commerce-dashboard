@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Modules\Admin\Http\Controllers\Admin\Api\AdminApiController;
+use Modules\Admin\Http\Controllers\Authorzation\Api\RoleApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,30 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/admin', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/admin', function (Request $request) {
+//     return $request->user();
+// });
+Route::prefix('/admin')->group(function (){
+    Route::get('/getadmins',[AdminApiController::class,'getAdmins']);
+    Route::get('/search',[AdminApiController::class,'serachAdmin']);
+    Route::post('/delete',[AdminApiController::class,'deleteAdmin']);
+    Route::post('//changestaus/',[AdminApiController::class,'changeStatusAdmin']);
+    Route::post('//store/',[AdminApiController::class,'store']);
+    //End Admin Api
+
+    // Start Roles Api
+
+    Route::prefix('/roles')->group( function (){
+        Route::get('/',[RoleApiController::class,'getRoles']);
+        Route::get('/permissions',[RoleApiController::class,'getPermissions']);
+        Route::post('/store',[RoleApiController::class,'storeRole']);
+        Route::get('/get/admins',[RoleApiController::class,'getAdminsRole']);
+        Route::post('admin/delete',[RoleApiController::class,'deleteAdminFormRole']);
+
+    });
+
+
+    // End Roles Api
 });
+
+
