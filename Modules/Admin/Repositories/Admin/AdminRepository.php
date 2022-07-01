@@ -11,7 +11,7 @@ class AdminRepository implements AdminInterface
 {
 
     private $admin;
-    private $avatarslink='/Galary/admin/avatars';
+    private $avatarslink='Galary/admin/avatars';
     private $roleRepo;
 
     public function __construct(AuthoraztionInterface $authinterface)
@@ -29,13 +29,13 @@ class AdminRepository implements AdminInterface
     }
     public function findAdminById($id)
     {
-         return Admin::find($id)->first()??null;
+         return Admin::findOrFail($id)->first();
     }
     public function storeAdmin($request){
         if($request->file('avatar'))
         {
             $file=$request->file('avatar');
-          $filename=$this->saveAvatar($file);
+            $filename=$this->avatarslink.'/'.SaveImage($this->avatarslink,$file);
 
         }
         $admin=Admin::create([
@@ -66,7 +66,7 @@ class AdminRepository implements AdminInterface
             if($admin->avatar)
             unlink(public_path($admin->avatar));
             $file=$request->file('avatar');
-            $filename=$this->saveAvatar($file);
+            $filename=SaveImage($this->avatarslink,$file);
             $admin->avatar=$this->avatarslink.'/'.$filename;
 
          }
@@ -82,7 +82,7 @@ class AdminRepository implements AdminInterface
             if($this->admin->avatar)
             unlink(public_path($this->admin->avatar));
             $file=$request->file('avatar');
-            $filename=$this->saveAvatar($file);
+            $filename=SaveImage($this->avatarslink,$file);
             $this->admin->avatar=$this->avatarslink.'/'.$filename;
          }
          $this->admin->save();
@@ -102,7 +102,7 @@ class AdminRepository implements AdminInterface
     }
     public function findAdminByEmail($email,$relations=[])
     {
-        return Admin::with($relations)->where('email',$email)->first()??null;
+        return Admin::with($relations)->where('email',$email)->first()??abort(404);
 
     }
 
@@ -153,13 +153,7 @@ class AdminRepository implements AdminInterface
 
     }
 
-    public function saveAvatar($file)
-    {
 
-        $filename=time().$file->getClientOriginalName();
-        $file->move(public_path($this->avatarslink),$filename);
-        return $filename;
-    }
 
     public function searchAdmin($request)
     {

@@ -26,7 +26,7 @@ class RoleController extends Controller
     public function index()
     {
 
-        $roles=$this->roleRepository->getRoles();
+        $roles=$this->roleRepository->getRoles(['name','id','created_at']);
 
         return view('admin::Admin.authorization.index',compact('roles'));
     }
@@ -69,10 +69,8 @@ class RoleController extends Controller
     }
     public function destroy($role){
         $role=$this->roleRepository->deleteRole($role);
-        if(str_starts_with($role,'No'))
-        return redirect()->route('admin.roles')->with('faild',$role);
-
-        return redirect()->route('admin.roles')->with('success',$role);
+        if($role)
+        return redirect()->route('admin.roles')->with('success',);
 
     }
 

@@ -10,24 +10,24 @@ use function PHPUnit\Framework\returnSelf;
 
 class AuthoraztionRepository implements AuthoraztionInterface
 {
-    public function getRoles()
+    public function getRoles($params=['name'])
     {
         // DB::raw('select `name`, `id`, `created_at`, ( select count(*) from `admins` inner join `model_has_roles` on `admins`.`id` = `model_has_roles`.`model_id` where `roles`.`id` = `model_has_roles`.`role_id` ) as `admin_count` from `roles` order by `created_at` desc; ')
-          return Role::with('permissions:name')->select('name','id','created_at')->orderBy('created_at','desc')->withCount('users as admin_count')->withCount('permissions')->get();
+          return Role::with('permissions:name')->select($params)->orderBy('created_at','desc')->withCount('users as admin_count')->withCount('permissions')->get();
 
 
 
     }
-    public function getPermissions(){
-        return Permission::select('name','id')->paginate(10);
 
-    }
     public function findRole($role,$relations=[]){
 
-        return Role::with($relations)->find($role)??null;
+        return Role::with($relations)->findOrFail($role);
     }
-    public function getAllPermission()
+    public function getAllPermission($paginate=0)
     {
+        if($paginate)
+        return Permission::select('name','id')->paginate($paginate);
+
         return Permission::select('name','id')->get();
 
     }
@@ -96,17 +96,16 @@ class AuthoraztionRepository implements AuthoraztionInterface
     public function deleteRole($role)
     {
         $role=$this->findRole($role);
-        if(!$role)
-        return 'No Role Found with this id:'.$role;
-
+        dd($role);
         $role->delete();
-
-        return 'Role Deleted Succesfull:';
+        return $role;
 
     }
     public function deleteAdminFormRole($admin,$role)
     {
         $admin=Admin::where('email',$admin)->first();
+        if(!$admin)
+        abort(404);
         $admin=$this->revokeRolesToAdmin($role,$admin);
         return $admin;
 
