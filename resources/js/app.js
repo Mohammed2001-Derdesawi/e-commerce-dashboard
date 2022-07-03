@@ -8,6 +8,7 @@ Vue.component('adminslist-component',require('./components/Admin/AdminslistCompo
 Vue.component('roleslist-component',require('./components/Roles/RoleslistComponent').default);
  Vue.component('rolesadmin-component',require('./components/Roles/RolesadminComponent').default);
  Vue.component('storerole-component',require('./components/Roles/StoreroleComponent').default);
+ Vue.component('orderslist-component',require('./components/Order/OrderslistComponent').default);
 
 
 

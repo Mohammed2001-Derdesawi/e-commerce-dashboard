@@ -1,5 +1,7 @@
-@extends('admin::Admin.layouts.Dashboard.master')
+@extends('Dashboard.master')
 @section('page_title','Edit Admin')
+@section('nav_title','Edit Admin')
+
 @section('breadcrumb')
 	<ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 pt-1">
 										<!--begin::Item-->

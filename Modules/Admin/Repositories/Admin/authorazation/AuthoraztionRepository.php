@@ -10,10 +10,10 @@ use function PHPUnit\Framework\returnSelf;
 
 class AuthoraztionRepository implements AuthoraztionInterface
 {
-    public function getRoles($params=['name'])
+    public function getRoles($params=['name'],$relations=[])
     {
         // DB::raw('select `name`, `id`, `created_at`, ( select count(*) from `admins` inner join `model_has_roles` on `admins`.`id` = `model_has_roles`.`model_id` where `roles`.`id` = `model_has_roles`.`role_id` ) as `admin_count` from `roles` order by `created_at` desc; ')
-          return Role::with('permissions:name')->select($params)->orderBy('created_at','desc')->withCount('users as admin_count')->withCount('permissions')->get();
+     return Role::with($relations)->select($params)->orderBy('created_at','desc')->withCount('permissions')->get();
 
 
 
@@ -48,10 +48,6 @@ class AuthoraztionRepository implements AuthoraztionInterface
     public function assignRolePermissions($role,$permissions){
 
            $role->givePermissionTo($permissions);
-
-
-
-
     }
     public function createRole($request){
           $role=Role::create([
@@ -68,10 +64,6 @@ class AuthoraztionRepository implements AuthoraztionInterface
                ]);
              $role=$this->syncRolePermissions($role,$request->permissions);
              return $role;
-
-
-
-
 
     }
     public function assignRolesToAdmin($roles,$admin){
@@ -96,7 +88,6 @@ class AuthoraztionRepository implements AuthoraztionInterface
     public function deleteRole($role)
     {
         $role=$this->findRole($role);
-        dd($role);
         $role->delete();
         return $role;
 
@@ -108,7 +99,6 @@ class AuthoraztionRepository implements AuthoraztionInterface
         abort(404);
         $admin=$this->revokeRolesToAdmin($role,$admin);
         return $admin;
-
     }
 
 }

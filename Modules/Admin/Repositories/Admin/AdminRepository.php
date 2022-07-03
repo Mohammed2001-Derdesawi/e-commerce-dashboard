@@ -1,9 +1,12 @@
 <?php
 namespace Modules\Admin\Repositories\Admin;
 
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Modules\Admin\Entities\Admin\Admin;
+use Modules\Admin\Filters\Admin\Search;
+use Modules\Admin\Filters\Admin\Status;
 use Modules\Admin\Repositories\Admin\AdminInterface;
 use Modules\Admin\Repositories\Admin\authorazation\AuthoraztionInterface;
 
@@ -18,9 +21,23 @@ class AdminRepository implements AdminInterface
     {
              $this->roleRepo=$authinterface;
     }
-    public function getAdmins($request,$paginate=15){
+    public function getAdmins($paginate=15,$relations=[],$params=['*']){
 
-        return Admin::query()->admin($request->filter);
+
+
+        return app(Pipeline::class)
+        ->send(Admin::query())
+        ->through([
+            Status::class,
+            Search::class
+        ])
+        ->thenReturn()
+        ->with($relations)
+        ->select($params)
+
+        ->paginate($paginate);
+
+        // return Admin::with('roles')->admin($request->filter);
 
     }
     public function getRoleRepo()
@@ -63,11 +80,7 @@ class AdminRepository implements AdminInterface
          if($request->file('avatar'))
          {
 
-            if($admin->avatar)
-            unlink(public_path($admin->avatar));
-            $file=$request->file('avatar');
-            $filename=SaveImage($this->avatarslink,$file);
-            $admin->avatar=$this->avatarslink.'/'.$filename;
+            $admin=$this->saveAvatar($admin,$request);
 
          }
          $admin->save();
@@ -79,11 +92,7 @@ class AdminRepository implements AdminInterface
         $this->admin->username=$request->username;
          if($request->file('avatar'))
          {
-            if($this->admin->avatar)
-            unlink(public_path($this->admin->avatar));
-            $file=$request->file('avatar');
-            $filename=SaveImage($this->avatarslink,$file);
-            $this->admin->avatar=$this->avatarslink.'/'.$filename;
+            $this->admin=$this->saveAvatar($this->admin,$request);
          }
          $this->admin->save();
          return $this->admin;
@@ -96,13 +105,13 @@ class AdminRepository implements AdminInterface
     }
     public function changestatus($email){
         $admin=$this->findAdminByEmail($email);
-        $admin->status=$admin->status==1?0 : 1;
+        $admin->status=$admin->status?0 : 1;
         $admin->save();
         return $admin;
     }
-    public function findAdminByEmail($email,$relations=[])
+    public function findAdminByEmail($email,$relations=[],$params=['*'])
     {
-        return Admin::with($relations)->where('email',$email)->first()??abort(404);
+        return Admin::with($relations)->select($params)->where('email',$email)->first()??abort(404);
 
     }
 
@@ -128,13 +137,6 @@ class AdminRepository implements AdminInterface
             $admin->save();
             return $this->admin;
 
-
-
-
-
-
-
-
     }
     public function updatedPasswordProfile($request)
     {
@@ -153,15 +155,25 @@ class AdminRepository implements AdminInterface
 
     }
 
-
-
-    public function searchAdmin($request)
+    public function saveAvatar($admin,$request)
     {
-
-        $admins=Admin::query()->search($request->search);
-        return $admins;
-
+        if($admin->avatar)
+        unlink(public_path($admin->avatar));
+        $file=$request->file('avatar');
+        $filename=SaveImage($this->avatarslink,$file);
+        $admin->avatar=$this->avatarslink.'/'.$filename;
+        return $admin;
     }
+
+
+
+    // public function searchAdmin($request,$paginate=15)
+    // {
+
+    //     $admins=Admin::query()->search($request->search,$paginate);
+    //     return $admins;
+
+    // }
 
 
 }

@@ -21,7 +21,6 @@ use Modules\Admin\Http\Controllers\Authorzation\Api\RoleApiController;
 // });
 Route::prefix('/admin')->group(function (){
     Route::get('/getadmins',[AdminApiController::class,'getAdmins']);
-    Route::get('/search',[AdminApiController::class,'serachAdmin']);
     Route::post('/delete',[AdminApiController::class,'deleteAdmin']);
     Route::post('//changestaus/',[AdminApiController::class,'changeStatusAdmin']);
     Route::post('//store/',[AdminApiController::class,'store']);

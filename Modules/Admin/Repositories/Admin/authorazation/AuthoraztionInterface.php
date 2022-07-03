@@ -3,7 +3,7 @@
 namespace Modules\Admin\Repositories\Admin\authorazation;
 
 interface AuthoraztionInterface {
-    public function getRoles($params=[]);
+    public function getRoles($params=[],$relations=[]);
     public function findRole($role,$relations=[]);
     public function syncRolePermissions($role,$permissions);
     public function assignRolePermissions($role,$permissions);

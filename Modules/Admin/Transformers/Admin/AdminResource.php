@@ -21,7 +21,7 @@ class AdminResource extends JsonResource
             'last_login_at'=>$this->last_login_at,
             'created_at'=>$this->created_at,
             'status'=>$this->status,
-            'roles'=>$this->getRoleNames()
+            'roles'=>$this->roles,
 
         ];
     }

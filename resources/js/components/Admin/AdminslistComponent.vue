@@ -67,7 +67,7 @@
                                 <select class="form-select form-select-solid fw-bolder"
 
                                       v-model="filter">
-                                    <option value="-1">None</option>
+                                    <option value="">None</option>
                                     <option value="0">InActive</option>
                                     <option value="1">Active</option>
 
@@ -154,8 +154,8 @@
                             </p>
                         </td>
                           <td>
-                            <span  v-for=" (role,index) in admin.roles" :key="role" class="badge badge-light-primary fs-7 m-1" :class="{'badge-light-primary':index%2==0,'badge-light-danger':index%2==1}">{{role}}</span>
-                          <span  v-if="!admin.roles">--</span>
+                            <span  v-for=" (role,index) in admin.roles" :key="role.id" class="badge badge-light-primary fs-7 m-1" :class="{'badge-light-primary':index%2==0,'badge-light-danger':index%2==1}">{{role.name}}</span>
+                          <span  v-if="admin.roles.lenght==0">--</span>
 
                         </td>
 
@@ -329,7 +329,7 @@
 																				<i class="bi bi-pencil-fill fs-7"></i>
 																				<!--begin::Inputs-->
 																				<input type="file" name="avatar" accept=".png, .jpg, .jpeg" @change="uploadAvatar" />
-																				<input type="hidden" name="avatar_remove" @change="removeAvatar" />
+																				<input type="hidden" name="avatar_remove" @click="removeAvatar" />
 																				<!--end::Inputs-->
 																			</label>
 																			<!--end::Label-->
@@ -472,7 +472,8 @@ export default {
             },
             roles:[],
             errors:{},
-            filter:-1,
+            filter:'',
+            perpage:15,
         };
     },
     mounted() {
@@ -483,7 +484,7 @@ export default {
         getAdmins()
         {
 
-           axios.get("/api/admin/getadmins",{params:{filter:this.filter}}).then((response) => {
+           axios.get("/api/admin/getadmins?paginate="+this.perpage+(this.filter?"&status="+this.filter:'')).then((response) => {
             this.admins = response.data.data;
             this.paginate = response.data.meta;
             this.pages = this.pagesNumbers();
@@ -606,7 +607,14 @@ export default {
     {
         search($value)
         {
-         axios.get('/api/admin/search?search='+this.search).then((response)=>{
+            if(!this.filter)
+         axios.get('/api/admin/getadmins?search='+this.search+'&&paginate='+this.perpage).then((response)=>{
+                this.admins = response.data.data;
+                this.paginate = response.data.meta;
+                this.pages = this.pagesNumbers();
+        })
+        else
+         axios.get('/api/admin/getadmins?search='+this.search+"&&status="+this.status+"&&paginate="+this.perpage).then((response)=>{
                 this.admins = response.data.data;
                 this.paginate = response.data.meta;
                 this.pages = this.pagesNumbers();

@@ -21,7 +21,7 @@ class RoleApiController extends Controller
       }
     public function getRoles()
     {
-        return RoleResource::collection($this->roleRepo->getRoles(['name','id','created_at']));
+        return RoleResource::collection($this->roleRepo->getRoles(['name','id','created_at'],['permissions:id,name']));
     }
     public function storeRole(RoleRequest $request)
     {

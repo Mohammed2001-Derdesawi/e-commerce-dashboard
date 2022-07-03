@@ -48,20 +48,11 @@ class Admin extends Authenticatable
     {
         return Carbon::parse($this->attributes['created_at'])->format('Y-m-d');
     }
-    public function scopeSearch($query,$search)
-    {
-        return $query->where('email','Like','%'.$search.'%')->orWhere('username','Like','%'.$search.'%')->paginate(15);
-    }
-    public function scopeAdmin($query,$filter)
-    {
 
-        return $filter!=-1?$query->where('status',$filter)->orderBy('created_at','desc')->paginate(15):$query->orderBy('created_at','desc')->paginate(15);
 
-    }
-    public function scopeFilter($query,$search)
-    {
-        return $query->where('email','Like','%'.$search.'%')->orWhere('username','Like','%'.$search.'%');
-    }
+    // setPasswordAttibute($val){
+//    $this->Attributess["password"]=bcrypt($val)
+    // }//
 
 
 }

@@ -22,9 +22,13 @@ class AdminApiController extends Controller
         $this->adminRepo=$admininterface;
 
     }
-    public function getAdmins(Request $request)
+    public function getAdmins()
     {
-       return AdminResource::collection($this->adminRepo->getAdmins($request));
+       return AdminResource::collection($this->adminRepo->getAdmins(
+           request()->paginate??15,
+           ['roles:id,name'],
+           ['email','username','created_at','last_login_at','status','avatar','id']
+       ));
 
     }
 
@@ -33,12 +37,12 @@ class AdminApiController extends Controller
     {
        $this->adminRepo->changestatus($request->email);
     }
-    public function serachAdmin(Request $request)
-    {
-        $admins=$this->adminRepo->searchAdmin($request);
-        return AdminResource::collection($admins);
+    // public function serachAdmin(Request $request)
+    // {
+    //     $admins=$this->adminRepo->searchAdmin($request,$paginate=15);
+    //     return AdminResource::collection($admins);
 
-    }
+    // }
     public function deleteAdmin(Request $request)
     {
          $this->adminRepo->deleteadmin($request->email);

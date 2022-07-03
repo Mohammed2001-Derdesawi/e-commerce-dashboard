@@ -1,5 +1,7 @@
-@extends('admin::Admin.layouts.Dashboard.master')
+@extends('Dashboard.master')
 @section('page_title','Edit Role')
+@section('nav_title','Edit Role')
+
 @section('breadcrumb')
 	<ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 pt-1">
 										<!--begin::Item-->
@@ -120,7 +122,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <select name="permissions[]" aria-label="Select a Permissions" data-control="select2" data-placeholder="Select a Roles" class="form-select form-select-solid form-select-lg fw-bold" multiple>
+                                <select name="permissions[]" aria-label="Select a Permissions" data-control="select2" data-placeholder="Select a Permissions" class="form-select form-select-solid form-select-lg fw-bold" multiple>
                                     <option value="">Select a Permissions...</option>
                                     @foreach ($permissions as $permission )
 

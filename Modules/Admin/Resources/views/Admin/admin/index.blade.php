@@ -1,4 +1,4 @@
-@extends('admin::Admin.layouts.Dashboard.master')
+@extends('Dashboard.master')
 @section('page_title','Admins')
 @section('nav_title','Admins')
 @section('breadcrumb')

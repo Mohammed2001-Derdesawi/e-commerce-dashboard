@@ -67,7 +67,8 @@ class AdminController extends Controller
     {
         $relations=['roles:id,name'];
         $admin=$this->adminRepo->findAdminByEmail($email,$relations);
-        $roles=$this->adminRepo->getRoleRepo()->getRoles();
+        $roles=$this->adminRepo->getRoleRepo()->getRoles(['name','id','created_at']);
+
 
         return view('admin::Admin.admin.edit',compact('admin','roles'));
     }
