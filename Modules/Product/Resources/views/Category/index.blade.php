@@ -33,10 +33,10 @@
     <style>
     .description {
         display:inline-block;
-    width:180px;
-    white-space: nowrap;
-    overflow:hidden !important;
-    text-overflow: ellipsis;
+        width:180px;
+        white-space: nowrap;
+        overflow:hidden !important;
+        text-overflow: ellipsis;
     }
     </style>
 @endsection
@@ -48,7 +48,7 @@
 
 @if(Session::has('message'))
 <div class="alert alert-success" role="alert" style="width: 70%; margin-left: 15%;">
-    <strong>Note !!</strong><span>{{ Session::get('message') }}</span>
+    <strong> Note !! </strong><span>{{ Session::get('message') }}</span>
 </div>
 @endif
 
@@ -92,7 +92,7 @@
                     <!--begin::Card toolbar-->
                     <div class="card-toolbar">
                         <!--begin::Add customer-->
-                        <a href="{{ route('category.create') }}" class="btn btn-primary">Add
+                        <a href="{{ route('admin.category.create') }}" class="btn btn-primary">Add
                             Category</a>
                         <!--end::Add customer-->
                     </div>
@@ -138,10 +138,10 @@
                                 <td>
                                     <div class="d-flex">
                                         <!--begin::Thumbnail-->
-                                        <img src="{{ asset('storage/images/categories/'.$category->image) }}" alt=""
+                                        <img src="{{ asset('storage/'.$category->image) }}" alt=""
                                             class="symbol symbol-50px" style="width: 60px; height: 60px;" />
                                         <span class="symbol-label"
-                                            style="background-image:url(assets/media//stock/ecommerce/68.gif);"></span>
+                                            style=""></span>
                                         <!--end::Thumbnail-->
                                         <div class="ms-5">
                                             <!--begin::Title-->
@@ -150,7 +150,7 @@
                                             </p>
                                             <!--end::Title-->
                                             <!--begin::Description-->
-                                            
+
                                             <!--end::Description-->
                                         </div>
                                     </div>
@@ -195,13 +195,13 @@
                                         data-kt-menu="true">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('category.edit',['id'=>$category->id]) }}"
+                                            <a href="{{ route('admin.category.edit',['id'=>$category->id]) }}"
                                                 class="menu-link px-3">Edit</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('category.delete',$category->id) }}"
+                                            <a href="{{ route('admin.category.delete',$category->id) }}"
                                                 class="menu-link px-3"
                                                 data-kt-ecommerce-category-filter="delete_row">Delete</a>
                                         </div>
@@ -218,7 +218,7 @@
                     </table>
                     <!--end::Table-->
 
-                    {{ $categories->links() }}
+                    {!! $categories->links() !!}
                 </div>
                 <!--end::Card body-->
             </div>

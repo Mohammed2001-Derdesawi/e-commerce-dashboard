@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 namespace Modules\Product\Repository\Category;
 
 interface CategoryRepositoryInterface {
-    
-    public function allCategories ($data);
+
+    public function allCategories ($data ,  $paginate = 0 ,  $columns = ['*'] , $relations = ['*']);
 
     public function storeCategory($request);
 
@@ -12,7 +12,13 @@ interface CategoryRepositoryInterface {
 
     public function deleteCategory($id);
 
-    // public function searchCategory($data);
+
+
+
+    // public function getMinParentCategories($id);
+
+    // public function getParentsCategories($id);
+
 }
 
 

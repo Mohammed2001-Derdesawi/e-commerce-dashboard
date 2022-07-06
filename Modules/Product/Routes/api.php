@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\Product\Http\Controllers\Brand\Api\BrandApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/product', function (Request $request) {
-    return $request->user();
+Route::prefix('/admin')->name('admin.')->group(function() {
+    
+    // begin::Brand Routes
+    Route::name('brand')->group(function () {
+        Route::get('/brands', [BrandApiController::class , 'index'])->name('index');
+        Route::post('/brand/create', [BrandApiController::class , 'store'])->name('store');
+        Route::delete('/brand/delete/{id}', [BrandApiController::class , 'destroy'])->name('delete');
+        Route::post('/brand/update/{id}', [BrandApiController::class , 'update'])->name('update');
+    });
+    // end::Brand Routes
+    
 });

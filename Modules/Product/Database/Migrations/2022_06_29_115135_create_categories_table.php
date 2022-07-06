@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('status')->default(0);
             $table->string('image');
             $table->unsignedInteger('parent_id')->nullable();
-            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('CASCADE');
+            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('SET NULL');
 
             $table->timestamps();
         });

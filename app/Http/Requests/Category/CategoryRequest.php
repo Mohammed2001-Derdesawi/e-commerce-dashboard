@@ -21,6 +21,7 @@ class CategoryRequest extends FormRequest
             'meta_title' => 'required',
             'meta_keywords' => 'required',
             'status' => 'required',
+            'parent_id' => 'nullable',
             'image' => 'required|image|mimes:png,jpg,jpeg',
         ];
     }

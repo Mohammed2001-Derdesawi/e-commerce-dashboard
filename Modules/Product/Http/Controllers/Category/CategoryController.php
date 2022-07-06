@@ -4,7 +4,7 @@ namespace Modules\Product\Http\Controllers\Category;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Product\Entities\Category;
+use Modules\Product\Entities\Category\Category;
 use Illuminate\Contracts\Support\Renderable;
 use App\Http\Requests\Category\CategoryRequest;
 use App\Http\Requests\Category\UpdateCategoryRequest;
@@ -20,16 +20,15 @@ class CategoryController extends Controller
     }
 
 
-
-
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index(Request $request)
     {
-        $categories = $this->categoryRepo->allCategories($request);
-        $categories->appends($request->all());
+        $categories = $this->categoryRepo->allCategories($request , 5 , [
+            'id' , 'name' , 'description' , 'status' , 'image'
+        ] , $relations = ['*']);
         return view('product::Category.index' , compact('categories'));
     }
 
@@ -39,7 +38,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::select('id' , 'name')->doesntHave('parent.parent.parent')->get();
+        $categories = $this->categoryRepo->allCategories(['id' , 'name']);
         return view('product::Category.create' , compact('categories'));
     }
 
@@ -50,10 +49,8 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-
-        // dd($request);
         $this->categoryRepo->storeCategory($request);
-        return redirect()->route('category.index')->with('message' , 'Category Created Successfully');
+        return redirect()->route('admin.category.index')->with('message' , 'Category Created Successfully');
     }
 
     /**
@@ -73,8 +70,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::where('id' , $id)->first();
-        $categories = Category::select('id' , 'name')->doesntHave('parent.parent.parent')->get();
+        $category = findById($id , new Category);
+        $categories = $this->categoryRepo->allCategories(['id' , 'name']);
         return view('product::Category.edit' , compact('category' , 'categories'));
     }
 
@@ -86,9 +83,8 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, $id)
     {
-        // dd($request);
         $this->categoryRepo->updateCategory($request , $id);
-        return redirect()->route('category.index')->with('message' , 'Category Updated Successfully');
+        return redirect()->route('admin.category.index')->with('message' , 'Category Updated Successfully');
     }
 
     /**
@@ -99,6 +95,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $this->categoryRepo->deleteCategory($id);
-        return redirect()->route('category.index')->with('message' , 'Category Deleted Successfully');
+        return redirect()->route('admin.category.index')->with('message' , 'Category Deleted Successfully');
     }
 }

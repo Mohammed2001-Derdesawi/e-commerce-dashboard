@@ -36,6 +36,12 @@ License: For each use you must have a valid license purchased only from above li
 		<link href="{{asset('assets/Admin/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('assets/Admin/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
+
+
+		<link href="{{ asset('css/app.css') }}" />
+
+
+
         @yield('css')
 	</head>
 	<!--end::Head-->
@@ -1014,7 +1020,7 @@ License: For each use you must have a valid license purchased only from above li
 													</a>
 												</div>
 												<div class="menu-item">
-													<a class="menu-link" href="{{ route('category.index') }}">
+													<a class="menu-link" href="{{ route('admin.category.index') }}">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
@@ -1022,15 +1028,15 @@ License: For each use you must have a valid license purchased only from above li
 													</a>
 												</div>
 												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/catalog/add-product.html">
+													<a class="menu-link" href="{{ route('admin.brand.index') }}">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
-														<span class="menu-title">Add Product</span>
+														<span class="menu-title">Brands</span>
 													</a>
 												</div>
 												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/catalog/edit-product.html">
+													<a class="menu-link" href="">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
@@ -1292,7 +1298,9 @@ License: For each use you must have a valid license purchased only from above li
 					<!--end::Header-->
 					<!--begin::Content-->
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-						@yield('content')
+						<div id="app">
+							@yield('content')
+						</div>
 					</div>
 					<!--end::Content-->
 					<!--begin::Footer-->
@@ -4390,6 +4398,7 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="{{asset('assets/Admin/plugins/global/plugins.bundle.js')}}"></script>
 		<script src="{{asset('assets/Admin/js/scripts.bundle.js')}}"></script>
 		<script src="{{asset('assets/Admin/js/general.js')}}"></script>
+		<script src="{{ asset('js/app.js') }}"></script>
 
 		<!--end::Global Javascript Bundle-->
 		<!--end::Javascript-->

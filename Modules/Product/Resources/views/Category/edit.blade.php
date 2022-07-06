@@ -26,7 +26,7 @@
     </li>
     <!--end::Item-->
     <!--begin::Item-->
-    <li class="breadcrumb-item text-dark">Categories</li>
+    <li class="breadcrumb-item text-muted">Categories</li>
     <!--end::Item-->
     <!--begin::Item-->
     <li class="breadcrumb-item">
@@ -54,7 +54,7 @@
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
-            <form class="form d-flex flex-column flex-lg-row" action="{{ route('category.update',$category->id) }}"
+            <form class="form d-flex flex-column flex-lg-row" action="{{ route('admin.category.update',$category->id) }}"
                 method="POST" enctype="multipart/form-data">
                 @csrf
                 <!--begin::Aside column-->
@@ -77,7 +77,7 @@
                                 data-kt-image-input="true">
                                 <!--begin::Preview existing avatar-->
                                 <div class="image-input-wrapper w-150px h-150px">
-                                    <img id="oldImage" src="{{ asset('storage/images/categories/'.$category->image) }}"
+                                    <img id="oldImage" src="{{ asset('storage/'.$category->image) }}"
                                         alt="" width="100px" height="100px">
                                 </div>
                                 <!--end::Preview existing avatar-->
@@ -143,7 +143,7 @@
                                 <div class="rounded-circle bg-success w-15px h-15px"
                                     id="kt_ecommerce_add_category_status"></div>
                                 @endif
-                                
+
                             </div>
                             <!--begin::Card toolbar-->
                         </div>
@@ -228,7 +228,7 @@
                                 <select class="form-select mb-2" data-control="select2"
                                     data-placeholder="Select an option" data-allow-clear="true" name="parent_id">
 
-                                    <option value="NULL">--None--</option>
+                                    <option value="">--None--</option>
                                     @foreach ($categories as $sub_category)
                                     <option {{ $sub_category->id == $category->parent_id ? 'selected' : '' }} value="{{ $sub_category->id }}">{{ $sub_category->name }}</option>
                                     @endforeach
@@ -236,7 +236,7 @@
                                 </select>
                                 <!--end::Select2-->
                                 <!--begin::Description-->
-                                <div class="text-muted fs-7 mb-7">Add Sub-Category to a Category.</div>
+                                <div class="text-muted fs-7 mb-7">Add Sub-Category to a Category (optional).</div>
                                 <!--end::Description-->
                             </div>
                             <!--end::Category-->
@@ -297,7 +297,7 @@
                     <!--end::Meta options-->
                     <div class="d-flex justify-content-end">
                         <!--begin::Button-->
-                        <a href="{{ route('category.index') }}" id="kt_ecommerce_add_product_cancel"
+                        <a href="{{ route('admin.category.index') }}" id="kt_ecommerce_add_product_cancel"
                             class="btn btn-light me-5">Cancel</a>
                         <!--end::Button-->
                         <!--begin::Button-->
@@ -329,7 +329,7 @@
 
     function hideImage () {
             document.getElementById('oldImage').style.display = "none";
-        }
+    }
 </script>
 
 

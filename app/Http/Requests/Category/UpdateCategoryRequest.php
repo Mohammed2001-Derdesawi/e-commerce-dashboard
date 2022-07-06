@@ -29,6 +29,7 @@ class UpdateCategoryRequest extends FormRequest
             'meta_title' => 'required',
             'meta_keywords' => 'required',
             'status' => 'required',
+            'parent_id' => 'nullable',
             'image' => 'nullable|image|mimes:png,jpg,jpeg',
         ];
     }

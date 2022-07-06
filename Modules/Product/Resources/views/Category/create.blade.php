@@ -24,7 +24,7 @@
     </li>
     <!--end::Item-->
     <!--begin::Item-->
-    <li class="breadcrumb-item text-dark">Categories</li>
+    <li class="breadcrumb-item text-muted">Categories</li>
     <!--end::Item-->
     <!--begin::Item-->
     <li class="breadcrumb-item">
@@ -49,7 +49,7 @@
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
-            <form class="form d-flex flex-column flex-lg-row" action="{{ route('category.store') }}" method="POST"
+            <form class="form d-flex flex-column flex-lg-row" action="{{ route('admin.category.store') }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
                 <!--begin::Aside column-->
@@ -208,14 +208,17 @@
                                 <!--begin::Select2-->
                                 <select class="form-select mb-2" data-control="select2"
                                     data-placeholder="Select an option" data-allow-clear="true" name="parent_id">
-                                    <option value="NULL">--None--</option>
+                                    <option value="">--None--</option>
                                     @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @if($category->parentsCount < 3)
+                                       <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                   @endif
                                     @endforeach
+
                                 </select>
                                 <!--end::Select2-->
                                 <!--begin::Description-->
-                                <div class="text-muted fs-7 mb-7">Add Sub-Category to a Category.</div>
+                                <div class="text-muted fs-7 mb-7">Add Sub-Category to a Category (optional).</div>
                                 <!--end::Description-->
                             </div>
                             <!--end::Category-->
@@ -280,7 +283,7 @@
                     <!--end::Meta options-->
                     <div class="d-flex justify-content-end">
                         <!--begin::Button-->
-                        <a href="{{ route('category.index') }}" id="kt_ecommerce_add_product_cancel"
+                        <a href="{{ route('admin.category.index') }}" id="kt_ecommerce_add_product_cancel"
                             class="btn btn-light me-5">Cancel</a>
                         <!--end::Button-->
                         <!--begin::Button-->
