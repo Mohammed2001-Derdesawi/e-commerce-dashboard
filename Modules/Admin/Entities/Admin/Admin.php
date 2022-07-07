@@ -50,9 +50,9 @@ class Admin extends Authenticatable
     }
 
 
-    // setPasswordAttibute($val){
-//    $this->Attributess["password"]=bcrypt($val)
-    // }//
+    public function setPasswordAttribute($val){
+           $this->attributes["password"]=bcrypt($val);
+    }
 
 
 }

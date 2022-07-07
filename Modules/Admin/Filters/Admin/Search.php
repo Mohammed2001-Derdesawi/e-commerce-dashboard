@@ -1,7 +1,7 @@
 <?php
 namespace Modules\Admin\Filters\Admin;
 
-use Modules\Admin\Filters\Filter;
+use App\Filters\Filter;
 
 class Search extends Filter {
    public function filter($builder)

@@ -1042,7 +1042,7 @@ License: For each use you must have a valid license purchased only from above li
 													</a>
 												</div>
 												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/catalog/add-product.html">
+													<a class="menu-link" href="{{route('admin.product.create')}}">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
@@ -1195,6 +1195,14 @@ License: For each use you must have a valid license purchased only from above li
 													</a>
 												</div>
 											</div>
+										</div>
+                                        <div class="menu-item">
+											<a class="menu-link" href="{{route('admin.attribute.index')}}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Attributes</span>
+											</a>
 										</div>
 										<div class="menu-item">
 											<a class="menu-link" href="../../demo8/dist/apps/ecommerce/settings.html">
@@ -4407,12 +4415,14 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Modal - Users Search-->
 		<!--end::Modals-->
 		<!--begin::Javascript-->
-		 <script>var hostUrl = "assets/";</script>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js" crossorigin="anonymous"></script>
+		 {{-- <script>var hostUrl = "assets/";</script> --}}
+
+         {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js" crossorigin="anonymous"></script> --}}
 
 		<!--begin::Global Javascript Bundle(used by all pages)-->
 		<script src="{{asset('assets/Admin/plugins/global/plugins.bundle.js')}}"></script>
 		<script src="{{asset('assets/Admin/js/scripts.bundle.js')}}"></script>
+
 		<!--end::Global Javascript Bundle-->
 
 		<!--end::Page Custom Javascript-->

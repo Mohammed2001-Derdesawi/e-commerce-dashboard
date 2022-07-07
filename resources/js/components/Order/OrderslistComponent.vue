@@ -315,7 +315,6 @@ export default {
 
 }
 
- console.log('wow')
 
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Admin\Filters;
+namespace App\Filters;
 
 use Closure;
 use Illuminate\Support\Str;

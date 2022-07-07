@@ -58,14 +58,11 @@ class AdminRepository implements AdminInterface
         $admin=Admin::create([
             'username'=>$request->username,
             'email'=>$request->email,
-            'password'=>Hash::make($request->password),
+            'password'=>bcrypt($request->password),
             'avatar'=>$filename??null,
         ]);
         if($request->has('roles'))
         $this->roleRepo->assignRolesToAdmin($request->roles,$admin);
-        if(!$admin)
-        return false;
-
         return $admin;
     }
     public function setAdmin($admin)
@@ -123,6 +120,7 @@ class AdminRepository implements AdminInterface
             $this->admin->email=$request->email;
 
         }
+        $this->admin->save();
         return $this->admin;
 
 
@@ -135,13 +133,13 @@ class AdminRepository implements AdminInterface
 
         $admin->email=$email;
             $admin->save();
-            return $this->admin;
+            return $admin;
 
     }
     public function updatedPasswordProfile($request)
     {
 
-        $this->admin->password=Hash::make($request->password);
+        $this->admin->password=$request->password;
         $this->admin->save();
 
            return  $this->admin;
@@ -150,7 +148,8 @@ class AdminRepository implements AdminInterface
     public function updatedPasswordAdmin($request,$email)
     {
        $admin=$this->findAdminByEmail($email,['roles:id,name']);
-        $admin->password=Hash::make($request->password);
+        $admin->password=$request->password;
+        $admin->save();
            return  $admin;
 
     }

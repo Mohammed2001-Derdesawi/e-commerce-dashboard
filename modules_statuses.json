@@ -1,4 +1,5 @@
 {
     "Admin": true,
-    "Order": true
+    "Order": true,
+    "Product": true
 }
