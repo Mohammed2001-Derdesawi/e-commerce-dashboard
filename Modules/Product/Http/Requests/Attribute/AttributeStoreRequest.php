@@ -14,7 +14,7 @@ class AttributeStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|max:12|min:4|string',
+            'name'=>'required|max:12|min:4|string|unique:attributes,name',
             'type'=>'required|max:5|min:4|string',
         ];
     }

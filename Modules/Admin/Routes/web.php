@@ -55,6 +55,10 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('/login',[AdminLoginController::class,'showloginForm'])->name('showloginform');
     Route::post('/login',[AdminLoginController::class,'login'])->name('login');
     Route::post('/logout',[AdminLoginController::class,'logout'])->name('logout');
+    Route::get('/forget-password',[AdminLoginController::class,'forgetPassword'])->name('forgetPassword');
+    Route::post('/forget-password',[AdminLoginController::class,'checkEmailForgetPassword'])->name('checkEmailForgetPassword');
+    Route::get('/reset-password/{token}',[ResetPasswordController ::class,'showResetPassword'])->name('showResetPassword');
+    Route::post('/reset-password',[ResetPasswordController ::class,'updatePassword'])->name('updatePassword');
     //  End Authentication Routes
 
 
@@ -62,7 +66,12 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
 
 
+
 });
+
+
+
+
 
 
 

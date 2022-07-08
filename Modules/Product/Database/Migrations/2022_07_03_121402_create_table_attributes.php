@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->bigIncrements('id');
+
             $table->string('name');
             $table->string('type')->default('text');
             $table->index('name');

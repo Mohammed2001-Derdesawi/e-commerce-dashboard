@@ -6,10 +6,10 @@ use Attribute;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Contracts\Support\Renderable;
+use Modules\Product\Repository\Attribute\AttributeInterface;
+use Modules\Product\Transformers\Attribute\AttributeResource;
 use Modules\Product\Http\Requests\Attribute\AttributeStoreRequest;
 use Modules\Product\Http\Requests\Attribute\AttributeUpdateRequest;
-use Modules\Product\Transformers\Attribute\AttributeResource;
-use Modules\Product\Repositories\Attribute\AttributeInterface;
 
 class AttributeApiController extends Controller
 {

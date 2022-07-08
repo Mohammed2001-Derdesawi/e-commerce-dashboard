@@ -2,7 +2,6 @@
 
 namespace Modules\Admin\Http\Controllers\Dashboard;
 
-
 use Illuminate\Routing\Controller;
 
 class AdminHomeController extends Controller

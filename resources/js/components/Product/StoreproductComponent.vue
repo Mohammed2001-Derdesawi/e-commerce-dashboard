@@ -4,7 +4,7 @@
 							<!--begin::Container-->
 							<div id="kt_content_container" class="container-xxl">
 								<!--begin::Form-->
-								<form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row">
+								<form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" enctype="multipart/form-data">
 									<!--begin::Aside column-->
 									<div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
 										<!--begin::Thumbnail settings-->
@@ -64,7 +64,7 @@
 												<!--end::Card title-->
 												<!--begin::Card toolbar-->
 												<div class="card-toolbar">
-													<div class="rounded-circle  w-15px h-15px" :class="{'bg-success ':product.status==''|| 'active' , 'bg-warning':product.status=='inactive'}" id="kt_ecommerce_add_product_status"></div>
+													<div class="rounded-circle   w-15px h-15px" id="kt_ecommerce_add_product_status" :class="[ product.status==1 ?  'bg-success ' : 'bg-warning']"  > </div>
 												</div>
 												<!--begin::Card toolbar-->
 											</div>
@@ -111,26 +111,19 @@
 												<label class="form-label">Categories</label>
 												<!--end::Label-->
 												<!--begin::Select2-->
-												<select class="form-select mb-2" v-model="product.category" data-control="select2" data-placeholder="Select an option" data-allow-clear="true">
-													<option></option>
-													<option value="Computers">Computers</option>
-													<option value="Watches">Watches</option>
-													<option value="Headphones">Headphones</option>
-													<option value="Footwear">Footwear</option>
-													<option value="Cameras">Cameras</option>
-													<option value="Shirts">Shirts</option>
-													<option value="Household">Household</option>
-													<option value="Handbags">Handbags</option>
-													<option value="Wines">Wines</option>
-													<option value="Sandals">Sandals</option>
-												</select>
+                                                <div class=" mb-2">
+
+
+                                        <Select2 v-model="product.category" :options="categories" :settings="{ width:'100%' }" />
+                                          </div>
+
 												<!--end::Select2-->
 												<!--begin::Description-->
 												<div class="text-muted fs-7 mb-7">Add product to a category.</div>
 												<!--end::Description-->
 												<!--end::Input group-->
 												<!--begin::Button-->
-												<a href="../../demo8/dist/apps/ecommerce/catalog/add-category.html" class="btn btn-light-primary btn-sm mb-10">
+												<a href="/admin/category/create" class="btn btn-light-primary btn-sm mb-10">
 												<!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
 												<span class="svg-icon svg-icon-2">
 													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -423,7 +416,7 @@
 															<div class="fv-row">
 																<!--begin::Input-->
 																<div class="form-check form-check-custom form-check-solid mb-2">
-																	<input class="form-check-input" type="checkbox" id="kt_ecommerce_add_product_shipping_checkbox" value="1" />
+																	<input v-model="is_has_varient" class="form-check-input" type="checkbox" id="kt_ecommerce_add_product_shipping_checkbox"  />
 																	<label class="form-check-label">Have A variations?</label>
 																</div>
 																<!--end::Input-->
@@ -448,7 +441,8 @@
 																				<div class="w-100 w-md-200px">
 
 																					<select class="form-select" v-model="attributes_varients[index].attribute" name="" data-placeholder="Select a variation" >
-																						<option  v-for="attribute in attributes" :key="attribute.id" :value="attribute.name">{{attribute.name}}</option>
+                                                                                        <option v-if="attributes.length==0" >No Attributes yet </option>
+																						<option  v-for="attribute in attributes" :key="attribute.id" :value="attribute.id">{{attribute.name}}</option>
 
 																					</select>
 																				</div>
@@ -458,6 +452,7 @@
                                                   								<input :id="'tagifyid'+index" @change="addvalue($event,index)"   name="kt_ecommerce_values_attributes_tagify" :data-kt-tagify="'tagify'+index" class="form-control mb-2" />
 
                                                                                        </div>
+
 
 																				<!--end::Input-->
 																				<button @click="removevairent(index)" type="button" data-repeater-delete="" class="btn btn-sm btn-icon btn-light-danger">
@@ -475,7 +470,7 @@
 																	</div>
 																	<!--end::Form group-->
 																	<!--begin::Form group-->
-																	<div class="form-group mt-5">
+																	<div class="form-group mt-5" v-if="attributes.length>0">
 																		<button @click.prevent="pushvarient" type="button" data-repeater-create="" class="btn btn-sm btn-light-primary">
 																		<!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
 																		<span class="svg-icon svg-icon-2">
@@ -486,14 +481,14 @@
 																		</span>
 																		<!--end::Svg Icon-->Add another variation</button>
 																	</div>
+
 																	<!--end::Form group-->
 																</div>
 																<!--end::Repeater-->
 															</div>
-                                                                </div>
-                                                                		<div class="d-flex justify-content-end">
+                   		<div class="d-flex justify-content-end" v-if="showsure || attributes_varients.length > 0">
 											<!--begin::Button-->
-											<a href="" @click.prevent="cancelvareitns()" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancel</a>
+											<a  href="" @click.prevent="cancelvareitns()" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancel</a>
 											<!--end::Button-->
 											<!--begin::Button-->
 											<button @click.prevent="previewVarients" type="" id="" class="btn btn-primary">
@@ -502,11 +497,16 @@
 											</button>
 											<!--end::Button-->
 										</div>
+                                                                </div>
+
+
+
+
 															<!--end::Input group-->
 														</div>
 														<!--end::Card header-->
 													</div>
-                                                    <div class="card mb-5 mb-xl-8" v-if="is_sure &&  attributes_varients.length>=1">
+                                                    <div class="card mb-5 mb-xl-8" v-if="is_sure &&  attributes_varients.length>=1 && varients.length>0">
 									<!--begin::Header-->
 									    <div class="card-header border-0 pt-5">
 										<h3 class="card-title align-items-start flex-column">
@@ -547,13 +547,13 @@
 
 														</td>
 														<td>
-															<input  class="text-dark form-control text-hover-primary d-block mb-1 fs-6" v-model="varients[index].price" style ="height:20px !important;" />
+															<input  class="text-dark form-control text-hover-primary d-block mb-1 fs-6" v-model="varients[index].price" style ="height:30px !important;" />
 														</td>
 														<td>
-															<input  class="text-dark  form-control text-hover-primary d-block mb-1 fs-6" v-model="varients[index].quantity"  style ="height:20px !important;"/>
+															<input  class="text-dark  form-control text-hover-primary d-block mb-1 fs-6" v-model="varients[index].quantity"  style ="height:30px !important;"/>
 														</td>
 														<td>
-															<input  class="text-dark  form-control  text-hover-primary d-block mb-1 fs-6" v-model="varients[index].sku" style ="height:20px !important;"/>
+															<input  class="text-dark  form-control  text-hover-primary d-block mb-1 fs-6" v-model="varients[index].sku" style ="height:30px !important;"/>
 														</td>
 
 														<td class="text-end">
@@ -699,7 +699,7 @@
 											<a href="../../demo8/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancel</a>
 											<!--end::Button-->
 											<!--begin::Button-->
-											<button @click.prevent="assignfiles" type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
+											<button @click.prevent="StoreProduct"  id="" class="btn btn-primary">
 												<span class="indicator-label">Save Changes</span>
 
 											</button>
@@ -806,12 +806,24 @@ export default {
         ],
         varients:[],
         options:
-            ['active','inactive'],
+        [
+             {
+                id:1,
+                text:'Active'
+
+             },
+             {
+                     id:0,
+                    text:'Inactive'
+             }
+             ],
 
 
         attributes:{},
         categories:{},
 		is_sure:false,
+        showsure:false,
+        is_has_varient:false,
 
 
     }
@@ -822,11 +834,15 @@ export default {
    mounted()
    {
     this.getAttributes()
+    this.getCategories()
 
-         new Tagify(document.getElementById('tagifyid'+0),{
+
+          new Tagify(document.getElementById('kt_ecommerce_add_category_meta_keywords'),{
              originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')
          })
-          new Tagify(document.getElementById('kt_ecommerce_add_category_meta_keywords'),{
+
+
+           new Tagify(document.getElementById('tagifyid'+0),{
              originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')
          })
 
@@ -839,21 +855,59 @@ export default {
 
    methods:{
 
+    StoreProduct()
+    {
+        let data =new FormData()
+
+
+        this.product.varients=this.varients
+        let arr=[]
+
+        for(let key in this.product.images)
+         {
+            this.product.images[key]={
+                name:this.product.images[key].name,
+                lastModified:this.product.images[key].lastModified,
+                size:this.product.images[key].size,
+                type:this.product.images[key].type,
+                webkitRelativePath:this.product.images[key].webkitRelativePath,
+
+            }
+
+         }
+
+        data.append('product',JSON.stringify(this.product));
+        data.append('mainimage',this.product.mainimage);
+
+
+
+const headers = { 'Content-Type': 'multipart/form-data' };
+
+        axios.post('/api/admin/products/store',data,{headers}).then(response=>{
+        console.log('done');
+        })
+
+
+
+
+    },
+
+    getCategories()
+    {
+         axios.get('/api/admin/categories')
+         .then(response=>{
+            this.categories=response.data.data
+         })
+    },
+
     keywordsadd(e)
     {
-        this.product.meta.keywords=e.target.value.split(',')
+        this.product.meta.keywords=e.target.value
 
     },
 
     fileRemoved(file, error, xhr) {
     this.product.images=this.$refs.myVueDropzone.getAcceptedFiles()
-    console.log(this.product.images)
-
-
-
-    },
-    assignfiles()
-    {
 
 
 
@@ -862,7 +916,7 @@ export default {
     getfile(file)
     {
 
-
+         console.log(file)
 
          if(this.acceptedFiles.indexOf(file.name.split('.')[1]) !=-1)
 		 {
@@ -876,13 +930,14 @@ export default {
               },400)
 
 
+                       console.log(this.product.images)
 
 
 
 			 }
              else
              {
-                   console.log(1)
+
 				 this.$refs.myVueDropzone.removeFile(file)
               this.$Message['error']({
                     background: true,
@@ -905,17 +960,26 @@ export default {
 
     },
 
+    pageatribute()
+    {
+       window.location.href="/admin/attributes"
+    },
+
 
     previewVarients()
     {
-		this.varients=[]
 
-		var object = this.attributes_varients.reduce(
+         if(this.attributes_varients.length!=0)
+         {
+            this.varients=[]
+	var object = this.attributes_varients.reduce(
   (obj, item) => Object.assign(obj, { [item.attribute]: item.values }), {});
 
 
 let attrs = [];
-
+console.log(Object.values(object).length || this.attributes_varients[0].values.length ==0)
+if(!Object.values(object).length ==0)
+{
 for (const [attr, values] of Object.entries(object))
   attrs.push(values.map(v => ({[attr]:v})));
 
@@ -925,6 +989,7 @@ attrs = attrs.reduce((a, b) => a.flatMap(d => b.map(e => ({...d, ...e}))));
 
          for(let x in attrs)
 		 {
+            if(!Object.values(attrs[x]).length==0)
 			this.varients.push({
 				attributes:Object.keys(attrs[x]),
 				values:Object.values(attrs[x]),
@@ -936,6 +1001,10 @@ attrs = attrs.reduce((a, b) => a.flatMap(d => b.map(e => ({...d, ...e}))));
 
 		 }
 		 this.is_sure=true
+}
+
+         }
+
 
 
     },
@@ -950,15 +1019,12 @@ attrs = attrs.reduce((a, b) => a.flatMap(d => b.map(e => ({...d, ...e}))));
     this.attributes_varients.push({attribute:'',
                 values:[],
               })
+              this.showsure=true
 
 
 
     },
-    mediaimages(e)
-    {
-        console.log(e)
 
-    },
 
     addvalue(e,index)
     {
@@ -974,6 +1040,8 @@ attrs = attrs.reduce((a, b) => a.flatMap(d => b.map(e => ({...d, ...e}))));
         this.attributes_varients.splice(index,1)
 		if(this.is_sure)
 		this.previewVarients()
+        if(this.attributes_varients.length==0)
+        this.showsure=false
 
     },
 	 deletevairent(index)
@@ -988,13 +1056,11 @@ attrs = attrs.reduce((a, b) => a.flatMap(d => b.map(e => ({...d, ...e}))));
     savemainimage(e)
     {
         this.product.mainimage=e.target.files[0]
-        console.log(this.product)
 
     },
     removemainimage()
     {
         this.product.mainimage=''
-        console.log(this.product)
 
 
     },
@@ -1013,6 +1079,15 @@ attrs = attrs.reduce((a, b) => a.flatMap(d => b.map(e => ({...d, ...e}))));
 
 
         },200)
+
+       },
+       is_has_varient()
+       {
+        if(!this.is_has_varient)
+        {
+            this.attributes_varients=[]
+
+        }
 
        }
    }

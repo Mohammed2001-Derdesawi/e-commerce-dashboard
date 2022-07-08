@@ -38,6 +38,12 @@ License: For each use you must have a valid license purchased only from above li
 		<link href="{{asset('assets/Admin/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('assets/Admin/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
+
+
+		<link href="{{ asset('css/app.css') }}" />
+
+
+
         @yield('css')
 	</head>
 	<!--end::Head-->
@@ -177,7 +183,7 @@ License: For each use you must have a valid license purchased only from above li
 											<!--end::Menu item-->
 											<!--begin::Menu item-->
 											<div class="menu-item px-5">
-												<a href="../../demo8/dist/account/statements.html" class="menu-link px-5">My Statements</a>
+												<a href="" class="menu-link px-5">My Statements</a>
 											</div>
 											<!--end::Menu item-->
 											<!--begin::Menu separator-->
@@ -193,46 +199,17 @@ License: For each use you must have a valid license purchased only from above li
 												<div class="menu-sub menu-sub-dropdown w-175px py-4">
 													<!--begin::Menu item-->
 													<div class="menu-item px-3">
-														<a href="../../demo8/dist/account/settings.html" class="menu-link d-flex px-5 active">
+														<a href="" class="menu-link d-flex px-5 active">
 														<span class="symbol symbol-20px me-4">
 														</span>English</a>
 													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="../../demo8/dist/account/settings.html" class="menu-link d-flex px-5">
-														<span class="symbol symbol-20px me-4">
-														</span>Spanish</a>
-													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="../../demo8/dist/account/settings.html" class="menu-link d-flex px-5">
-														<span class="symbol symbol-20px me-4">
-														</span>German</a>
-													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="../../demo8/dist/account/settings.html" class="menu-link d-flex px-5">
-														<span class="symbol symbol-20px me-4">
-														</span>Japanese</a>
-													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="../../demo8/dist/account/settings.html" class="menu-link d-flex px-5">
-														<span class="symbol symbol-20px me-4">
-														</span>French</a>
-													</div>
-													<!--end::Menu item-->
 												</div>
 												<!--end::Menu sub-->
 											</div>
 											<!--end::Menu item-->
 											<!--begin::Menu item-->
 											<div class="menu-item px-5 my-1">
-												<a href="../../demo8/dist/account/settings.html" class="menu-link px-5">Account Settings</a>
+												<a href="" class="menu-link px-5">Account Settings</a>
 											</div>
 											<!--end::Menu item-->
 											<!--begin::Menu item-->
@@ -1034,7 +1011,7 @@ License: For each use you must have a valid license purchased only from above li
 													</a>
 												</div>
 												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/catalog/categories.html">
+													<a class="menu-link" href="{{ route('admin.category.index') }}">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
@@ -1042,15 +1019,15 @@ License: For each use you must have a valid license purchased only from above li
 													</a>
 												</div>
 												<div class="menu-item">
-													<a class="menu-link" href="{{route('admin.product.create')}}">
+													<a class="menu-link" href="{{ route('admin.brand.index') }}">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
-														<span class="menu-title">Add Product</span>
+														<span class="menu-title">Brands</span>
 													</a>
 												</div>
 												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/catalog/edit-product.html">
+													<a class="menu-link" href="">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
@@ -1667,7 +1644,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Info-->
 												<div class="ms-1 fw-bold">
 													<!--begin::Desc-->
-													<a href="../../demo8/dist/apps/projects/project.html" class="fs-6 text-hover-primary fw-bolder">Finance KPI App Guidelines</a>
+													<a href="" class="fs-6 text-hover-primary fw-bolder">Finance KPI App Guidelines</a>
 													<!--end::Desc-->
 													<!--begin::Number-->
 													<div class="text-gray-400">1.9mb</div>
@@ -3731,30 +3708,6 @@ License: For each use you must have a valid license purchased only from above li
 										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
 											<!--begin::Avatar-->
 											<div class="symbol symbol-35px symbol-circle me-5">
-											</div>
-											<!--end::Avatar-->
-											<!--begin::Info-->
-											<div class="fw-bold">
-												<span class="fs-6 text-gray-800 me-2">Max Smith</span>
-												<span class="badge badge-light">Software Enginer</span>
-											</div>
-											<!--end::Info-->
-										</a>
-										<!--end::User-->
-										<!--begin::User-->
-										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
-											<!--begin::Avatar-->
-											<div class="symbol symbol-35px symbol-circle me-5">
-											</div>
-											<!--end::Avatar-->
-											<!--begin::Info-->
-											<div class="fw-bold">
-												<span class="fs-6 text-gray-800 me-2">Sean Bean</span>
-												<span class="badge badge-light">Web Developer</span>
-											</div>
-											<!--end::Info-->
-										</a>
-										<!--end::User-->
 										<!--begin::User-->
 										<a href="#" class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1">
 											<!--begin::Avatar-->
@@ -4415,21 +4368,24 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Modal - Users Search-->
 		<!--end::Modals-->
 		<!--begin::Javascript-->
-		 {{-- <script>var hostUrl = "assets/";</script> --}}
 
-         {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js" crossorigin="anonymous"></script> --}}
-
-		<!--begin::Global Javascript Bundle(used by all pages)-->
-		<script src="{{asset('assets/Admin/plugins/global/plugins.bundle.js')}}"></script>
-		<script src="{{asset('assets/Admin/js/scripts.bundle.js')}}"></script>
 
 		<!--end::Global Javascript Bundle-->
 
 		<!--end::Page Custom Javascript-->
+		{{-- <script>var hostUrl = "assets/";</script> --}}
+		<!--begin::Global Javascript Bundle(used by all pages)-->
+		<script src="{{asset('assets/Admin/plugins/global/plugins.bundle.js')}}"></script>
+		<script src="{{asset('assets/Admin/js/scripts.bundle.js')}}"></script>
+        <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
+		<script src="{{asset('assets/Admin/js/general.js')}}"></script>
+
+		<!--end::Global Javascript Bundle-->
+		<!--end::Javascript-->
         @yield('js')
 
 		<!--end::Javascript-->
-        <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
+
 
 	</body>
 	<!--end::Body-->

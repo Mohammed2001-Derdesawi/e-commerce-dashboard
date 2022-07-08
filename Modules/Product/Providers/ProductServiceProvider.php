@@ -5,8 +5,14 @@ namespace Modules\Product\Providers;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
-use Modules\Product\Repositories\Attribute\AttributeInterface;
-use Modules\Product\Repositories\Attribute\AttributeRepository;
+use Modules\Product\Repository\Brand\BrandRepository;
+use Modules\Product\Repository\Product\ProductRepository;
+use Modules\Product\Repository\Category\CategoryRepository;
+use Modules\Product\Repository\Attribute\AttributeInterface;
+use Modules\Product\Repository\Attribute\AttributeRepository;
+use Modules\Product\Repository\Brand\BrandRepositoryInterface;
+use Modules\Product\Repository\Product\ProductRepositoryInterface;
+use Modules\Product\Repository\Category\CategoryRepositoryInterface;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -42,6 +48,9 @@ class ProductServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->app->bind(AttributeInterface::class,AttributeRepository::class);
+        $this->app->bind(CategoryRepositoryInterface::class,CategoryRepository::class);
+        $this->app->bind(BrandRepositoryInterface::class,BrandRepository::class);
+        $this->app->bind(ProductRepositoryInterface::class,ProductRepository::class);
     }
 
     /**

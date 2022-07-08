@@ -24,7 +24,7 @@
 		<link href="{{asset('assets/Admin/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('assets/Admin/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
-
+		@yield('css')
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->

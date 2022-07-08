@@ -2,6 +2,14 @@
 @section('title','Login')
 
 @section('content')
+
+@if(Session::has('message'))
+
+<div class="alert alert-success" role="alert">
+    <strong>Note!</strong> {{ Session::get('message') }}.
+</div>
+@endif
+
 <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
     <!--begin::Form-->
     <form class="form w-100" novalidate="novalidate"  action="{{route('admin.login')}}" method="POST">
@@ -35,7 +43,7 @@
                 <label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
                 <!--end::Label-->
                 <!--begin::Link-->
-                <a href="../../demo8/dist/authentication/layouts/basic/password-reset.html" class="link-primary fs-6 fw-bolder">Forgot Password ?</a>
+                <a href="{{ route('admin.forgetPassword') }}" class="link-primary fs-6 fw-bolder">Forgot Password ?</a>
                 <!--end::Link-->
             </div>
             <!--end::Wrapper-->
