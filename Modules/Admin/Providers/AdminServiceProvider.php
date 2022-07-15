@@ -2,10 +2,14 @@
 
 namespace Modules\Admin\Providers;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
-use Modules\Admin\Repositories\Authorization\AuthrozationRepository;
-use Modules\Admin\Repositories\Authorization\Interfaces\AuthorzationInterface;
+use Modules\Admin\Repositories\Admin\AdminInterface;
+use Modules\Admin\Repositories\Admin\AdminRepository;
+use Modules\Admin\Repositories\Admin\authorazation\AuthoraztionInterface;
+use Modules\Admin\Repositories\Admin\authorazation\AuthoraztionRepository;
+
 class AdminServiceProvider extends ServiceProvider
 {
     /**
@@ -40,7 +44,8 @@ class AdminServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
-        $this->app->bind(AuthorzationInterface::class,AuthrozationRepository::class);
+        $this->app->bind(AuthoraztionInterface::class,AuthoraztionRepository::class);
+        $this->app->bind(AdminInterface::class,AdminRepository::class);
     }
 
     /**
@@ -52,9 +57,20 @@ class AdminServiceProvider extends ServiceProvider
     {
         $this->publishes([
             module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
+            module_path($this->moduleName, 'Config/basepermissions.php') => config_path($this->moduleNameLower . '.php'),
+
         ], 'config');
         $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
+
+            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower,
+
+
+        );
+        $this->mergeConfigFrom(
+
+            module_path($this->moduleName, 'Config/basepermissions.php'),'basepermissions'
+
+
         );
     }
 
@@ -105,7 +121,7 @@ class AdminServiceProvider extends ServiceProvider
     private function getPublishableViewPaths(): array
     {
         $paths = [];
-        foreach (\Config::get('view.paths') as $path) {
+        foreach (Config::get('view.paths') as $path) {
             if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
                 $paths[] = $path . '/modules/' . $this->moduleNameLower;
             }
