@@ -3,6 +3,7 @@
 namespace Modules\Product\Database\factories\Product;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Product\Entities\Attribute\Attribute;
 
 class AttributeFactory extends Factory
 {
@@ -11,7 +12,7 @@ class AttributeFactory extends Factory
      *
      * @var string
      */
-    protected $model = \Modules\Product\Entities\Product\Attribute::class;
+    protected $model = Attribute::class;
 
     /**
      * Define the model's default state.
@@ -21,8 +22,8 @@ class AttributeFactory extends Factory
     public function definition()
     {
         return [
-            'name'=>$this->faker->name('5'),
-            'type'=>$this->faker->name('5'),
+            'name'=>$this->faker->name(5),
+            'type'=>$this->faker->name(5),
 
         ];
     }

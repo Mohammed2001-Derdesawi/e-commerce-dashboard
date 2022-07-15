@@ -183,7 +183,7 @@
                             <a href="#" class="
                   btn btn-icon btn-bg-light btn-active-color-primary btn-sm
                   me-1
-                " @click="changeStatus(admin)" data-toggle="tooltip" data-placement="top" :title="+admin.status==1?' Change Status to  InActive': ' Change Status  to Active'">
+                " @click="changeStatus(admin)" data-toggle="tooltip" data-placement="top" :title="admin.status==1? 'Change Status to  InActive' :  ' Change Status  to Active' ">
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
                                 <span class="svg-icon svg-icon-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

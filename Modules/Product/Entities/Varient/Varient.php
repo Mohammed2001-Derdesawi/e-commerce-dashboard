@@ -25,9 +25,9 @@ class Varient extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function arrtibutes(): BelongsToMany
+    public function attributes(): BelongsToMany
     {
-        return $this->belongsToMany(Attribute::class, 'attribute_varient',  'varient_id' , 'attribute_id');
+        return $this->belongsToMany(Attribute::class, 'attribute_varient',  'varient_id' , 'attribute_id')->withPivot('value');
     }
 
 
@@ -39,5 +39,11 @@ class Varient extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
+
+
+    public function groupByatrr()
+    {
+       return $this->attributes()->gruopBy('pivot.attribute_id');
     }
 }

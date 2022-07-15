@@ -21,7 +21,7 @@
 											<!--begin::Card body-->
 											<div class="card-body text-center pt-0">
 												<!--begin::Image input-->
-												<div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
+												<div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" :style="{'background-image': 'url(/assets/Admin/media/svg/files/blank-image.svg)'}">
 													<!--begin::Preview existing avatar-->
 													<div class="image-input-wrapper w-150px h-150px"></div>
 													<!--end::Preview existing avatar-->
@@ -73,25 +73,55 @@
 											<div class="card-body pt-0">
 												<!--begin::Select2-->
 
-                                                    <Select2 v-model="product.status" :options="options" :settings="{ width:'100%' }" />
 
 
-<!--
-												<select class="form-select mb-2" v-model="product.status" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
+	                                              <select  class="form-select mb-2"  data-placeholder="Select a variation"  data-hide-search="true"  id="status_select">
+													<option value="1" >Active</option>
 
-
-
-													<option value="scheduled">Active</option>
-													<option value="inactive">Inactive</option>
-												</select> -->
+													<option value="0" selected>Inactive</option>
+												</select>
 												<!--end::Select2-->
 												<!--begin::Description-->
-												<div class="text-muted fs-7">Set the product status.</div>
+												<div class="text-muted fs-7 mt-10">Set the product status.</div>
 												<!--end::Description-->
 
 											</div>
 											<!--end::Card body-->
 										</div>
+		                                <div class="card card-flush py-4">
+											<!--begin::Card header-->
+											<div class="card-header">
+												<!--begin::Card title-->
+												<div class="card-title">
+													<h2>Brands</h2>
+												</div>
+												<!--end::Card title-->
+
+											</div>
+											<!--end::Card header-->
+											<!--begin::Card body-->
+											<div class="card-body pt-0">
+												<!--begin::Select2-->
+
+
+
+	                                              <select id="select_brand"  class="form-select mb-2"  data-placeholder="Select a Brand"  data-hide-search="true" >
+                                                      <option selected>Default Brand</option>
+
+													<option v-for="brand in brands" :key="brand.id" :value="brand.id">{{brand.name}}</option>
+												</select>
+												<!--end::Select2-->
+												<!--begin::Description-->
+												<div class="text-muted fs-7 mt-10">Set the Product Brand.</div>
+												<!--end::Description-->
+
+											</div>
+											<!--end::Card body-->
+										</div>
+
+
+
+
 										<!--end::Status-->
 										<!--begin::Category & tags-->
 										<div class="card card-flush py-4">
@@ -113,13 +143,18 @@
 												<!--begin::Select2-->
                                                 <div class=" mb-2">
 
+		<select id="categories_Select" class="form-select mb-2" data-control="select2" data-placeholder="Select an option">
+                                                <option selected>Default Category</option>
 
-                                        <Select2 v-model="product.category" :options="categories" :settings="{ width:'100%' }" />
+													<option v-for="category in categories" :key="category.id" :value="category.id">{{category.name}}</option>
+
+												</select>
+												<!--end::Select2-->
                                           </div>
 
 												<!--end::Select2-->
 												<!--begin::Description-->
-												<div class="text-muted fs-7 mb-7">Add product to a category.</div>
+												<div class="text-muted fs-7 mb-7 mt-10">Add product to a category.</div>
 												<!--end::Description-->
 												<!--end::Input group-->
 												<!--begin::Button-->
@@ -179,7 +214,7 @@
 														<!--begin::Card body-->
 														<div class="card-body pt-0">
 															<!--begin::Input group-->
-															<div class="mb-10 fv-row">
+															<div class="mb-10 fv-row" >
 																<!--begin::Label-->
 																<label class="required form-label">Product Name</label>
 																<!--end::Label-->
@@ -323,7 +358,7 @@
 																<div class="fv-row w-100 flex-md-root">
 																	<!--begin::Label-->
 																	<label class="form-label">Tax</label>
-																<div class="d-flex justify-content-between">
+																<div class="d-flex justify-content-start">
                                                                     <!--begin::Label-->
                                                                     <div class="fw-bold">
                                                                         <label class="fs-6">Is Product have a tax?</label>
@@ -332,7 +367,7 @@
                                                                     <!--end::Label-->
 
                                                                     <!--begin::Switch-->
-                                                                    <label class="form-check form-switch form-check-custom form-check-solid" style="margin: 0 80px 0 0;">
+                                                                    <label class="form-check form-switch form-check-custom form-check-solid" style="margin: 0 80px 0 80px;">
                                                                         <input v-model="product.has_tax" class="form-check-input" type="checkbox"  checked="checked">
                                                                         <span class="form-check-label fw-bold text-muted" >Yes</span>
                                                                     </label>
@@ -437,10 +472,12 @@
 																	<div class="form-group" v-for="(varient,index) in attributes_varients" :key="index" style="margin-bottom:15px;">
 																		<div data-repeater-list="kt_ecommerce_add_product_options" class="d-flex flex-column gap-3"  >
 																			<div data-repeater-item="" class="form-group d-flex flex-wrap gap-5">
+
 																				<!--begin::Select2-->
 																				<div class="w-100 w-md-200px">
 
-																					<select class="form-select" v-model="attributes_varients[index].attribute" name="" data-placeholder="Select a variation" >
+																					<select  class="form-select" :id="'select'+index"  name="product_option"  data-kt-ecommerce-catalog-add-product="product_option"  data-placeholder="Select a variation"   >
+                                                                                        <option selected>Default Attribute</option>
                                                                                         <option v-if="attributes.length==0" >No Attributes yet </option>
 																						<option  v-for="attribute in attributes" :key="attribute.id" :value="attribute.id">{{attribute.name}}</option>
 
@@ -718,18 +755,15 @@
 
 <script>
 import vue2Dropzone from "vue2-dropzone";
-// import "vue2-dropzone/dist/vue2Dropzone.min.css";
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
-import Select2 from 'v-select2-component';
 import { quillEditor } from 'vue-quill-editor'
 export default {
    name:'StoreproductComponent',
     components: {
     vueDropzone: vue2Dropzone,
     quillEditor:quillEditor,
-    Select2:Select2
   },
 
    data()
@@ -744,14 +778,7 @@ export default {
        maxFilesize: 10,
         addRemoveLinks: !0,
         acceptedFiles: "image/jpeg,image/png,image/gif,image/jpg"
-        // accept: function(file, done) {
-        //     console.log(file);
-        //     if (file.type != "image/jpeg") {
-        //       this.fileRemoved(file)
-        //       self.$Message.success('File is in correct format')
-        //     }
-        //     else { done(); }
-        // },
+
 
       },
 
@@ -789,6 +816,7 @@ export default {
             },
 
             description:'',
+            brand:'',
 
             meta:{
                 name:'',
@@ -805,25 +833,12 @@ export default {
             }
         ],
         varients:[],
-        options:
-        [
-             {
-                id:1,
-                text:'Active'
-
-             },
-             {
-                     id:0,
-                    text:'Inactive'
-             }
-             ],
-
-
         attributes:{},
         categories:{},
 		is_sure:false,
         showsure:false,
         is_has_varient:false,
+        brands:{},
 
 
     }
@@ -835,6 +850,7 @@ export default {
    {
     this.getAttributes()
     this.getCategories()
+    this.getBrands()
 
 
           new Tagify(document.getElementById('kt_ecommerce_add_category_meta_keywords'),{
@@ -847,13 +863,31 @@ export default {
          })
 
 
+          $('#select0').select2()
+          $('#status_select').select2()
+          $('#categories_Select').select2()
+          $('#select_brand').select2()
+
+          let arr=this.attributes_varients
+
+        $('#select0').on("select2:select", function (e) {
+      arr[0].attribute = $(e.currentTarget).val();
+
+     })
+      this.attributes_varients=arr
+
+
+
 
 
    },
 
 
 
+
+
    methods:{
+
 
     StoreProduct()
     {
@@ -861,34 +895,36 @@ export default {
 
 
         this.product.varients=this.varients
-        let arr=[]
+
 
         for(let key in this.product.images)
          {
-            this.product.images[key]={
-                name:this.product.images[key].name,
-                lastModified:this.product.images[key].lastModified,
-                size:this.product.images[key].size,
-                type:this.product.images[key].type,
-                webkitRelativePath:this.product.images[key].webkitRelativePath,
+             data.append('images['+key+']',this.product.images[key])
 
-            }
 
          }
+         this.product.images=[]
 
         data.append('product',JSON.stringify(this.product));
-        data.append('mainimage',this.product.mainimage);
+
+
+        data.append('file',this.product.mainimage);
 
 
 
-const headers = { 'Content-Type': 'multipart/form-data' };
-
+        const headers = { 'Content-Type': 'multipart/form-data' };
         axios.post('/api/admin/products/store',data,{headers}).then(response=>{
-        console.log('done');
         })
 
 
+    },
 
+    getBrands()
+    {
+        axios.get('/api/admin/brands/all')
+        .then(response=>{
+            this.brands=response.data.data
+        })
 
     },
 
@@ -916,7 +952,6 @@ const headers = { 'Content-Type': 'multipart/form-data' };
     getfile(file)
     {
 
-         console.log(file)
 
          if(this.acceptedFiles.indexOf(file.name.split('.')[1]) !=-1)
 		 {
@@ -926,11 +961,9 @@ const headers = { 'Content-Type': 'multipart/form-data' };
 			 {
                         setTimeout(()=>{
  this.product.images=this.$refs.myVueDropzone.getAcceptedFiles()
-              console.log(this.product.images)
               },400)
 
 
-                       console.log(this.product.images)
 
 
 
@@ -947,7 +980,6 @@ const headers = { 'Content-Type': 'multipart/form-data' };
 
 		 }
         else{
-            console.log(1)
               this.$refs.myVueDropzone.removeFile(file)
               this.$Message['error']({
                     background: true,
@@ -969,6 +1001,7 @@ const headers = { 'Content-Type': 'multipart/form-data' };
     previewVarients()
     {
 
+
          if(this.attributes_varients.length!=0)
          {
             this.varients=[]
@@ -977,25 +1010,24 @@ const headers = { 'Content-Type': 'multipart/form-data' };
 
 
 let attrs = [];
-console.log(Object.values(object).length || this.attributes_varients[0].values.length ==0)
 if(!Object.values(object).length ==0)
 {
 for (const [attr, values] of Object.entries(object))
   attrs.push(values.map(v => ({[attr]:v})));
-
 attrs = attrs.reduce((a, b) => a.flatMap(d => b.map(e => ({...d, ...e}))));
 
 
 
          for(let x in attrs)
 		 {
+            console.log(attrs[x])
             if(!Object.values(attrs[x]).length==0)
 			this.varients.push({
 				attributes:Object.keys(attrs[x]),
 				values:Object.values(attrs[x]),
-				price:this.product.price,
-				quantity:this.product.quantity,
-				sku:this.product.sku,
+				price:this.product.price!=0?this.product.price :'' ,
+				quantity:this.product.quantity!=0?this.product.quantity:'',
+				sku:this.product.sku!=0?this.product.sku:'',
 
 			})
 
@@ -1003,6 +1035,10 @@ attrs = attrs.reduce((a, b) => a.flatMap(d => b.map(e => ({...d, ...e}))));
 		 this.is_sure=true
 }
 
+         }
+         else
+         {
+            this.varients=[]
          }
 
 
@@ -1073,10 +1109,23 @@ attrs = attrs.reduce((a, b) => a.flatMap(d => b.map(e => ({...d, ...e}))));
 
 
      for(let x in this.attributes_varients )
-    new Tagify(document.getElementById('tagifyid'+x),{
+     {
+         new Tagify(document.getElementById('tagifyid'+x),{
          originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')
     });
 
+     }
+
+  document.querySelectorAll('[data-kt-ecommerce-catalog-add-product="product_option"]').forEach((e => { $(e).select2({})
+
+         }))
+let arr=this.attributes_varients
+          for(let index in this.attributes_varients)
+        $('#select'+index).on("select2:select", function (e) {
+      arr[index].attribute = $(e.currentTarget).val();
+
+     })
+      this.attributes_varients=arr
 
         },200)
 
@@ -1118,11 +1167,21 @@ background-color: #F1FAFF;
 border-radius: 0.475rem !important;
 
 }
+.select2-container .select2-selection--single{
+    height: 43px;
+}
+.select2-container--open .select2-dropdown--below {
+    margin-top:14px !important;
+}
 .dropzone, .dropzone *{
     box-sizing:border-box
 }
 .ql-editor{
-    padding: 20px 23px 70px;
+    /* padding: 20px 23px 70px; */
+    min-height: 200px !important;
+    border-bottom-right-radius: .475rem !important;
+    border-bottom-left-radius: .475rem !important;
+    background-color: #fff !important;
 }
 .selection{
   box-sizing: border-box;
@@ -1138,7 +1197,13 @@ user-select: none;
 -webkit-user-select: none;
 
 }
-.select2-container .select2-selection--single {
-
+body{
+    background-color: #f5f8fa  !important;
+    height: 100%;
+margin: 0;
+padding: 0;
+font-size: 13px !important;
+font-weight: 400;
+font-family: Poppins,Helvetica,sans-serif;
 }
 </style>

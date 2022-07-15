@@ -13,6 +13,10 @@ use Modules\Product\Repository\Attribute\AttributeRepository;
 use Modules\Product\Repository\Brand\BrandRepositoryInterface;
 use Modules\Product\Repository\Product\ProductRepositoryInterface;
 use Modules\Product\Repository\Category\CategoryRepositoryInterface;
+use Modules\Product\Repository\Comment\CommentRepository;
+use Modules\Product\Repository\Comment\CommenttInterface;
+use Modules\Product\Repository\Rate\RateInterface;
+use Modules\Product\Repository\Rate\RateRepository;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -51,6 +55,8 @@ class ProductServiceProvider extends ServiceProvider
         $this->app->bind(CategoryRepositoryInterface::class,CategoryRepository::class);
         $this->app->bind(BrandRepositoryInterface::class,BrandRepository::class);
         $this->app->bind(ProductRepositoryInterface::class,ProductRepository::class);
+        $this->app->bind(CommenttInterface::class,CommentRepository::class);
+        $this->app->bind(RateInterface::class,RateRepository::class);
     }
 
     /**

@@ -14,7 +14,7 @@ class AdminRepository implements AdminInterface
 {
 
     private $admin;
-    private $avatarslink='Galary/admin/avatars';
+    private $avatarslink='Gallery/admin/avatars';
     private $roleRepo;
 
     public function __construct(AuthoraztionInterface $authinterface)

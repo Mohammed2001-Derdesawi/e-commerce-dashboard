@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Product\Http\Controllers\Attribute\AttributeController;
-use Modules\Product\Http\Controllers\Product\ProductController;
-
+use Modules\Product\Http\Controllers\Rate\RateController;
 use Modules\Product\Http\Controllers\Brand\BrandController;
+
+use Modules\Product\Http\Controllers\Comment\CommentController;
+use Modules\Product\Http\Controllers\Product\ProductController;
 use Modules\Product\Http\Controllers\Category\CategoryController;
+use Modules\Product\Http\Controllers\Attribute\AttributeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +24,10 @@ Route::name('admin.')->prefix('/admin//')->middleware('admin')->group(function()
 
 
     Route::name('product.')->prefix('/products')->group(function (){
+        Route::get('/',[ProductController::class,'index'])->name('index');
+        Route::get('/show/{id}',[ProductController::class,'show'])->name('show');
         Route::get('/create',[ProductController::class,'create'])->name('create');
+        Route::get('/edit/{id}',[ProductController::class,'edit'])->name('edit');
 
     });
 
@@ -52,6 +57,22 @@ Route::name('admin.')->prefix('/admin//')->middleware('admin')->group(function()
         Route::get('brand/{id}/edit', [BrandController::class , 'edit'])->name('edit');
     });
     // end::Brand Routes
+
+    //Start Rate Routes
+    Route::name('rates.')->prefix('/rates')->group(function () {
+        Route::get('/', [RateController::class , 'index'])->name('index');
+
+    });
+    //End Rate Routes
+
+
+    //Start Comment Routes
+    Route::name('commnets.')->prefix('/comments')->group(function () {
+        Route::get('/', [CommentController::class , 'index'])->name('index');
+
+    });
+    //End Commnet Routes
+
 
 
 

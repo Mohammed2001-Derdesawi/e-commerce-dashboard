@@ -31,7 +31,7 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Fonts-->
 		<!--begin::Page Vendor Stylesheets(used by this page)-->
         <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
-		<link href="{{asset('assets/Admin/plugins/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" />
+		{{-- <link href="{{asset('assets/Admin/plugins/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" /> --}}
 		<link href="{{asset('assets/Admin/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<!--end::Page Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
@@ -1003,7 +1003,7 @@ License: For each use you must have a valid license purchased only from above li
 											</span>
 											<div class="menu-sub menu-sub-accordion">
 												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/catalog/products.html">
+													<a class="menu-link" href="{{route('admin.product.index')}}">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
@@ -1026,30 +1026,24 @@ License: For each use you must have a valid license purchased only from above li
 														<span class="menu-title">Brands</span>
 													</a>
 												</div>
+
 												<div class="menu-item">
-													<a class="menu-link" href="">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Edit Product</span>
-													</a>
-												</div>
-												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/catalog/add-category.html">
+													<a class="menu-link" href="{{route('admin.category.create')}}">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
 														<span class="menu-title">Add Category</span>
 													</a>
 												</div>
-												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/catalog/edit-category.html">
+                                                <div class="menu-item">
+													<a class="menu-link" href="{{route('admin.product.create')}}">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
-														<span class="menu-title">Edit Category</span>
+														<span class="menu-title">Add Product</span>
 													</a>
 												</div>
+
 											</div>
 										</div>
 										<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
@@ -1179,6 +1173,22 @@ License: For each use you must have a valid license purchased only from above li
 													<span class="bullet bullet-dot"></span>
 												</span>
 												<span class="menu-title">Attributes</span>
+											</a>
+										</div>
+                                        <div class="menu-item">
+											<a class="menu-link" href="{{route('admin.rates.index')}}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Rates</span>
+											</a>
+										</div>
+                                        <div class="menu-item">
+											<a class="menu-link" href="{{route('admin.commnets.index')}}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Comments</span>
 											</a>
 										</div>
 										<div class="menu-item">

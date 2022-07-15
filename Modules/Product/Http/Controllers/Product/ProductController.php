@@ -2,19 +2,26 @@
 
 namespace Modules\Product\Http\Controllers\Product;
 
-use Illuminate\Contracts\Support\Renderable;
+use Facade\Ignition\QueryRecorder\Query;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Modules\Product\Repository\Product\ProductRepositoryInterface;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
+    private $ProductRepo;
+
+    public function __construct(ProductRepositoryInterface $ProductRepo)
+    {
+        $this->ProductRepo = $ProductRepo;
+    }
+
     public function index()
     {
-        return view('product::index');
+        return view('product::Product.index');
     }
 
     /**
@@ -26,25 +33,8 @@ class ProductController extends Controller
         return view('product::Product.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('product::show');
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -53,27 +43,23 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        return view('product::edit');
+        $product= $this->ProductRepo->getByID($id,
+        ['*'],
+
+       ['varients.attributes','images']);
+        return view('product::Product.edit',compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
+    public function show($id)
     {
-        //
+        $product= $this->ProductRepo->getByID($id,
+        ['*'],
+
+       ['varients.attributes','images','category:id,name','brand:id,name'],true);
+        return view('product::Product.show',compact('product'));
+
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
-    }
+
 }

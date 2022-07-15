@@ -26,17 +26,10 @@ class BrandApiController extends Controller
      */
     public function index()
     {
-        return BrandResource::collection($this->BrandRepo->Brands(['id','name' , 'image'] , 2 , $relations = ['*']));
+        return BrandResource::collection($this->BrandRepo->Brands(['id','name' , 'image'] , 2 , $relations = ['']));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('product::create');
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -48,25 +41,8 @@ class BrandApiController extends Controller
         $this->BrandRepo->Store($request);
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('product::show');
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('product::edit');
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -87,5 +63,10 @@ class BrandApiController extends Controller
     public function destroy($id)
     {
         $this->BrandRepo->Delete($id);
+    }
+
+    public function brands()
+    {
+        return BrandResource::collection($this->BrandRepo->Brands(['id','name'] , 0 , $relations = ['']));
     }
 }

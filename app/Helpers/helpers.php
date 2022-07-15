@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
      function SaveImage($path,$file)
     {
         $filename=time().$file->getClientOriginalName();
-        $file->move(public_path($path),$filename);
+        Storage::disk('public')->putFileAs($path,$file,$filename);
         return $filename;
 
     }

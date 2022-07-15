@@ -4,19 +4,28 @@ namespace Modules\Product\Http\Controllers\Product\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\Support\Renderable;
+use Modules\Product\Transformers\Product\ProductResource;
 use Modules\Product\Repository\Product\ProductRepositoryInterface;
 
 class ProductApiController extends Controller
 {
-
-    protected $ProductRepo;
+    private $ProductRepo;
 
     public function __construct(ProductRepositoryInterface $ProductRepo)
     {
         $this->ProductRepo = $ProductRepo;
     }
 
+    public function getFilesInfo(Request $request)
+    {
+
+        return $this->ProductRepo->getimagesInfo($request);
+    }
 
     /**
      * Display a listing of the resource.
@@ -24,17 +33,25 @@ class ProductApiController extends Controller
      */
     public function index()
     {
-        return view('product::index');
+
+        $products=Cache::put('products',$this->ProductRepo->index(
+            ['id','name','category_id','brand_id'],
+              (int)request()->paginate,
+              ['category:id,name','brand:id,name','mainimage:path,product_id']
+            ),60);
+
+            if(Cache::has('products'))
+            $products=Cache::get('products');
+            else
+            $products=$this->ProductRepo->index(
+                ['id','name','category_id','brand_id'],
+                  (int)request()->paginate,
+                  ['category:id,name','brand:id,name','mainimage:path,product_id']
+                );
+       return ProductResource::collection($products);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('product::create');
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -43,28 +60,20 @@ class ProductApiController extends Controller
      */
     public function store(Request $request)
     {
+        $data=$request["product"];
+        $decoded_data=json_decode($request["product"] , true);
+        $request_data=new Request($decoded_data);
+        $validated=Validator::make($request_data->all() , [
+            "name" =>"required",
+            "varients" =>"required" ,
+            "varients.*.price"=>"required|max:8|integer|min:1",
+        ]);
+        dd($validated->errors());
         $this->ProductRepo->store($request);
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('product::show');
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('product::edit');
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -72,9 +81,12 @@ class ProductApiController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        dd($request);
+        $product=$this->ProductRepo->update($request);
+        dd($product);
+        return $product;
     }
 
     /**
@@ -84,6 +96,10 @@ class ProductApiController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $this->ProductRepo->delete($id);
+        return response()->json([
+            'message'=>'Product has been deleted',
+
+        ],200);
     }
 }
