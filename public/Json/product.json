@@ -1,0 +1,45 @@
+{
+    "product": {
+        "name": "mobiles",
+        "price": "200",
+        "quantity": "10",
+        "images": {
+            "name": "x.png",
+            "lastModified": "",
+            "size": "",
+            "type": "x.png"
+        },
+        "sku": "123gh",
+        "status": "1",
+        "has_tax": "1",
+        "tax": "15",
+        "mainimage": "gg.png",
+        "weight": "250",
+        "dimension": {
+            "width": "300",
+            "height": "150",
+            "length": "400"
+        },
+        "description": "mobile is the best choice",
+        "meta": {
+            "name": "mobile product",
+            "description": "mobile product description",
+            "keywords": "mobile product keyword"
+        },
+        "category_id": "",
+        "varients": {
+            "attributes": {
+                "0": "1",
+                "1": "2"
+            },
+            "values": {
+                "0": "red",
+                "1": "64"
+            },
+            "price": "",
+            "quantity": "",
+            "sku": ""
+        }
+
+    }
+}

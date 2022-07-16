@@ -15,6 +15,7 @@ class ProductDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
+        \Modules\Product\Entities\Attribute\Attribute::factory(20)->create();
 
         // $this->call("OthersTableSeeder");
     }

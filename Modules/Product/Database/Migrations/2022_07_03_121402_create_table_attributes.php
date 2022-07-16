@@ -13,7 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('attributes', function (Blueprint $table) {
+            $table->bigIncrements('id');
+
+            $table->string('name');
+            $table->string('type')->default('text');
+            $table->index('name');
+
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('');
     }
 };

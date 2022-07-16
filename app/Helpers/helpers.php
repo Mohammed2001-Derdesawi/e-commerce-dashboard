@@ -31,7 +31,7 @@ function deleteImage($oldImage)
 function checkPagination($paginate){
     return $paginate  ? true  : false;
 }
-            
+
 function findById ($id ,  $model) {
     $model = $model::where('id' , $id)->first();
     return $model;

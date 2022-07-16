@@ -2,14 +2,17 @@
 
 namespace Modules\Product\Providers;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\Product\Repository\Brand\BrandRepository;
-use Modules\Product\Repository\Category\CategoryRepository;
-use Modules\Product\Repository\Brand\BrandRepositoryInterface;
-use Modules\Product\Repository\Category\CategoryRepositoryInterface;
 use Modules\Product\Repository\Product\ProductRepository;
+use Modules\Product\Repository\Category\CategoryRepository;
+use Modules\Product\Repository\Attribute\AttributeInterface;
+use Modules\Product\Repository\Attribute\AttributeRepository;
+use Modules\Product\Repository\Brand\BrandRepositoryInterface;
 use Modules\Product\Repository\Product\ProductRepositoryInterface;
+use Modules\Product\Repository\Category\CategoryRepositoryInterface;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -44,6 +47,7 @@ class ProductServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->bind(AttributeInterface::class,AttributeRepository::class);
         $this->app->bind(CategoryRepositoryInterface::class,CategoryRepository::class);
         $this->app->bind(BrandRepositoryInterface::class,BrandRepository::class);
         $this->app->bind(ProductRepositoryInterface::class,ProductRepository::class);
@@ -111,7 +115,7 @@ class ProductServiceProvider extends ServiceProvider
     private function getPublishableViewPaths(): array
     {
         $paths = [];
-        foreach (\Config::get('view.paths') as $path) {
+        foreach (Config::get('view.paths') as $path) {
             if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
                 $paths[] = $path . '/modules/' . $this->moduleNameLower;
             }

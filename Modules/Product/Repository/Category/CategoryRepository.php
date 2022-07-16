@@ -15,6 +15,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         $categories = Category::query();
         if( isset($_GET['search'])){
+
             $categories = Category::query()->search($data->search);
         }
 
