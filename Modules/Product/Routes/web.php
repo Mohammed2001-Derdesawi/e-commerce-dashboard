@@ -67,7 +67,7 @@ Route::name('admin.')->prefix('/admin//')->middleware('admin')->group(function()
 
 
     //Start Comment Routes
-    Route::name('commnets.')->prefix('/comments')->group(function () {
+    Route::name('comments.')->prefix('/comments')->group(function () {
         Route::get('/', [CommentController::class , 'index'])->name('index');
 
     });

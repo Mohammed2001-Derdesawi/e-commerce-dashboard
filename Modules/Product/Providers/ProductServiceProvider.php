@@ -5,6 +5,7 @@ namespace Modules\Product\Providers;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Product\Repository\Actions\ActionUserInterface;
 use Modules\Product\Repository\Brand\BrandRepository;
 use Modules\Product\Repository\Product\ProductRepository;
 use Modules\Product\Repository\Category\CategoryRepository;
@@ -55,8 +56,12 @@ class ProductServiceProvider extends ServiceProvider
         $this->app->bind(CategoryRepositoryInterface::class,CategoryRepository::class);
         $this->app->bind(BrandRepositoryInterface::class,BrandRepository::class);
         $this->app->bind(ProductRepositoryInterface::class,ProductRepository::class);
-        $this->app->bind(CommenttInterface::class,CommentRepository::class);
-        $this->app->bind(RateInterface::class,RateRepository::class);
+        $this->app->bind(ActionUserInterface::class, function (){
+            if(request()->is('api/admin/comments') || request()->is('api/admin/comments/*'))
+            return new CommentRepository;
+
+            return new RateRepository;
+        });
     }
 
     /**

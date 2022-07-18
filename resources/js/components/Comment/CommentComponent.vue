@@ -64,9 +64,7 @@
 														<div class="d-flex align-items-center">
 															<!--begin::Thumbnail-->
 															<a href="#" class="symbol symbol-50px">
-																<span class="symbol-label" style="background-image:url('https://via.placeholder.com/300.png/09f/fff
-
-C/O https://placeholder.com/ ');"></span>
+																<span class="symbol-label" style="background-image:url('https://via.placeholder.com/300.png/09f/fffC/O https://placeholder.com/ ');"></span>
 															</a>
 															<!--end::Thumbnail-->
 															<div class="ms-5">
@@ -84,7 +82,7 @@ C/O https://placeholder.com/ ');"></span>
 													<!--begin::Rating-->
 													<td class="text-end pe-0" data-order="rating-4">
 														<div class="rating justify-content-end" style="display:flex; justify-content:space-between">
-													      {{comment.body + "..."}}
+													      {{comment.body.substr(1,50) + "..."}}
 														</div>
 													</td>
 													<!--end::Rating-->
@@ -98,7 +96,20 @@ C/O https://placeholder.com/ ');"></span>
 													<!--begin::Action=-->
 
 													<td class="text-end">
-
+         <button @click="showComment(comment)"  data-bs-toggle="modal" data-bs-target="#kt_modal_show_comment"  class="
+                  btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                <span class="svg-icon svg-icon-3">
+                                 <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/General/Visible.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect x="0" y="0" width="24" height="24"/>
+        <path d="M3,12 C3,12 5.45454545,6 12,6 C16.9090909,6 21,12 21,12 C21,12 16.9090909,18 12,18 C5.45454545,18 3,12 3,12 Z" fill="currentColor" fill-rule="nonzero" opacity="0.3"/>
+        <path d="M12,15 C10.3431458,15 9,13.6568542 9,12 C9,10.3431458 10.3431458,9 12,9 C13.6568542,9 15,10.3431458 15,12 C15,13.6568542 13.6568542,15 12,15 Z" fill="currentColor"/>
+    </g>
+</svg><!--end::Svg Icon-->
+                                </span>
+                                <!--end::Svg Icon-->
+                            </button>
 															<a @click.prevent="deleteComment(comment.id)" href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
 																<!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
 																<span class="svg-icon svg-icon-3">
@@ -182,6 +193,33 @@ C/O https://placeholder.com/ ');"></span>
 								<!--end::Products-->
 							</div>
 							<!--end::Container-->
+                                   <!-- Modal-->
+<div class="modal fade"  id="kt_modal_show_comment" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="kt_modal_show_comment" v-if="comment.user!=undefined"> User:{{comment.user.name}}</h5>
+        <!--begin::Close-->
+															<div  @click="removeModal" class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+																<!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+																<span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																		<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+																		<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+																	</svg>
+																</span>
+																<!--end::Svg Icon-->
+															</div>
+															<!--end::Close-->
+            </div>
+            <div class="modal-body" style="height: 300px;">
+            <h5 v-if="comment.body!=undefined" style="margin-bottom:10px;" class="modal-title">Comment:</h5>
+                {{comment.body}}
+            </div>
+
+        </div>
+    </div>
+</div>
 						</div>
 						<!--end::Post-->
 </template>
@@ -196,7 +234,8 @@ export default {
             perpage:25,
             paginate:{},
             search:'',
-            pages:[]
+            pages:[],
+            comment:{},
 
         }
 
@@ -208,6 +247,30 @@ export default {
     },
 
      methods:{
+         removeModal()
+        {
+            const modal=document.getElementById('kt_modal_show_comment')
+            modal.classList.remove('show')
+         modal.removeAttribute('aria-modal')
+            modal.removeAttribute('role')
+            modal.setAttribute('aria-hidden','true')
+            modal.style.display='none'
+            const body=document.getElementById('kt_body');
+			body.classList.remove('modal-open')
+			body.style=''
+
+              let backmodal=document.querySelectorAll(".modal-backdrop")
+
+			  backmodal.forEach(box => {
+                box.remove();
+                 });
+
+        },
+        showComment(comment)
+        {
+            this.comment=comment
+        },
+
 
         getComments(page=1)
         {

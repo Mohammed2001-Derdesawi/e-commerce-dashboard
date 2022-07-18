@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\CanComment;
+use App\Traits\CanRate;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -9,10 +11,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\Order\Entities\Order\Order;
+use Modules\Product\Entities\Comment\Comment;
+use Modules\Product\Entities\Rate\Rate;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, CanRate, CanComment;
 
     /**
      * The attributes that are mass assignable.
@@ -51,5 +55,15 @@ class User extends Authenticatable
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class, 'user_id', 'id');
+    }
+
+    public function rates()
+    {
+        return $this->hasMany(Rate::class, 'user_id', 'id');
+    }
+
+    public function comments()
+    {
+        $this->hasMany(Comment::class, 'user_id', 'id');
     }
 }

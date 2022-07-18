@@ -30,6 +30,7 @@
         "@fortawesome/free-regular-svg-icons": "^6.1.1",
         "@fortawesome/free-solid-svg-icons": "^6.1.1",
         "@fortawesome/vue-fontawesome": "^2.0.8",
+        "chart.js": "^3.8.0",
         "stream": "0.0.2",
         "sweetalert2": "^11.4.19",
         "v-select2-component": "^0.4.7",
