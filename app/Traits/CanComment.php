@@ -13,7 +13,7 @@ trait CanComment
     {
 
         $model=findById($product_id,new Product(),[]);
-        $comment=$this->rates->where('commentable_id',$model->id)->where('commentable_type',get_class($model))->first();
+        $comment=$this->comments->where('commentable_id',$model->id)->where('commentable_type',get_class($model))->first();
        if(!$comment)
        $comment= $this->comments()->create([
             'body'=>$body,
