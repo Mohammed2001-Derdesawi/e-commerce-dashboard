@@ -115,8 +115,7 @@ class ProductApiController extends Controller
         if($validator->fails()) {
             return response()->json([
                 'errors' => $validator->errors(),
-                'status' => 422
-            ]);
+            ] , 422);
         } else {
             $this->ProductRepo->store($data_request);
         }
@@ -206,8 +205,8 @@ class ProductApiController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'errors' => $validator->errors(),
-                'status' => 422
-            ]);
+            ] , 422);
+
         }
         $this->ProductRepo->update($data_request);
     }

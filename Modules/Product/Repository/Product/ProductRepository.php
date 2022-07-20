@@ -98,7 +98,6 @@ class ProductRepository implements ProductRepositoryInterface {
 
     public function update($request){
 
-//        dd($request);
         $data = json_decode($request->product , true);
         $product = findById($data['id'] , new Product);
 
@@ -156,25 +155,36 @@ class ProductRepository implements ProductRepositoryInterface {
         }
 
         $varient = Varient::where('product_id' , $product->id)->delete();
-        $varients = [];
-        for ($i = 0 ; $i<count($data['varients']) ; $i++) {
-            $varients[] = Varient::create([
-                'quantity' => $data['varients'][$i]['quantity'],
-                'price' => $data['varients'][$i]['price'],
-                'sku' => $data['varients'][$i]['sku'],
+        if (count($data['varients']) != 0) {
+            $varients = [];
+            for ($i = 0 ; $i<count($data['varients']) ; $i++) {
+                $varients[] = Varient::create([
+                    'quantity' => $data['varients'][$i]['quantity'],
+                    'price' => $data['varients'][$i]['price'],
+                    'sku' => $data['varients'][$i]['sku'],
+                    'product_id' => $product->id,
+                ]);
+
+
+
+                $arttributes_varients = [];
+                for ($j = 0 ; $j<count($data['varients'][$i]['attributes']) ; $j++) {
+                    $attribute_id = findById($data['varients'][$i]['attributes'][$j] , new Attribute())->id;
+                    $value = $data['varients'][$i]['values'][$j];
+                    $arttributes_varients[] = ['attribute_id'=>$attribute_id , 'value'=>$value];
+                }
+                $varients[$i]->attributes()->attach($arttributes_varients);
+            }
+        } else {
+            $varient = Varient::create([
+                'quantity' => $data['quantity'],
+                'price' => $data['price'],
+                'sku' => $data['sku'],
                 'product_id' => $product->id,
             ]);
-
-
-
-            $arttributes_varients = [];
-            for ($j = 0 ; $j<count($data['varients'][$i]['attributes']) ; $j++) {
-                $attribute_id = findById($data['varients'][$i]['attributes'][$j] , new Attribute())->id;
-                $value = $data['varients'][$i]['values'][$j];
-                $arttributes_varients[] = ['attribute_id'=>$attribute_id , 'value'=>$value];
-            }
-            $varients[$i]->attributes()->attach($arttributes_varients);
         }
+
+
 
     }
 

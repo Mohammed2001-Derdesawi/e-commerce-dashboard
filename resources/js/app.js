@@ -42,6 +42,7 @@ Vue.component('editbrand-component', require('./components/Product/Brand/EditCom
 Vue.component('storeproduct-component', require('./components/Product/StoreproductComponent.vue').default);
 Vue.component('attribute-component',require('./components/Attribute/AttributeComponent').default);
 Vue.component('updateproduct-component',require('./components/Product/UpdateproductComponent').default);
+Vue.component('user-component',require('./components/User/UserComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

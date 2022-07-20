@@ -6,6 +6,8 @@ use Modules\Product\Http\Controllers\Product\ProductController;
 
 use Modules\Product\Http\Controllers\Brand\BrandController;
 use Modules\Product\Http\Controllers\Category\CategoryController;
+use Modules\Product\Http\Controllers\Cart\CartController;
+use Modules\Product\Http\Controllers\WishList\WishListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,12 +55,17 @@ Route::name('admin.')->prefix('/admin/')->middleware('admin')->group(function() 
         Route::get('brand/{id}/edit', [BrandController::class , 'edit'])->name('edit');
     });
     // end::Brand Routes
-
-
-
-
-
 });
+
+// begin::Cart Routes
+Route::get('/add-to-cart/{id}', [CartController::class , 'store'])->name('store');
+Route::get('/delete-from-cart/{id}', [CartController::class , 'destroy'])->name('delete');
+// end::Cart Routes
+
+// begin::WishList Routes
+Route::get('/add-to-wishList/{id}', [WishListController::class , 'store'])->name('store');
+Route::get('/delete-from-wishList/{id}', [WishListController::class , 'destroy'])->name('delete');
+// end::WishList Routes
 
 
 

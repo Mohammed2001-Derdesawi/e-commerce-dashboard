@@ -192,7 +192,7 @@ License: For each use you must have a valid license purchased only from above li
 												<a href="#" class="menu-link px-5">
 													<span class="menu-title position-relative">Language
 													<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-													
+
 												</a>
 												<!--begin::Menu sub-->
 												<div class="menu-sub menu-sub-dropdown w-175px py-4">
@@ -218,7 +218,7 @@ License: For each use you must have a valid license purchased only from above li
 													@method('POST')
 													<button type="submit" class="menu-link px-5">Sign Out</button>
 												</form>
-												
+
 											</div>
 											<!--end::Menu item-->
 											<!--begin::Menu separator-->
@@ -1190,6 +1190,15 @@ License: For each use you must have a valid license purchased only from above li
 												<span class="menu-title">Settings</span>
 											</a>
 										</div>
+
+                                        <div class="menu-item">
+                                            <a class="menu-link" href="{{route('admin.user.index')}}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+                                                <span class="menu-title">Users</span>
+                                            </a>
+                                        </div>
 									</div>
 								</div>
 							</div>

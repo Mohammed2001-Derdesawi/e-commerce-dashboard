@@ -5,6 +5,8 @@ use Modules\Product\Http\Controllers\Brand\Api\BrandApiController;
 use Modules\Product\Http\Controllers\Product\Api\ProductApiController;
 use Modules\Product\Http\Controllers\Category\Api\CategoryApiController;
 use Modules\Product\Http\Controllers\Attribute\Api\AttributeApiController;
+use Modules\Product\Http\Controllers\Cart\Api\CartApiController;
+use Modules\Product\Http\Controllers\WishList\Api\WishListApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,10 +54,19 @@ Route::name('admin.')->prefix('/admin')->group(function (){
         Route::post('/store', [ProductApiController::class , 'store'])->name('store');
         Route::post('/update', [ProductApiController::class , 'update'])->name('update');
         Route::post('/images/info', [ProductApiController::class , 'getFilesInfo'])->name('getimages');
-
     });
     // end::Product Routes
 
-
-
 });
+
+
+
+// begin::Cart Routes
+Route::get('/add-to-cart/{id}', [CartApiController::class , 'store'])->name('store');
+Route::get('/delete-from-cart/{id}', [CartApiController::class , 'destroy'])->name('delete');
+// end::Cart Routes
+
+// begin::WishList Routes
+Route::get('/add-to-wishList/{id}', [WishListApiController::class , 'store'])->name('store');
+Route::get('/delete-from-wishList/{id}', [WishListApiController::class , 'destroy'])->name('delete');
+// end::WishList Routes

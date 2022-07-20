@@ -18,12 +18,6 @@ class BrandApiController extends Controller
         $this->BrandRepo = $BrandRepo;
     }
 
-
-
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
     public function index()
     {
         return BrandResource::collection($this->BrandRepo->Brands(['id','name' , 'image'] , 2 , $relations = ['*']));

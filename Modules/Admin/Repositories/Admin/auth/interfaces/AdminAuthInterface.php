@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Admin\Repositories\Admin\auth\interfaces
+namespace Modules\Admin\Repositories\Admin\auth\interfaces;
 
 
 
