@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Modules\Admin\Http\Controllers\User\UserApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/admin', function (Request $request) {
-    return $request->user();
+Route::name('admin.')->prefix('/admin')->group(function (){
+
+    // begin::User Routes
+    Route::name('user')->group(function () {
+        Route::get('/users', [UserApiController::class , 'index'])->name('index');
+        Route::delete('/user/delete/{id}', [UserApiController::class , 'delete'])->name('delete');
+        Route::get('/user/changeStatus/{id}', [UserApiController::class , 'changeStatus'])->name('changeStatus');
+    });
+    // end::User Routes
 });

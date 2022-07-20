@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\Authorzation\RoleController;
+use Modules\Admin\Http\Controllers\Dashboard\AdminHomeController;
+use Modules\Admin\Http\Controllers\Authentication\AdminLoginController;
+use Modules\Admin\Http\Controllers\Authentication\ResetPasswordController;
+use Modules\Admin\Http\Controllers\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +18,32 @@ use Modules\Admin\Http\Controllers\Authorzation\RoleController;
 |
 */
 
-Route::prefix('admin')->group(function() {
-    //Route::get('/roles', [RoleController::class,'index']);
-    Route::get('/', 'AdminController@index');
+Route::prefix('admin')->name('admin.')->group(function() {
+
+    Route::middleware('admin')->group(function (){
+        // Dahsboard Controller
+        Route::get('/', [AdminHomeController::class,'index'])->name('dashboard');
+        // End Dashboard Controller
+
+
+        // begin::User Routes
+        Route::name('user.')->group(function () {
+            Route::get('/users', [UserController::class , 'index'])->name('index');
+        });
+            // end::User Routes
+    });
+
+    // Authentication Routes
+    Route::get('/login',[AdminLoginController::class,'showloginForm'])->name('showloginform');
+    Route::post('/login',[AdminLoginController::class,'login'])->name('login');
+    Route::post('/logout',[AdminLoginController::class,'logout'])->name('logout');
+    Route::get('/forget-password',[AdminLoginController::class,'forgetPassword'])->name('forgetPassword');
+    Route::post('/forget-password',[AdminLoginController::class,'checkEmailForgetPassword'])->name('checkEmailForgetPassword');
+
+
+    Route::get('/reset-password/{token}',[ResetPasswordController ::class,'showResetPassword'])->name('showResetPassword');
+    Route::post('/reset-password',[ResetPasswordController ::class,'updatePassword'])->name('updatePassword');
+    //  End Authentication Routes
+
 });
-
-
-Route::get('test' , function(){
-    return view('admin::Admin.layouts.master');
-});
-
 
