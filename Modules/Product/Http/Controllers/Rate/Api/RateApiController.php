@@ -14,49 +14,41 @@ use Modules\Product\Transformers\Rate\RateResource;
 
 class RateApiController extends Controller
 {
-     protected $rateRepo;
+    protected $rateRepo;
     public function __construct(RateInterface $rateInterface)
     {
-        $this->rateRepo=$rateInterface;
-
+        $this->rateRepo = $rateInterface;
     }
     public function index()
     {
         return RateResource::collection($this->rateRepo->index(
-            ['id','rate','user_id','rateable_id','rateable_type'],
-            ['user:id,name','rateable'
-            =>function (MorphTo $morphTo) {
-                $morphTo->constrain([
-                    Product::class => function (Builder $query) {
-                        $query->select(['id','name']);
-                    },
+            ['id', 'rate', 'user_id', 'rateable_id', 'rateable_type'],
+            [
+                'user:id,name', 'rateable'
+                => function (MorphTo $morphTo) {
+                    $morphTo->constrain([
+                        Product::class => function (Builder $query) {
+                            $query->select(['id', 'name']);
+                        },
 
-                ]);
-            }
-
-
-
-
-
-        ],
+                    ]);
+                }
+            ],
             request()->paginate,
         ));
-
     }
-
-
 
     /**
      * Store a newly created resource in storage.
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request,$product_id)
+    public function store(Request $request, $product_id)
     {
-       $product= $this->rateRepo->store($product_id,$request->rate);
-       return $this->ReturnMessage( [
-        'product'=>$product,
-        'message'=>'Rate has been Created for this product with id = '.$product_id
+        $product = $this->rateRepo->store($product_id, $request->rate);
+        return $this->ReturnMessage([
+            'product' => $product,
+            'message' => 'Rate has been Created for this product with id = ' . $product_id
         ]);
     }
 
@@ -69,10 +61,10 @@ class RateApiController extends Controller
      */
     public function update(Request $request, $product_id)
     {
-        $product=$this->rateRepo->update($product_id,$request->rate);
-        return $this->ReturnMessage( [
-            'product'=>$product,
-            'message'=>'Rate has been updated for this product with id = '.$product_id
+        $product = $this->rateRepo->update($product_id, $request->rate);
+        return $this->ReturnMessage([
+            'product' => $product,
+            'message' => 'Rate has been updated for this product with id = ' . $product_id
         ]);
     }
 
@@ -85,16 +77,13 @@ class RateApiController extends Controller
     {
         $this->rateRepo->delete($id);
         return response()->json([
-            'message'=>'Rate has been Deleted'
+            'message' => 'Rate has been Deleted'
 
         ]);
-
     }
 
     public function ReturnMessage($json)
     {
         return response()->json($json);
-
-
     }
 }

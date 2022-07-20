@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('varients', function (Blueprint $table) {
             $table->bigIncrements('id');
-
             $table->string('quantity');
             $table->string('price');
             $table->string('sku');

@@ -69,7 +69,7 @@
 															<!--end::Thumbnail-->
 															<div class="ms-5">
 																<!--begin::Title-->
-																<a class="text-gray-800 text-hover-primary fs-5 fw-bolder" data-kt-ecommerce-product-filter="product_name">{{product.name}}</a>
+																<a @click.prevent="showProduct(product.id)" class="text-gray-800 text-hover-primary fs-5 fw-bolder" data-kt-ecommerce-product-filter="product_name">{{product.name}}</a>
 																<!--end::Title-->
 															</div>
 														</div>
@@ -260,6 +260,11 @@ export default {
         this.getProducts()
     },
     methods:{
+        showProduct(id)
+        {
+            window.location.href='/admin/products/show/'+id
+
+        },
         getProducts(page=1)
         {
              axios.get('/api/admin/products?page='+page+'&&paginate='+this.perpage+"&&search="+this.search)

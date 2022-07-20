@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->enum('status',['cancelled','comploted','denied','expired','failed','pending','processing','refunded','delivered','delivering']);
+            $table->enum('status',['cancelled','completed','denied','expired','failed','pending','processing','refunded','delivered','delivering']);
             $table->unsignedBigInteger('user_id');
             $table->date('delivery_date')->nullable();
              $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');

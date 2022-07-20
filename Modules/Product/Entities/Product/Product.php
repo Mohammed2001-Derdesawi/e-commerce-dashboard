@@ -13,12 +13,14 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Product\Entities\Like\Like;
+use Modules\Product\Entities\View\View;
 
 class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name' , 'description' , 'status' , 'width' , 'height' , 'length' , 'weight' , 'meta_name' , 'meta_description' , 'meta_keywords' , 'is_tax' , 'brand_id' , 'category_id','tax'];
+    protected $fillable = ['name' , 'description' , 'status' , 'width' , 'height' , 'length' , 'weight' , 'meta_name' , 'meta_description' , 'meta_keywords' , 'is_tax' , 'brand_id' , 'category_id','tax','real_views','views'];
 
     protected static function newFactory()
     {
@@ -84,6 +86,15 @@ class Product extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class,'commentable');
+    }
+    public function likeable()
+    {
+        return $this->morphMany(Like::class,'likeable');
+    }
+
+    public function views()
+    {
+        return $this->morphMany(View::class,'viewable');
     }
 
 }

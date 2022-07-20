@@ -14,12 +14,6 @@ use Modules\Product\Repository\Product\ProductRepositoryInterface;
 
 class CommentRepository implements CommenttInterface{
 
-    protected $prodRepo;
-    public function __construct(ProductRepositoryInterface $interface)
-    {
-        $this->prodRepo=$interface;
-
-    }
     public function index($columns=['*'],$relations=[''],$paginate=25){
         return app(Pipeline::class)
         ->send(Comment::query())

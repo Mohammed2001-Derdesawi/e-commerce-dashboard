@@ -13,12 +13,7 @@ use Modules\Product\Repository\Rate\RateInterface;
 use Modules\Product\Repository\Product\ProductRepositoryInterface;
 
 class RateRepository implements RateInterface{
-    protected $prodRepo;
-    public function __construct(ProductRepositoryInterface $interface)
-    {
-        $this->prodRepo=$interface;
-
-    }
+   
     public function index($columns=['*'],$relations=[''],$paginate=25){
 
         return app(Pipeline::class)
@@ -36,7 +31,7 @@ class RateRepository implements RateInterface{
 
     public function store($product,$rate)
     {
-        $product=$this->prodRepo->getByID($product);
+        $product = $this->prodRepo->getByID($product);
         $product->rates()->create([
         'rate'=>$rate,
         'user_id'=>Auth::user()->id,

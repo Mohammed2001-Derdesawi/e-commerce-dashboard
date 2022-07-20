@@ -15,6 +15,7 @@ use Modules\Product\Repository\Product\ProductRepositoryInterface;
 use Modules\Product\Repository\Category\CategoryRepositoryInterface;
 use Modules\Product\Repository\Comment\CommentRepository;
 use Modules\Product\Repository\Comment\CommenttInterface;
+use Modules\Product\Repository\Like\LikeRepository;
 use Modules\Product\Repository\Rate\RateInterface;
 use Modules\Product\Repository\Rate\RateRepository;
 
@@ -55,8 +56,15 @@ class ProductServiceProvider extends ServiceProvider
         $this->app->bind(CategoryRepositoryInterface::class,CategoryRepository::class);
         $this->app->bind(BrandRepositoryInterface::class,BrandRepository::class);
         $this->app->bind(ProductRepositoryInterface::class,ProductRepository::class);
-        $this->app->bind(CommenttInterface::class,CommentRepository::class);
-        $this->app->bind(RateInterface::class,RateRepository::class);
+        $this->app->bind(ActionUserInterface::class, function (){
+            if(request()->is('api/admin/comments') || request()->is('api/admin/comments/*'))
+            return new CommentRepository;
+
+            if(request()->is('api/admin/rates') || request()->is('api/admin/rates/*'))
+            return new RateRepository;
+
+            return new LikeRepository;
+        });
     }
 
     /**

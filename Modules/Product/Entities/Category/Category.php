@@ -55,8 +55,6 @@ class Category extends Model
         });
     }
 
-
-
     public  function getParents () {
         $parent = $this->parent;
         $parents = collect([]);
@@ -64,9 +62,7 @@ class Category extends Model
             $parents->push($parent);
             $parent = $parent->parent;
         }
-
         return $parents ;
-
     }
 
     public function treeCount(){
@@ -84,7 +80,4 @@ class Category extends Model
     {
         return $this->morphMany(Rate::class,'rateable');
     }
-
-
-
 }

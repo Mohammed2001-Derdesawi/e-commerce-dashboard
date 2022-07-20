@@ -18,8 +18,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->text('body');
             $table->morphs('commentable');
-
-
             $table->timestamps();
         });
     }

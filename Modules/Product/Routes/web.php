@@ -81,4 +81,10 @@ Route::name('admin.')->prefix('/admin//')->middleware('admin')->group(function()
 });
 
 
+Route::name('products.')->prefix('/products')->group(function (){
+    Route::get('/show/{id}',[ProductController::class,'showuserproduct']);
+
+});
+
+
 

@@ -11,7 +11,7 @@ class Rate extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','rate'];
+    protected $fillable = ['user_id','rate','rateable_id','rateable_type'];
 
     protected static function newFactory()
     {

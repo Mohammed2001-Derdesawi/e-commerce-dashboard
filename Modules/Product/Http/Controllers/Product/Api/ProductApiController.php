@@ -34,21 +34,13 @@ class ProductApiController extends Controller
     public function index()
     {
 
-        $products=Cache::put('products',$this->ProductRepo->index(
-            ['id','name','category_id','brand_id'],
-              (int)request()->paginate,
-              ['category:id,name','brand:id,name','mainimage:path,product_id']
-            ),60);
-
-            if(Cache::has('products'))
-            $products=Cache::get('products');
-            else
-            $products=$this->ProductRepo->index(
-                ['id','name','category_id','brand_id'],
-                  (int)request()->paginate,
-                  ['category:id,name','brand:id,name','mainimage:path,product_id']
-                );
-       return ProductResource::collection($products);
+      
+  
+       return ProductResource::collection($this->ProductRepo->index(
+        ['id','name','category_id','brand_id'],
+          (int)request()->paginate,
+          ['category:id,name','brand:id,name','mainimage:path,product_id']
+        ));
     }
 
 

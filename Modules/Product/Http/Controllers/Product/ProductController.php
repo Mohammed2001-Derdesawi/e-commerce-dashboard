@@ -2,10 +2,12 @@
 
 namespace Modules\Product\Http\Controllers\Product;
 
+use App\Models\User;
 use Facade\Ignition\QueryRecorder\Query;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Modules\Product\Repository\Product\ProductRepositoryInterface;
@@ -43,23 +45,46 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product= $this->ProductRepo->getByID($id,
-        ['*'],
-
-       ['varients.attributes','images']);
-        return view('product::Product.edit',compact('product'));
+        $product = $this->ProductRepo->getByID($id,
+            ['*'],
+            ['varients.attributes', 'images'],false
+        );
+        return view('product::Product.edit', compact('product'));
     }
 
     public function show($id)
     {
-        $product= $this->ProductRepo->getByID($id,
-        ['*'],
+        $product = $this->ProductRepo->getByID(
+            $id,
+            ['*'],
 
-       ['varients.attributes','images','category:id,name','brand:id,name'],true);
-        return view('product::Product.show',compact('product'));
-
-
+            ['varients.attributes', 'images', 'category:id,name', 'brand:id,name'],
+            true
+        );
+        return view('product::Product.show', compact('product'));
     }
 
+    public function showuserproduct($id)
+    {
+        //  Auth::login(User::find(2));
 
+        $product=$this->ProductRepo->view($id);
+      
+         dd($product);
+        // return view('product.show',compact('product'));
+      
+
+        }
+
+        
+      
+        
+
+
+        
+
+
+
+
+    
 }
