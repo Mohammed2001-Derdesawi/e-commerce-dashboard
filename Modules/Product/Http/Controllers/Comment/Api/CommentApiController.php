@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\Product\Entities\Product\Product;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Modules\Product\Repository\Comment\CommenttInterface;
+use Modules\Product\Repository\Actions\ActionUserInterface;
 use Modules\Product\Transformers\Comment\CommentResource;
 
 class CommentApiController extends Controller
 {
     protected $commentRepo;
-    public function __construct(CommenttInterface $commentInterface)
+    public function __construct(ActionUserInterface $commentInterface)
     {
         $this->commentRepo=$commentInterface;
 
@@ -45,7 +45,7 @@ class CommentApiController extends Controller
      */
     public function store(Request $request,$product_id)
     {
-       $product= $this->commentRepo->store($product_id,$request->body);
+       $product= $this->commentRepo->createorupdate($product_id,$request->body);
        return $this->ReturnMessage( [
         'product'=>$product,
         'message'=>'Comment has been Created for this product with id = '.$product_id
@@ -61,7 +61,7 @@ class CommentApiController extends Controller
      */
     public function update(Request $request, $product_id)
     {
-        $product=$this->commentRepo->update($product_id,$request->body);
+        $product=$this->commentRepo->createorupdate($product_id,$request->body);
         return $this->ReturnMessage( [
             'product'=>$product,
             'message'=>'Comment has been updated for this product with id = '.$product_id
@@ -75,7 +75,7 @@ class CommentApiController extends Controller
      */
     public function destroy($id)
     {
-        $this->commentRepo->delete($id);
+        $this->commentRepo->admindelete($id);
         return $this->ReturnMessage([
             'message'=>'Comment has been Deleted'
 
@@ -89,6 +89,17 @@ class CommentApiController extends Controller
 
 
     }
+    public function userdelete($id)
+    {
+        $this->commentRepo->delete($id);
+        return $this->ReturnMessage( [
+
+            'message'=>'Rate has been deleted'
+        ]);
+
+    }
+
+
 
 
 }

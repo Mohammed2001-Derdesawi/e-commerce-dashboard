@@ -64,9 +64,7 @@
 														<div class="d-flex align-items-center">
 															<!--begin::Thumbnail-->
 															<a href="#" class="symbol symbol-50px">
-																<span class="symbol-label" style="background-image:url('https://via.placeholder.com/300.png/09f/fff
-
-C/O https://placeholder.com/ ');"></span>
+																<span class="symbol-label" style="background-image:url('https://via.placeholder.com/300.png/09f/fffC/O https://placeholder.com/ ');"></span>
 															</a>
 															<!--end::Thumbnail-->
 															<div class="ms-5">

@@ -10,12 +10,18 @@ use Illuminate\Contracts\Support\Renderable;
 use Modules\Product\Repository\Rate\RateInterface;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Modules\Product\Entities\Product\Product;
+use Modules\Product\Repository\Actions\ActionUserInterface;
 use Modules\Product\Transformers\Rate\RateResource;
 
 class RateApiController extends Controller
 {
+<<<<<<< HEAD
     protected $rateRepo;
     public function __construct(RateInterface $rateInterface)
+=======
+     protected $rateRepo;
+    public function __construct(ActionUserInterface $rateInterface)
+>>>>>>> 10bdf55e56e5d580f8b241021bdf87d286193de8
     {
         $this->rateRepo = $rateInterface;
     }
@@ -45,10 +51,17 @@ class RateApiController extends Controller
      */
     public function store(Request $request, $product_id)
     {
+<<<<<<< HEAD
         $product = $this->rateRepo->store($product_id, $request->rate);
         return $this->ReturnMessage([
             'product' => $product,
             'message' => 'Rate has been Created for this product with id = ' . $product_id
+=======
+       $product= $this->rateRepo->createorupdate($product_id,$request->rate);
+       return $this->ReturnMessage( [
+        'product'=>$product,
+        'message'=>'Rate has been Created for this product with id = '.$product_id
+>>>>>>> 10bdf55e56e5d580f8b241021bdf87d286193de8
         ]);
     }
 
@@ -61,11 +74,27 @@ class RateApiController extends Controller
      */
     public function update(Request $request, $product_id)
     {
+<<<<<<< HEAD
         $product = $this->rateRepo->update($product_id, $request->rate);
         return $this->ReturnMessage([
             'product' => $product,
             'message' => 'Rate has been updated for this product with id = ' . $product_id
+=======
+        $this->rateRepo->createorupdate($product_id,$request->rate);
+        return $this->ReturnMessage( [
+            'message'=>'Rate has been updated for this product with id = '.$product_id
+>>>>>>> 10bdf55e56e5d580f8b241021bdf87d286193de8
         ]);
+    }
+
+    public function userdelete($id)
+    {
+        $this->rateRepo->delete($id);
+        return $this->ReturnMessage( [
+
+            'message'=>'Rate has been deleted'
+        ]);
+
     }
 
     /**
@@ -75,7 +104,7 @@ class RateApiController extends Controller
      */
     public function destroy($id)
     {
-        $this->rateRepo->delete($id);
+        $this->rateRepo->admindelete($id);
         return response()->json([
             'message' => 'Rate has been Deleted'
 

@@ -5,6 +5,7 @@ namespace Modules\Product\Providers;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Product\Repository\Actions\ActionUserInterface;
 use Modules\Product\Repository\Brand\BrandRepository;
 use Modules\Product\Repository\Product\ProductRepository;
 use Modules\Product\Repository\Category\CategoryRepository;
@@ -60,10 +61,14 @@ class ProductServiceProvider extends ServiceProvider
             if(request()->is('api/admin/comments') || request()->is('api/admin/comments/*'))
             return new CommentRepository;
 
+<<<<<<< HEAD
             if(request()->is('api/admin/rates') || request()->is('api/admin/rates/*'))
             return new RateRepository;
 
             return new LikeRepository;
+=======
+            return new RateRepository;
+>>>>>>> 10bdf55e56e5d580f8b241021bdf87d286193de8
         });
     }
 

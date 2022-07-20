@@ -10,10 +10,13 @@
             <div class = "product-div">
                 <div class = "product-div-left">
                     <div class = "img-container">
-                        <img :src = "'/storage/'+product.images[0].path" alt = "">
+                        <img id="mainimage" :src = "'/storage/'+product.images[0].path" alt = "">
                     </div>
                     <div class = "hover-container">
-                        <div v-for="img in product.images" :key="img.id"><img :src = "'/storage/'+img.path"></div>
+                        <div  v-for="img in product.images" :key="img.id" >
+
+                        <img @click="changeimage" :src ="'/storage/'+img.path">
+                        </div>
 
                     </div>
                 </div>
@@ -90,13 +93,13 @@
 
 														</td>
 														<td>
-															<input  class="text-dark form-control text-hover-primary d-block mb-1 fs-6" disabled :value="varients[index].price" style ="height:30px !important;" />
+															<p  class="text-dark  text-hover-primary d-block mb-1 fs-6"   style ="height:30px !important;" >{{varients[index].price}}</p>
 														</td>
 														<td>
-															<input  class="text-dark  form-control text-hover-primary d-block mb-1 fs-6" disabled :value="varients[index].quantity"  style ="height:30px !important;"/>
+															<p  class="text-dark  text-hover-primary d-block mb-1 fs-6"   style ="height:30px !important;" >{{varients[index].quantity}}</p>
 														</td>
 														<td>
-															<input  class="text-dark  form-control  text-hover-primary d-block mb-1 fs-6" disabled :value="varients[index].sku" style ="height:30px !important;"/>
+															<p  class="text-dark  text-hover-primary d-block mb-1 fs-6"   style ="height:30px !important;" >{{varients[index].sku}}</p>
 														</td>
 
 													</tr>
@@ -111,6 +114,68 @@
 									</div>
 									<!--begin::Body-->
 								</div>
+                                 <div class="card mb-5 mb-xl-8">
+                                    <div class="row">
+
+
+                                <div class="col-xl-6">
+										<!--begin::Charts Widget 3-->
+										<div class="card card-xl-stretch mb-xl-8">
+											<!--begin::Header-->
+											<div class="card-header border-0 pt-5">
+												<h3 class="card-title align-items-start flex-column">
+													<span class="card-label fw-bolder fs-3 mb-1">Views</span>
+													<span class="text-muted fw-bold fs-7">Real views to this Product</span>
+												</h3>
+												<!--begin::Toolbar-->
+												<div class="card-toolbar" data-kt-buttons="true">
+													<a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1 active" id="kt_charts_widget_3_year_btn">Year</a>
+													<a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1" id="kt_charts_widget_3_month_btn">Month</a>
+													<a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4" id="kt_charts_widget_3_week_btn">Week</a>
+												</div>
+												<!--end::Toolbar-->
+											</div>
+											<!--end::Header-->
+                                            <div class="cart-body" >
+                                               <div  style="height: 350px; min-height: 365px; min-width:526px; margin:0 30px;">
+                                                <canvas id="product_views_chart" role="img" style="height: 315.4px;
+width: 533.6px;"></canvas>
+                                                </div>
+                                            </div>
+
+										</div>
+                                 </div>
+
+                                      <div class="col-xl-6">
+										<!--begin::Charts Widget 3-->
+										<div class="card card-xl-stretch mb-xl-8">
+											<!--begin::Header-->
+											<div class="card-header border-0 pt-5">
+												<h3 class="card-title align-items-start flex-column">
+													<span class="card-label fw-bolder fs-3 mb-1">Orders</span>
+													<span class="text-muted fw-bold fs-7">Orders to this Product</span>
+												</h3>
+												<!--begin::Toolbar-->
+												<div class="card-toolbar" data-kt-buttons="true">
+													<a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1 active" id="kt_charts_widget_3_year_btn">Year</a>
+													<a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1" id="kt_charts_widget_3_month_btn">Month</a>
+													<a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4" id="kt_charts_widget_3_week_btn">Week</a>
+												</div>
+												<!--end::Toolbar-->
+											</div>
+											<!--end::Header-->
+                                            <div class="cart-body" >
+                                               <div  style="height: 350px; min-height: 365px; min-width:526px; margin:0 30px;">
+                                                <canvas id="product_orders_chart" role="img" style="height: 315.4px;
+width: 533.6px;"></canvas>
+                                                </div>
+                                            </div>
+
+										</div>
+                                 </div>
+                                     </div>
+										<!--end::Charts Widget 3-->
+									</div>
 </div>
     </div>
 
@@ -137,6 +202,126 @@ export default {
     this.getProduct()
     this.previewVarients()
 
+
+
+let labels = [1,2,3,4,5,6,7];
+let data = {
+  labels: labels,
+  datasets: [{
+    label: 'Real views',
+    data: [65, 59, 80, 81, 56, 55, 40],
+    fill: true,
+    borderColor: '#753dea ',
+    tension: 0.1,
+
+  },
+  {
+    label: 'All Views',
+    data: [1,5,6,8,9,4],
+    fill: true,
+    borderColor: '#753dea ',
+    tension: 0.1,
+
+  },
+
+  ],
+
+
+};
+
+let ctx = document.getElementById('product_views_chart');
+let myChart = new Chart(ctx, {
+    type: 'line',
+    data:data,
+  options: {
+    // animations: {
+    //   tension: {
+    //     duration: 1000,
+    //     easing: 'easeInQuad',
+    //     from: 1,
+    //     to: 0,
+    //     loop: true
+    //   }
+    // },
+    scales: {
+      y: {
+
+          grid: {
+                  borderDash: [8, 4],
+                color: "#e9edf1"
+            }
+      },
+          x: {
+
+          grid: {
+                display:false
+            }
+      },
+
+
+    },
+  }
+});
+
+ labels = ['March','May','Augest','Semptember','December'];
+ data = {
+  labels: labels,
+  datasets: [{
+    data: [65, 59, 80, 81, 56, 55, 40],
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(201, 203, 207, 0.2)'
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+      'rgb(54, 162, 235)',
+      'rgb(153, 102, 255)',
+      'rgb(201, 203, 207)'
+    ],
+    borderWidth: 1,
+     barThickness: 2,
+  }]
+};
+ ctx = document.getElementById('product_orders_chart');
+ myChart = new Chart(ctx, {
+    type: 'bar',
+    data:data,
+  options: {
+     plugins: {
+        legend: {
+            display: false
+        }
+    },
+    scales: {
+      y: {
+           beginAtZero: true,
+          grid: {
+                 display:false
+            },
+
+            //  barPercentage: 0.1
+      },
+          x: {
+            grid: {
+                 display:false
+            },
+      },
+
+
+    },
+  }
+
+});
+ctx.style.backgroundColor = '#fff';
+
   },
     data() {
         return {
@@ -150,8 +335,19 @@ export default {
 
         }
 
+
     },
     methods:{
+        changeimage(e)
+        {
+            const mainimage=document.getElementById('mainimage')
+             mainimage.src=e.target.currentSrc
+
+
+        },
+
+
+
            getProduct()
     {
 

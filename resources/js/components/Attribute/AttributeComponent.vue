@@ -99,7 +99,7 @@
                         <td class="text-end">
                             <div class="d-flex justify-content-end flex-shrink-0">
 
-                            <button href="#" @click="editAttribute(attribute)"  data-bs-toggle="modal" data-bs-target="#kt_modal_edit_user"  class="
+                            <button  @click="editAttribute(attribute)"  data-bs-toggle="modal" data-bs-target="#kt_modal_edit_user"  class="
                   btn btn-icon btn-bg-light btn-active-color-primary btn-sm
                   me-1
                 ">
