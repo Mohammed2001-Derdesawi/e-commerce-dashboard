@@ -2,6 +2,7 @@
 
 namespace Modules\Product\Http\Controllers\Product\Api;
 
+<<<<<<< HEAD
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use Illuminate\Http\Request;
@@ -9,6 +10,16 @@ use Illuminate\Routing\Controller;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+=======
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\Product\Transformers\Product\ProductResource;
+>>>>>>> refs/remotes/origin/main
 use Modules\Product\Repository\Product\ProductRepositoryInterface;
 
 class ProductApiController extends Controller
@@ -32,6 +43,7 @@ class ProductApiController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         //
     }
 
@@ -43,10 +55,32 @@ class ProductApiController extends Controller
     {
         return view('product::create');
     }
+=======
+
+        $products=Cache::put('products',$this->ProductRepo->index(
+            ['id','name','category_id','brand_id'],
+              (int)request()->paginate,
+              ['category:id,name','brand:id,name','mainimage:path,product_id']
+            ),60);
+
+            if(Cache::has('products'))
+            $products=Cache::get('products');
+            else
+            $products=$this->ProductRepo->index(
+                ['id','name','category_id','brand_id'],
+                  (int)request()->paginate,
+                  ['category:id,name','brand:id,name','mainimage:path,product_id']
+                );
+       return ProductResource::collection($products);
+    }
+
+
+>>>>>>> refs/remotes/origin/main
 
     /**
      * Store a newly created resource in storage.
      * @param Request $request
+<<<<<<< HEAD
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
@@ -130,12 +164,32 @@ class ProductApiController extends Controller
     {
         return view('product::show');
     }
+=======
+     * @return Renderable
+     */
+    public function store(Request $request)
+    {
+        $data=$request["product"];
+        $decoded_data=json_decode($request["product"] , true);
+        $request_data=new Request($decoded_data);
+        $validated=Validator::make($request_data->all() , [
+            "name" =>"required",
+            "varients" =>"required" ,
+            "varients.*.price"=>"required|max:8|integer|min:1",
+        ]);
+        dd($validated->errors());
+        $this->ProductRepo->store($request);
+    }
+
+
+>>>>>>> refs/remotes/origin/main
 
 
     /**
      * Update the specified resource in storage.
      * @param Request $request
      * @param int $id
+<<<<<<< HEAD
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request)
@@ -209,6 +263,16 @@ class ProductApiController extends Controller
 
         }
         $this->ProductRepo->update($data_request);
+=======
+     * @return Renderable
+     */
+    public function update(Request $request)
+    {
+        dd($request);
+        $product=$this->ProductRepo->update($request);
+        dd($product);
+        return $product;
+>>>>>>> refs/remotes/origin/main
     }
 
     /**
@@ -218,6 +282,14 @@ class ProductApiController extends Controller
      */
     public function destroy($id)
     {
+<<<<<<< HEAD
         //
+=======
+       $this->ProductRepo->delete($id);
+        return response()->json([
+            'message'=>'Product has been deleted',
+
+        ],200);
+>>>>>>> refs/remotes/origin/main
     }
 }

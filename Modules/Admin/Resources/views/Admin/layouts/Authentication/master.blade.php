@@ -13,13 +13,13 @@
 		<meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
 		<meta property="og:url" content="https://keenthemes.com/metronic" />
 		<meta property="og:site_name" content="Keenthemes | Metronic" />
-
-
-		
-		<link rel="shortcut icon" href="{{asset("assets/Admin/media/logos/favicon.ico")}}" />
+		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+        <link rel="shortcut icon" href="{{asset("assets/Admin/media/logos/favicon.ico")}}" />
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
+		<!--begin::Page Vendor Stylesheets(used by this page)-->
+		<!--end::Page Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
 		<link href="{{asset('assets/Admin/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('assets/Admin/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
@@ -38,28 +38,32 @@
 				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
 					<!--begin::Logo-->
 					<a href="atyaf.com" class="mb-12">
-						<img alt="Logo" src="{{ asset('assets/Admin/media/logos/logo-1.svg') }}" class="h-40px" />
+						<img alt="Logo" src="{{asset('assets/Admin/media/logos/logo-1.svg')}}" class="h-40px" />
 					</a>
 					<!--end::Logo-->
-					@yield('content')
+					<!--begin::Wrapper-->
+                    @yield('content')
+
+					<!--end::Wrapper-->
 				</div>
 				<!--end::Content-->
+
 			</div>
 			<!--end::Authentication - Sign-in-->
 		</div>
 		<!--end::Root-->
 		<!--end::Main-->
 		<!--begin::Javascript-->
-		<script>var hostUrl = "assets/";</script>
+		{{-- <script>var hostUrl = "assets/";</script> --}}
 		<!--begin::Global Javascript Bundle(used by all pages)-->
 		<script src="{{asset('assets/Admin/plugins/global/plugins.bundle.js')}}"></script>
 		<script src="{{asset('assets/Admin/js/scripts.bundle.js')}}"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="{{ asset('assets/Admin/js/custom/authentication/sign-in/general.js') }}"></script>
+		<script src="{{asset('assets/Admin/js/custom/authentication/sign-in/general.js')}}"></script>
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
-		@yield('js')
+        @yield('js')
 	</body>
 	<!--end::Body-->
 </html>

@@ -1,7 +1,20 @@
 <?php
 
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+     function SaveImage($path,$file)
+    {
+        $filename=time().$file->getClientOriginalName();
+        Storage::disk('public')->putFileAs($path,$file,$filename);
+        return $filename;
+
+    }
+
+
+
+
+
 
 function storeImage($path, $file)
 {
@@ -32,7 +45,12 @@ function checkPagination($paginate){
     return $paginate  ? true  : false;
 }
 
+<<<<<<< HEAD
 function findById ($id ,  $model , $relations=[]) {
     $model = $model::with($relations)->findOrFail($id);
+=======
+function findById ($id ,  $model) {
+    $model = $model::where('id' , $id)->first();
+>>>>>>> refs/remotes/origin/main
     return $model;
 }

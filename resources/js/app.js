@@ -7,8 +7,76 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
+import ViewUI from 'view-design';
+ import 'view-design/dist/styles/iview.css';
+ import Swal from 'sweetalert2'
+// import VueQuill from 'vue-quill'
+Vue.use(ViewUI);
 
-import Swal from 'sweetalert2'
+/* import the fontawesome core */
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+/* import font awesome icon component */
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+/* import specific icons */
+import { fas } from '@fortawesome/free-solid-svg-icons'
+
+/* add icons to the library */
+library.add(fas)
+
+/* add font awesome icon component */
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+Vue.config.productionTip = false
+
+
+// Vue.use(VueQuill)
+
+// Start Admin && Authoriztaion Components
+Vue.component('adminslist-component',require('./components/Admin/AdminslistComponent').default);
+Vue.component('roleslist-component',require('./components/Roles/RoleslistComponent').default);
+ Vue.component('rolesadmin-component',require('./components/Roles/RolesadminComponent').default);
+ Vue.component('storerole-component',require('./components/Roles/StoreroleComponent').default);
+ // End Admin && Authoriztaion Components
+
+
+ // Start Order Components
+
+ Vue.component('orderslist-component',require('./components/Order/OrderslistComponent').default);
+  // End Order Components
+ // Start Attribute Components
+ Vue.component('attribute-component',require('./components/Attribute/AttributeComponent').default);
+  // End Attribute Components
+
+ // Start Product Components
+ Vue.component('products-component',require('./components/Product/ProductsComponent').default);
+ Vue.component('show-component',require('./components/Product/ShowComponent').default);
+ Vue.component('storeproduct-component',require('./components/Product/StoreproductComponent').default);
+ Vue.component('updateproduct-component',require('./components/Product/UpdateproductComponent').default);
+ // End Product Components
+
+
+ // Start Brand Components
+ Vue.component('brand-component', require('./components/Product/Brand/BrandComponent.vue').default);
+ Vue.component('createbrand-component', require('./components/Product/Brand/CreateComponent.vue').default);
+ Vue.component('editbrand-component', require('./components/Product/Brand/EditComponent.vue').default);
+ // End Brand Components
+
+ // Start Rate Component
+ Vue.component('rate-component', require('./components/Rate/RateComponent.vue').default);
+ // End Rate Component
+
+ // Start Comment Component
+ Vue.component('comment-component', require('./components/Comment/CommentComponent.vue').default);
+ // End Comment Component
+
+
+
+// require('./../../Modules/Admin/Resources/assets/js/app')
+
+
+
 window.Swal = Swal
 const Toast = Swal.mixin({
     toast: true,
@@ -34,8 +102,8 @@ window.Toast = Toast
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
+<<<<<<< HEAD
 Vue.component('brand-component', require('./components/Product/Brand/BrandComponent.vue').default);
 Vue.component('createbrand-component', require('./components/Product/Brand/CreateComponent.vue').default);
 Vue.component('editbrand-component', require('./components/Product/Brand/EditComponent.vue').default);
@@ -43,6 +111,9 @@ Vue.component('storeproduct-component', require('./components/Product/Storeprodu
 Vue.component('attribute-component',require('./components/Attribute/AttributeComponent').default);
 Vue.component('updateproduct-component',require('./components/Product/UpdateproductComponent').default);
 Vue.component('user-component',require('./components/User/UserComponent').default);
+=======
+
+>>>>>>> refs/remotes/origin/main
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -53,3 +124,33 @@ Vue.component('user-component',require('./components/User/UserComponent').defaul
 const app = new Vue({
     el: '#app',
 });
+// Start listeners for Select2 events
+let status=''
+$('#status_select').on("select2:select", function (e) {
+   app.$children[0].product.status=$(e.currentTarget).val()
+
+})
+$('#categories_Select').on("select2:select", function (e) {
+    app.$children[0].product.category=$(e.currentTarget).val()
+
+   })
+   $('#select_brand').on("select2:select", function (e) {
+    app.$children[0].product.brand=$(e.currentTarget).val()
+
+   })
+   $('#status_select_update').on("select2:select", function (e) {
+    app.$children[0].product.status=$(e.currentTarget).val()
+
+ })
+ $('#categories_Select_update').on("select2:select", function (e) {
+     app.$children[0].product.category_id=$(e.currentTarget).val()
+
+    })
+    $('#select_brand_update').on("select2:select", function (e) {
+     app.$children[0].product.brand_id=$(e.currentTarget).val()
+
+    })
+
+
+    // End listeners for Select2 events
+

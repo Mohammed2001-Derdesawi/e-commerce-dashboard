@@ -6,9 +6,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\Product\Repository\Brand\BrandRepository;
+<<<<<<< HEAD
 use Modules\Product\Repository\Cart\CartRepository;
 use Modules\Product\Repository\Cart\CartRepositoryInterface;
 use Modules\Product\Repository\WishList\WishListRepository;
+=======
+>>>>>>> refs/remotes/origin/main
 use Modules\Product\Repository\Product\ProductRepository;
 use Modules\Product\Repository\Category\CategoryRepository;
 use Modules\Product\Repository\Attribute\AttributeInterface;
@@ -16,7 +19,14 @@ use Modules\Product\Repository\Attribute\AttributeRepository;
 use Modules\Product\Repository\Brand\BrandRepositoryInterface;
 use Modules\Product\Repository\Product\ProductRepositoryInterface;
 use Modules\Product\Repository\Category\CategoryRepositoryInterface;
+<<<<<<< HEAD
 use Modules\Product\Repository\WishList\WishListRepositoryInterface;
+=======
+use Modules\Product\Repository\Comment\CommentRepository;
+use Modules\Product\Repository\Comment\CommenttInterface;
+use Modules\Product\Repository\Rate\RateInterface;
+use Modules\Product\Repository\Rate\RateRepository;
+>>>>>>> refs/remotes/origin/main
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -55,8 +65,13 @@ class ProductServiceProvider extends ServiceProvider
         $this->app->bind(CategoryRepositoryInterface::class,CategoryRepository::class);
         $this->app->bind(BrandRepositoryInterface::class,BrandRepository::class);
         $this->app->bind(ProductRepositoryInterface::class,ProductRepository::class);
+<<<<<<< HEAD
         $this->app->bind(CartRepositoryInterface::class,CartRepository::class);
         $this->app->bind(WishListRepositoryInterface::class,WishListRepository::class);
+=======
+        $this->app->bind(CommenttInterface::class,CommentRepository::class);
+        $this->app->bind(RateInterface::class,RateRepository::class);
+>>>>>>> refs/remotes/origin/main
     }
 
     /**

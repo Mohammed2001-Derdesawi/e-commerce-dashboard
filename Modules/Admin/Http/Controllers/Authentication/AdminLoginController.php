@@ -7,12 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Support\Renderable;
-use Modules\Admin\Jobs\Admin\ResetPasswordJob;
-use Modules\Admin\Emails\sendForgetPasswordAdmin;
+use Modules\Admin\Emails\SendForgetPasswordAdmin;
 use Modules\Admin\Http\Requests\Authentication\AdminLoginRequest;
 
 class AdminLoginController extends Controller
@@ -27,7 +25,7 @@ class AdminLoginController extends Controller
         if(Auth::guard('admin')->attempt(['password'=>$request->password,'email'=>$request->email]))
          {
             auth()->guard('admin')->user()->last_login_at=now();
-            return redirect()->route('admin.dashboard');
+            return redirect()->intended(route('admin.dashboard'));
          }
          return redirect()->route('admin.showloginform')->withInput(['email'=>$request->email])->with('faild',' Password is incorrect');
 
@@ -42,7 +40,7 @@ class AdminLoginController extends Controller
     }
 
 
-    
+
     public function forgetPassword(){
         return view('admin::Admin.auth.forgetPassword');
     }

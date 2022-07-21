@@ -51,6 +51,7 @@
        elements.forEach(element => {
            // Get tagify element
            const tagify = document.querySelector(element);
+           console.log(tagify)
 
            // Break if element not found
            if (!tagify) {
@@ -65,7 +66,6 @@
 
    const changeCircleRound = () => {
        var valStatus = document.getElementById('kt_ecommerce_add_category_status_select').value;
-       console.log(valStatus);
 
        if (valStatus == 0) {
            document.getElementById('kt_ecommerce_add_category_status').classList.remove("bg-success");

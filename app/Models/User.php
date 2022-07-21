@@ -2,12 +2,19 @@
 
 namespace App\Models;
 
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+<<<<<<< HEAD
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
+=======
+use Modules\Order\Entities\Order\Order;
+>>>>>>> refs/remotes/origin/main
 
 class User extends Authenticatable
 {
@@ -43,6 +50,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+<<<<<<< HEAD
 
     public function setPasswordAttribute($value)
     {
@@ -59,5 +67,15 @@ class User extends Authenticatable
         $email = $email_filter.'@'.$after_char;
 
         $this->attributes['email'] = $email;
+=======
+    /**
+     * Get all of the orders for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'user_id', 'id');
+>>>>>>> refs/remotes/origin/main
     }
 }

@@ -1,6 +1,12 @@
 {
     "Admin": true,
+    "Order": true,
     "Model": true,
+<<<<<<< HEAD
     "Product": true,
     "User": true
 }
+=======
+    "Product": true
+}
+>>>>>>> refs/remotes/origin/main

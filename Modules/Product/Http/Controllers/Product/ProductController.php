@@ -2,6 +2,10 @@
 
 namespace Modules\Product\Http\Controllers\Product;
 
+<<<<<<< HEAD
+=======
+use Facade\Ignition\QueryRecorder\Query;
+>>>>>>> refs/remotes/origin/main
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Contracts\Support\Renderable;
@@ -32,16 +36,11 @@ class ProductController extends Controller
         return view('product::Product.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/main
 
     /**
      * Show the form for editing the specified resource.
@@ -51,31 +50,29 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product= $this->ProductRepo->getByID($id,
+<<<<<<< HEAD
             ['*'],
 
             ['varients.attributes','images']);
         $product->varients()->get()->groupBy('pivot.attribute_id');
+=======
+        ['*'],
+
+       ['varients.attributes','images']);
+>>>>>>> refs/remotes/origin/main
         return view('product::Product.edit',compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
+    public function show($id)
     {
-        //
+        $product= $this->ProductRepo->getByID($id,
+        ['*'],
+
+       ['varients.attributes','images','category:id,name','brand:id,name'],true);
+        return view('product::Product.show',compact('product'));
+
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
-    }
+
 }

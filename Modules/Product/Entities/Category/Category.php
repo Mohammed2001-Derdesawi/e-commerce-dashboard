@@ -3,9 +3,16 @@
 namespace Modules\Product\Entities\Category;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+<<<<<<< HEAD
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Product\Entities\Product\Product;
+=======
+use Modules\Product\Entities\Comment;
+use Modules\Product\Entities\Product\Product;
+use Modules\Product\Entities\Rate;
+>>>>>>> refs/remotes/origin/main
 
 class Category extends Model
 {
@@ -19,6 +26,17 @@ class Category extends Model
     }
 
     public function products()
+    {
+        return $this->hasMany(Product::class, 'category_id', 'id');
+    }
+
+
+    /**
+     * Get all of the products for the Category
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products(): HasMany
     {
         return $this->hasMany(Product::class, 'category_id', 'id');
     }
@@ -71,6 +89,12 @@ class Category extends Model
     public function getParentsCountAttribute(){
         return $this->getParents()->count();
     }
+
+    public function rates()
+    {
+        return $this->morphMany(Rate::class,'rateable');
+    }
+
 
 
 }

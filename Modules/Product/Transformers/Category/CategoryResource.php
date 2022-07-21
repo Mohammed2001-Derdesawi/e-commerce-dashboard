@@ -16,7 +16,11 @@ class CategoryResource extends JsonResource
     {
         return [
             'id'=>$this->id,
+<<<<<<< HEAD
             'text'=>$this->name
+=======
+            'name'=>$this->name
+>>>>>>> refs/remotes/origin/main
         ];
     }
 }

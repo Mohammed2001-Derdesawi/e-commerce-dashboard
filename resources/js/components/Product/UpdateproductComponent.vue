@@ -73,6 +73,7 @@
 											<div class="card-body pt-0">
 												<!--begin::Select2-->
 
+<<<<<<< HEAD
                                                     <Select2 v-model="product.status" :options="options" :settings="{ width:'100%' }" />
 
 
@@ -84,6 +85,15 @@
 													<option value="scheduled">Active</option>
 													<option value="inactive">Inactive</option>
 												</select> -->
+=======
+
+
+            <select  class="form-select mb-2"  data-placeholder="Select a variation"  data-hide-search="true"  id="status_select_update">
+													<option value="1" :selected="product.status==1" >Active</option>
+
+													<option value="0" :selected="product.status==0">Inactive</option>
+												</select>
+>>>>>>> refs/remotes/origin/main
 												<!--end::Select2-->
 												<!--begin::Description-->
 												<div class="text-muted fs-7">Set the product status.</div>
@@ -92,6 +102,38 @@
 											</div>
 											<!--end::Card body-->
 										</div>
+<<<<<<< HEAD
+=======
+                                               <div class="card card-flush py-4">
+											<!--begin::Card header-->
+											<div class="card-header">
+												<!--begin::Card title-->
+												<div class="card-title">
+													<h2>Brands</h2>
+												</div>
+												<!--end::Card title-->
+
+											</div>
+											<!--end::Card header-->
+											<!--begin::Card body-->
+											<div class="card-body pt-0">
+												<!--begin::Select2-->
+
+
+
+	                                              <select id="select_brand_update"  class="form-select mb-2"  data-placeholder="Select a Brand"  data-hide-search="true" >
+
+													<option v-for="brand in brands" :key="brand.id" :value="brand.id" :selected="product.brand_id==brand.id" >{{brand.name}}</option>
+												</select>
+												<!--end::Select2-->
+												<!--begin::Description-->
+												<div class="text-muted fs-7 mt-10">Set the Product Brand.</div>
+												<!--end::Description-->
+
+											</div>
+											<!--end::Card body-->
+										</div>
+>>>>>>> refs/remotes/origin/main
 										<!--end::Status-->
 										<!--begin::Category & tags-->
 										<div class="card card-flush py-4">
@@ -114,12 +156,23 @@
                                                 <div class=" mb-2">
 
 
+<<<<<<< HEAD
                                         <Select2 v-model="product.category_id" :options="categories" :settings="{ width:'100%' }" />
                                           </div>
 
 												<!--end::Select2-->
 												<!--begin::Description-->
 												<div class="text-muted fs-7 mb-7">Add product to a category.</div>
+=======
+	<select id="categories_Select_update" class="form-select mb-2" data-control="select2" data-placeholder="Select an option">
+													<option v-for="category in categories" :key="category.id" :value="category.id" :selected="product.category_id==category.id"  >{{category.name}}</option>
+
+												</select>                                          </div>
+
+												<!--end::Select2-->
+												<!--begin::Description-->
+												<div class="text-muted fs-7 mb-7  mt-10">Add product to a category.</div>
+>>>>>>> refs/remotes/origin/main
 												<!--end::Description-->
 												<!--end::Input group-->
 												<!--begin::Button-->
@@ -276,7 +329,11 @@
 																<label class="required form-label">Price</label>
 																<!--end::Label-->
 																<!--begin::Input-->
+<<<<<<< HEAD
 																<input type="text" :value="product.varients.length<2 ? product.varients[0].price  : ''" name="price" class="form-control mb-2" placeholder="Product price"  />
+=======
+																<input type="text" :value="product.varients.length<2 ? product.varients[0].price  : product.price" name="price" class="form-control mb-2" placeholder="Product price"  />
+>>>>>>> refs/remotes/origin/main
 																<!--end::Input-->
 																<!--begin::Description-->
 																<div class="text-muted fs-7">Set the product price.</div>
@@ -289,7 +346,11 @@
 																<label class="required form-label">Quantity</label>
 																<!--end::Label-->
 																<!--begin::Input-->
+<<<<<<< HEAD
 																<input type="text"  :value="product.varients.length<2 ? product.varients[0].quantity  : ''" name="quantity" class="form-control mb-2" placeholder="Product Quantity"  />
+=======
+																<input type="text"  :value="product.varients.length<2 ? product.varients[0].quantity  : product.quantity" name="quantity" class="form-control mb-2" placeholder="Product Quantity"  />
+>>>>>>> refs/remotes/origin/main
 																<!--end::Input-->
 																<!--begin::Description-->
 																<div class="text-muted fs-7">Set the product Quantity.</div>
@@ -334,7 +395,11 @@
 
                                                                     <!--begin::Switch-->
                                                                     <label class="form-check form-switch form-check-custom form-check-solid" style="margin: 0 80px 0 0;">
+<<<<<<< HEAD
                                                                         <input v-model="product.is_tax" class="form-check-input" type="checkbox">
+=======
+                                                                        <input v-model="product.is_tax" class="form-check-input" type="checkbox"  checked="checked">
+>>>>>>> refs/remotes/origin/main
                                                                         <span class="form-check-label fw-bold text-muted" >Yes</span>
                                                                     </label>
 
@@ -389,7 +454,11 @@
 																<label class="form-label">SKU</label>
 																<!--end::Label-->
 																<!--begin::Input-->
+<<<<<<< HEAD
 																<input  :value="product.varients.length<2 ? product.varients[0].sku  : ''" type="text" name="sku" class="form-control mb-2" placeholder="SKU Number"  />
+=======
+																<input  :value="product.varients.length<2 ? product.varients[0].sku  : product.sku" type="text" name="sku" class="form-control mb-2" placeholder="SKU Number"  />
+>>>>>>> refs/remotes/origin/main
 																<!--end::Input-->
 																<!--begin::Description-->
 																<div class="text-muted fs-7">Enter the product SKU.</div>
@@ -441,9 +510,16 @@
 																				<!--begin::Select2-->
 																				<div class="w-100 w-md-200px">
 
+<<<<<<< HEAD
 																					<select class="form-select" v-model="attributes_varients[index].attribute" name="" data-placeholder="Select a variation" >
                                                                                         <option v-if="attributes.length==0" >No Attributes yet </option>
 																						<option  v-for="attribute in attributes" :key="attribute.id" :value="attribute.id">{{attribute.name}}</option>
+=======
+																				<select  class="form-select" :id="'select'+index"  name="product_option"  data-kt-ecommerce-catalog-add-product="product_option"  data-placeholder="Select a variation"   >
+                                                                                        <option v-if="attributes.length==0" >No Attributes yet </option>
+                                                                                        <option selected>Default Attribute</option>
+																						<option  v-for="attribute in attributes" :key="attribute.id" :value="attribute.id" :selected="attribute.id == attributes_varients[index].attribute ? true : false">{{attribute.name}}</option>
+>>>>>>> refs/remotes/origin/main
 
 																					</select>
 																				</div>
@@ -719,6 +795,7 @@
 
 <script>
 import vue2Dropzone from "vue2-dropzone";
+<<<<<<< HEAD
 // import "vue2-dropzone/dist/vue2Dropzone.min.css";
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
@@ -726,15 +803,27 @@ import 'quill/dist/quill.bubble.css'
 import Select2 from 'v-select2-component';
 import { quillEditor } from 'vue-quill-editor'
 import axios from 'axios';
+=======
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+import { quillEditor } from 'vue-quill-editor'
+>>>>>>> refs/remotes/origin/main
 export default {
    name:'UpdateproductComponent',
     components: {
     vueDropzone: vue2Dropzone,
     quillEditor:quillEditor,
+<<<<<<< HEAD
     Select2:Select2
   },
   props:{
     id:Object,
+=======
+  },
+  props:{
+    prod:Object,
+>>>>>>> refs/remotes/origin/main
   },
 
    data()
@@ -745,6 +834,7 @@ export default {
 		duplicateCheck:false,
        autoProcessQueue:false,
        paramName: "file"
+<<<<<<< HEAD
        , maxFiles: 10+this.id.images.length,
        maxFilesize: 10,
         addRemoveLinks: !0,
@@ -757,6 +847,13 @@ export default {
         //     }
         //     else { done(); }
         // },
+=======
+       , maxFiles: 10+this.prod.images.length,
+       maxFilesize: 10,
+        addRemoveLinks: !0,
+        acceptedFiles: "image/jpeg,image/png,image/gif,image/jpg"
+
+>>>>>>> refs/remotes/origin/main
 
       },
 
@@ -776,21 +873,33 @@ export default {
                },
         },
 
+<<<<<<< HEAD
         product:this.id,
+=======
+        product:this.prod,
+>>>>>>> refs/remotes/origin/main
         attributes_varients:[
 
         ],
         varients:[],
+<<<<<<< HEAD
         options:[],
 
 
+=======
+>>>>>>> refs/remotes/origin/main
 
         attributes:{},
         categories:{},
 		is_sure:false,
         showsure:false,
         is_has_varient:false,
+<<<<<<< HEAD
          varientsprod:[]
+=======
+         varientsprod:[],
+         brands:{},
+>>>>>>> refs/remotes/origin/main
 
 
     }
@@ -805,6 +914,11 @@ export default {
     this.getAttributes()
     this.getCategories()
     this.getProduct()
+<<<<<<< HEAD
+=======
+    this.getBrands()
+
+>>>>>>> refs/remotes/origin/main
     this.is_has_varient=this.attributes_varients.length>0
     if(this.is_has_varient)
     {
@@ -814,9 +928,13 @@ export default {
         this.previewVarients()
 
     }
+<<<<<<< HEAD
     this.product.is_tax=this.product.tax==0? false: true
 
     this.options=this.getoptions()
+=======
+
+>>>>>>> refs/remotes/origin/main
 
 
 
@@ -828,6 +946,14 @@ export default {
            new Tagify(document.getElementById('tagifyid'+0),{
              originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')
          })
+<<<<<<< HEAD
+=======
+          $('#select0').select2()
+          $('#status_select_update').select2()
+          $('#categories_Select_update').select2()
+          $('#select_brand_update').select2()
+
+>>>>>>> refs/remotes/origin/main
 
 
 
@@ -837,6 +963,7 @@ export default {
 
 
    methods:{
+<<<<<<< HEAD
     getoptions()
     {
        console.log(this.product)
@@ -853,6 +980,14 @@ export default {
                       selected:this.product.status
              }
              ]
+=======
+      getBrands()
+    {
+        axios.get('/api/admin/brands/all')
+        .then(response=>{
+            this.brands=response.data.data
+        })
+>>>>>>> refs/remotes/origin/main
 
     },
     searchselected(){
@@ -864,16 +999,23 @@ export default {
 },
     getProduct()
     {
+<<<<<<< HEAD
         console.log(this.product)
+=======
+>>>>>>> refs/remotes/origin/main
 
 
 
         for(let index in this.product.varients)
         {
 
+<<<<<<< HEAD
         //    for (const [attr, values] of Object.entries(this.product.varients[index]))
         //        objects.push(this.product.varients[index].attributes.map(v => ({[attr]:v})));
             //   console.log(objects)
+=======
+
+>>>>>>> refs/remotes/origin/main
      var object= this.product.varients[index].attributes.reduce( (obj ,item) =>{
         if(!obj[item.name])
         {
@@ -904,14 +1046,20 @@ export default {
            })
 
         obj[item.name].push(item.pivot.value)
+<<<<<<< HEAD
         console.log(obj)
+=======
+>>>>>>> refs/remotes/origin/main
         return obj
 
     },
 
 {}
   )
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/main
    this.varientsprod.push({
     varient:object,
     price:this.product.varients[index].price,
@@ -927,10 +1075,15 @@ export default {
 
         }
 
+<<<<<<< HEAD
   console.log(this.varientsprod)
 
 
   console.log(this.attributes_varients)
+=======
+
+
+>>>>>>> refs/remotes/origin/main
 
 
 
@@ -944,7 +1097,10 @@ export default {
         data.append('images',JSON.stringify(this.product.images));
         axios.post('/api/admin/products/images/info',data)
         .then(response=>{
+<<<<<<< HEAD
             // console.log(value)
+=======
+>>>>>>> refs/remotes/origin/main
             for( let file in response.data)
             {
 
@@ -965,7 +1121,10 @@ export default {
 
                     )
 
+<<<<<<< HEAD
                      console.log( this.$refs.updatevueDropzone)
+=======
+>>>>>>> refs/remotes/origin/main
                 }
                 else
                 {
@@ -991,11 +1150,16 @@ export default {
 
 
             }
+<<<<<<< HEAD
             console.log('accepeted files ')
 
             console.log(this.$refs.updatevueDropzone.getAcceptedFiles())
 
             // let file =
+=======
+
+
+>>>>>>> refs/remotes/origin/main
 
 
 
@@ -1013,16 +1177,21 @@ export default {
 
         this.product.varients=this.varients
         let arr=[]
+<<<<<<< HEAD
         //  if (this.$refs.updatevueDropzone.getQueuedFiles().length) {
         //   this.$refs.updatevueDropzone.processQueue()
         // }
         // else
+=======
+
+>>>>>>> refs/remotes/origin/main
         for(let key in this.product.images)
          {
               if(this.product.images[key].id==undefined)
               data.append('images['+key+']',this.product.images[key])
               else
               data.append('oldimages['+key+']',this.product.images[key].id)
+<<<<<<< HEAD
             // this.product.images[key]={
             //     name:this.product.images[key].name,
             //     lastModified:this.product.images[key].lastModified,
@@ -1031,6 +1200,9 @@ export default {
             //     webkitRelativePath:this.product.images[key].webkitRelativePath,
 
             // }
+=======
+
+>>>>>>> refs/remotes/origin/main
 
          }
          this.product.images=[]
@@ -1045,7 +1217,10 @@ export default {
  const headers = { 'Content-Type': 'multipart/form-data' };
 
         axios.post('/api/admin/products/update',data,{headers}).then(response=>{
+<<<<<<< HEAD
         console.log('done');
+=======
+>>>>>>> refs/remotes/origin/main
         })
 
 
@@ -1077,28 +1252,43 @@ export default {
     getfile(file)
     {
 
+<<<<<<< HEAD
          console.log(file)
+=======
+>>>>>>> refs/remotes/origin/main
 
          if(this.acceptedFiles.indexOf(file.name.split('.')[1]) !=-1)
 		 {
 
+<<<<<<< HEAD
              console.log(this.$refs.updatevueDropzone.getAcceptedFiles().length)
+=======
+>>>>>>> refs/remotes/origin/main
              if(this.product.images.length<=9 && this.$refs.updatevueDropzone.getAcceptedFiles().length <=9)
 			 {
                         setTimeout(()=>{
  this.product.images=this.$refs.updatevueDropzone.getAcceptedFiles()
+<<<<<<< HEAD
               console.log(this.product.images)
               },400)
 
 
                        console.log(this.product.images)
+=======
+              },400)
+
+
+>>>>>>> refs/remotes/origin/main
 
 
 
 			 }
              else
              {
+<<<<<<< HEAD
                   console.log("test remove file")
+=======
+>>>>>>> refs/remotes/origin/main
 				 this.$refs.updatevueDropzone.removeFile(file)
               this.$Message['error']({
                     background: true,
@@ -1108,7 +1298,10 @@ export default {
 
 		 }
         else{
+<<<<<<< HEAD
             console.log(1)
+=======
+>>>>>>> refs/remotes/origin/main
               this.$refs.updatevueDropzone.removeFile(file)
               this.$Message['error']({
                     background: true,
@@ -1138,7 +1331,10 @@ export default {
 
 
 let attrs = [];
+<<<<<<< HEAD
 console.log(Object.values(object).length || this.attributes_varients[0].values.length ==0)
+=======
+>>>>>>> refs/remotes/origin/main
 if(!Object.values(object).length ==0)
 {
 for (const [attr, values] of Object.entries(object))
@@ -1155,16 +1351,49 @@ attrs = attrs.reduce((a, b) => a.flatMap(d => b.map(e => ({...d, ...e}))));
 				attributes:Object.keys(attrs[x]),
 				values:Object.values(attrs[x]),
 				price:this.is_sure && this.varientsprod[x]!=undefined ? this.varientsprod[x].price : 0,
+<<<<<<< HEAD
 				quantity:this.is_sure && this.varientsprod[x]!=undefined ? this.varientsprod[x].quantity: 0,
 				sku:this.is_sure && this.varientsprod[x]!=undefined ? this.varientsprod[x].sku :0,
 
 			})
 
 		 }
+=======
+				quantity:this.is_sure && this.varientsprod[x]!=undefined  ? this.varientsprod[x].quantity: 0,
+				sku:this.is_sure && this.varientsprod[x]!=undefined  ? this.varientsprod[x].sku :0,
+
+			})
+
+
+		 }
+           if(this.varients.length> this.varientsprod.length)
+           {
+  for(let index in this.varients)
+            {
+            this.varients[index].price=0
+            this.varients[index].quantity=0
+            this.varients[index].sku=0
+            }
+
+            this.varientsprod=[]
+
+           }
+
+>>>>>>> refs/remotes/origin/main
 		 this.is_sure=true
 }
 
          }
+<<<<<<< HEAD
+=======
+         else
+         {
+            this.varientsprod=[]
+            this.varients=[]
+         }
+
+
+>>>>>>> refs/remotes/origin/main
 
 
 
@@ -1208,6 +1437,11 @@ attrs = attrs.reduce((a, b) => a.flatMap(d => b.map(e => ({...d, ...e}))));
 	 deletevairent(index)
     {
         this.varients.splice(index,1)
+<<<<<<< HEAD
+=======
+        if(this.varientsprod[index]!=undefined)
+         this.varientsprod.splice(index,1)
+>>>>>>> refs/remotes/origin/main
     },
 	cancelvareitns()
 	{
@@ -1239,6 +1473,21 @@ attrs = attrs.reduce((a, b) => a.flatMap(d => b.map(e => ({...d, ...e}))));
     });
 
 
+<<<<<<< HEAD
+=======
+  document.querySelectorAll('[data-kt-ecommerce-catalog-add-product="product_option"]').forEach((e => { $(e).select2({})
+
+         }))
+let arr=this.attributes_varients
+          for(let index in this.attributes_varients)
+        $('#select'+index).on("select2:select", function (e) {
+      arr[index].attribute = $(e.currentTarget).val();
+
+     })
+      this.attributes_varients=arr
+
+
+>>>>>>> refs/remotes/origin/main
         },200)
 
        },
@@ -1260,6 +1509,7 @@ attrs = attrs.reduce((a, b) => a.flatMap(d => b.map(e => ({...d, ...e}))));
 </script>
 
 <style scope>
+<<<<<<< HEAD
 /* .vue-dropzone{
 min-height: auto ;
 padding: 1.5rem 1.75rem  !important;
@@ -1269,6 +1519,15 @@ border: 1px dashed #009EF7  !important;
 background-color: #F1FAFF  !important;
 border-radius: 0.475rem !important;
 } */
+=======
+
+.select2-container .select2-selection--single{
+    height: 43px;
+}
+.select2-container--open .select2-dropdown--below {
+    margin-top:14px;
+}
+>>>>>>> refs/remotes/origin/main
 .dropzone{
   min-height: auto;
 padding: 1.5rem 1.75rem;
@@ -1300,6 +1559,19 @@ user-select: none;
 
 }
 
+<<<<<<< HEAD
+=======
+body{
+    background-color: #f5f8fa  !important;
+    height: 100%;
+margin: 0;
+padding: 0;
+font-size: 13px !important;
+font-weight: 400;
+font-family: Poppins,Helvetica,sans-serif;
+}
+
+>>>>>>> refs/remotes/origin/main
 .vue-dropzone .dz-preview .dz-image img{
     height: 100% !important;
     width: 100% !important;

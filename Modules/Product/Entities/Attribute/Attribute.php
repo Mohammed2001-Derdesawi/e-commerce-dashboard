@@ -30,7 +30,11 @@ class Attribute extends Model
      */
     public function varients(): BelongsToMany
     {
+<<<<<<< HEAD
         return $this->belongsToMany(Varient::class, 'attribute_varient', 'attribute_id', 'varient_id')->withPivot('value');
+=======
+        return $this->belongsToMany(Varient::class, 'attribute_varient', 'attribute_id', 'varient_id');
+>>>>>>> refs/remotes/origin/main
     }
 
 }

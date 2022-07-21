@@ -1,5 +1,7 @@
 <?php
 
+use Modules\Admin\Entities\Admin\Admin;
+
 return [
 
     /*
@@ -68,12 +70,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
         'admins' => [
             'driver' => 'eloquent',
-            'model' => Modules\Admin\Entities\Admin\Admin::class,
+            'model' => Admin::class,
         ],
-
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
