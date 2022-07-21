@@ -1,13 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
+use Modules\Product\Http\Controllers\Attribute\AttributeController;
+use Modules\Product\Http\Controllers\Product\ProductController;
+
+=======
 use Modules\Product\Http\Controllers\Rate\RateController;
+>>>>>>> refs/remotes/origin/main
 use Modules\Product\Http\Controllers\Brand\BrandController;
 
 use Modules\Product\Http\Controllers\Comment\CommentController;
 use Modules\Product\Http\Controllers\Product\ProductController;
 use Modules\Product\Http\Controllers\Category\CategoryController;
+<<<<<<< HEAD
+use Modules\Product\Http\Controllers\Cart\CartController;
+use Modules\Product\Http\Controllers\WishList\WishListController;
+=======
 use Modules\Product\Http\Controllers\Attribute\AttributeController;
+>>>>>>> refs/remotes/origin/main
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +31,19 @@ use Modules\Product\Http\Controllers\Attribute\AttributeController;
 |
 */
 
+<<<<<<< HEAD
+Route::name('admin.')->prefix('/admin/')->middleware('admin')->group(function() {
+
+    Route::name('product.')->prefix('/products')->group(function (){
+        Route::get('/',[ProductController::class,'index'])->name('index');
+=======
 Route::name('admin.')->prefix('/admin//')->middleware('admin')->group(function() {
 
 
     Route::name('product.')->prefix('/products')->group(function (){
         Route::get('/',[ProductController::class,'index'])->name('index');
         Route::get('/show/{id}',[ProductController::class,'show'])->name('show');
+>>>>>>> refs/remotes/origin/main
         Route::get('/create',[ProductController::class,'create'])->name('create');
         Route::get('/edit/{id}',[ProductController::class,'edit'])->name('edit');
 
@@ -57,6 +75,8 @@ Route::name('admin.')->prefix('/admin//')->middleware('admin')->group(function()
         Route::get('brand/{id}/edit', [BrandController::class , 'edit'])->name('edit');
     });
     // end::Brand Routes
+<<<<<<< HEAD
+=======
 
     //Start Rate Routes
     Route::name('rates.')->prefix('/rates')->group(function () {
@@ -78,7 +98,19 @@ Route::name('admin.')->prefix('/admin//')->middleware('admin')->group(function()
 
 
 
+>>>>>>> refs/remotes/origin/main
 });
+
+// begin::Cart Routes
+Route::get('/add-to-cart/{id}', [CartController::class , 'store'])->name('store');
+Route::get('/delete-from-cart/{id}', [CartController::class , 'destroy'])->name('delete');
+// end::Cart Routes
+
+// begin::WishList Routes
+Route::get('/add-to-wishList/{id}', [WishListController::class , 'store'])->name('store');
+Route::get('/delete-from-wishList/{id}', [WishListController::class , 'destroy'])->name('delete');
+// end::WishList Routes
+
 
 
 

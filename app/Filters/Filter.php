@@ -5,12 +5,20 @@ namespace App\Filters;
 use Closure;
 use Illuminate\Support\Str;
 
+<<<<<<< HEAD
+abstract class Filter {
+
+    public function handle($request , Closure $next) {
+        if (!request()->has($this->filtername()))
+            return $next($request);
+=======
 abstract class Filter{
     public function handle($request , Closure $next)
     {
         if(! request()->has($this->filtername()))
         return $next($request);
 
+>>>>>>> refs/remotes/origin/main
         return $this->filter($next($request));
 
     }
@@ -23,3 +31,9 @@ abstract class Filter{
     }
 
 }
+<<<<<<< HEAD
+
+
+?>
+=======
+>>>>>>> refs/remotes/origin/main

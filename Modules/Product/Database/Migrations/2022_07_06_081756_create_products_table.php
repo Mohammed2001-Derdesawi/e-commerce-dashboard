@@ -26,8 +26,12 @@ return new class extends Migration
             $table->string('meta_name');
             $table->string('meta_description');
             $table->string('meta_keywords');
+<<<<<<< HEAD
+            $table->integer('tax')->nullable();
+=======
             $table->string('is_tax');
             $table->integer('tax')->nullable()->default(0);
+>>>>>>> refs/remotes/origin/main
 
             $table->unsignedBigInteger('brand_id');
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');

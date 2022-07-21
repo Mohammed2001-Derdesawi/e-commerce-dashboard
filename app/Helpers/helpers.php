@@ -45,7 +45,9 @@ function checkPagination($paginate){
     return $paginate  ? true  : false;
 }
 
-function findById ($id ,  $model,$relaions=['']) {
-    $model = $model::with($relaions)->findOrFail($id);
+
+
+function findById ($id ,  $model) {
+    $model = $model::where('id' , $id)->first();
     return $model;
 }

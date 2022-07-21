@@ -5,10 +5,17 @@ namespace Modules\Admin\Providers;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+<<<<<<< HEAD
+use Modules\Admin\Repositories\Admin\Authorazition\AuthorzationInterface;
+use Modules\Admin\Repositories\Admin\Authorazition\AuthrozationRepository;
+use Modules\Admin\Repositories\Admin\User\UserRepository;
+use Modules\Admin\Repositories\Admin\User\UserRepositoryInterface;
+=======
 use Modules\Admin\Repositories\Admin\AdminInterface;
 use Modules\Admin\Repositories\Admin\AdminRepository;
 use Modules\Admin\Repositories\Admin\authorazation\AuthoraztionInterface;
 use Modules\Admin\Repositories\Admin\authorazation\AuthoraztionRepository;
+>>>>>>> refs/remotes/origin/main
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -44,8 +51,13 @@ class AdminServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+<<<<<<< HEAD
+        $this->app->bind(AuthorzationInterface::class,AuthrozationRepository::class);
+        $this->app->bind(UserRepositoryInterface::class,UserRepository::class);
+=======
         $this->app->bind(AuthoraztionInterface::class,AuthoraztionRepository::class);
         $this->app->bind(AdminInterface::class,AdminRepository::class);
+>>>>>>> refs/remotes/origin/main
     }
 
     /**

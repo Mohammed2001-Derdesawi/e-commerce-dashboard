@@ -5,6 +5,12 @@ use Modules\Admin\Http\Controllers\Admin\AdminController;
 use Modules\Admin\Http\Controllers\Authentication\AdminLoginController;
 use Modules\Admin\Http\Controllers\Authorzation\RoleController;
 use Modules\Admin\Http\Controllers\Dashboard\AdminHomeController;
+<<<<<<< HEAD
+use Modules\Admin\Http\Controllers\Authentication\AdminLoginController;
+use Modules\Admin\Http\Controllers\Authentication\ResetPasswordController;
+use Modules\Admin\Http\Controllers\User\UserController;
+=======
+>>>>>>> refs/remotes/origin/main
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +26,18 @@ use Modules\Admin\Http\Controllers\Dashboard\AdminHomeController;
 Route::prefix('admin')->name('admin.')->group(function() {
 
     Route::middleware('admin')->group(function (){
+<<<<<<< HEAD
+        // Dahsboard Controller
+        Route::get('/', [AdminHomeController::class,'index'])->name('dashboard');
+        // End Dashboard Controller
+
+
+        // begin::User Routes
+        Route::name('user.')->group(function () {
+            Route::get('/users', [UserController::class , 'index'])->name('index');
+        });
+            // end::User Routes
+=======
      // Main Pgae Dahsboard Controller
       Route::get('/', [AdminHomeController::class,'index'])->name('dashboard');
          // End  Main Page Dashboard Controller
@@ -49,6 +67,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
          //End Authorization Routes
 
+>>>>>>> refs/remotes/origin/main
     });
 
     // Authentication Routes
