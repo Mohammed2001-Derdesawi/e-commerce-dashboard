@@ -103,7 +103,13 @@ window.Toast = Toast
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 
-
+Vue.component('brand-component', require('./components/Product/Brand/BrandComponent.vue').default);
+Vue.component('createbrand-component', require('./components/Product/Brand/CreateComponent.vue').default);
+Vue.component('editbrand-component', require('./components/Product/Brand/EditComponent.vue').default);
+Vue.component('storeproduct-component', require('./components/Product/StoreproductComponent.vue').default);
+Vue.component('attribute-component',require('./components/Attribute/AttributeComponent').default);
+Vue.component('updateproduct-component',require('./components/Product/UpdateproductComponent').default);
+Vue.component('user-component',require('./components/User/UserComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -16,10 +16,17 @@ use Modules\Admin\Http\Controllers\Authorzation\Api\RoleApiController;
 |
 */
 
-// Route::middleware('auth:api')->get('/admin', function (Request $request) {
-//     return $request->user();
-// });
-Route::prefix('/admin')->group(function (){
+Route::name('admin.')->prefix('/admin')->group(function (){
+
+    // begin::User Routes
+    Route::name('user')->group(function () {
+        Route::get('/users', [UserApiController::class , 'index'])->name('index');
+        Route::delete('/user/delete/{id}', [UserApiController::class , 'delete'])->name('delete');
+        Route::get('/user/changeStatus/{id}', [UserApiController::class , 'changeStatus'])->name('changeStatus');
+    });
+    // end::User Routes
+
+    // Start Admin api
     Route::get('/getadmins',[AdminApiController::class,'getAdmins']);
     Route::post('/delete',[AdminApiController::class,'deleteAdmin']);
     Route::post('//changestaus/',[AdminApiController::class,'changeStatusAdmin']);
@@ -39,6 +46,11 @@ Route::prefix('/admin')->group(function (){
 
 
     // End Roles Api
+
+
+
 });
+
+
 
 

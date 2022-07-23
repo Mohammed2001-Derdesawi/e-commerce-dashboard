@@ -43,7 +43,11 @@
 @section('content')
 
 
+<<<<<<< HEAD
+      <updateproduct-component :id="{{$product}}"></updateproduct-component>
+=======
       <updateproduct-component :prod="{{$product}}"></updateproduct-component>
+>>>>>>> refs/remotes/origin/main
 
 
 @endsection

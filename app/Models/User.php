@@ -5,12 +5,13 @@ namespace App\Models;
 use App\Traits\CanLike;
 use App\Traits\CanComment;
 use App\Traits\CanRate;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\HasApiTokens;
 use Modules\Order\Entities\Order\Order;
 use Modules\Product\Entities\Comment\Comment;
 use Modules\Product\Entities\Like\Like;
@@ -33,6 +34,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status',
     ];
 
     /**
@@ -53,6 +55,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
+
+
+    public function setEmailAttribute($value)
+    {
+        $after_char = substr($value, strpos($value,'@')+strlen('@'));
+        $before_char = substr($value , 0 , strpos($value , '@'));
+
+        $email_filter = str_replace('.' , '' , $before_char);
+        $email = $email_filter.'@'.$after_char;
+
+        $this->attributes['email'] = $email;
+
+    }
     /**
      * Get all of the orders for the User
      *

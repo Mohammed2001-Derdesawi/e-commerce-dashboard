@@ -18,9 +18,13 @@ class ProductDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
+<<<<<<< HEAD
+        \Modules\Product\Entities\Attribute\Attribute::factory(20)->create();
+=======
          Attribute::factory(20)->create();
         Comment::factory(20)->create();
         Rate::factory(20)->create();
+>>>>>>> refs/remotes/origin/main
 
         // $this->call("OthersTableSeeder");
     }

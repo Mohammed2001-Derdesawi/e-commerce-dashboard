@@ -21,6 +21,7 @@
 											<!--begin::Card body-->
 											<div class="card-body text-center pt-0">
 												<!--begin::Image input-->
+
 												<div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" :style="{'background-image': 'url(/assets/Admin/media/svg/files/blank-image.svg)'}">
 													<!--begin::Preview existing avatar-->
 													<div class="image-input-wrapper w-150px h-150px"></div>
@@ -75,6 +76,7 @@
 
 
 
+
 	                                              <select  class="form-select mb-2"  data-placeholder="Select a variation"  data-hide-search="true"  id="status_select">
 													<option value="1" >Active</option>
 
@@ -88,6 +90,7 @@
 											</div>
 											<!--end::Card body-->
 										</div>
+
 		                                <div class="card card-flush py-4">
 											<!--begin::Card header-->
 											<div class="card-header">
@@ -143,6 +146,7 @@
 												<!--begin::Select2-->
                                                 <div class=" mb-2">
 
+
 		<select id="categories_Select" class="form-select mb-2" data-control="select2" data-placeholder="Select an option">
                                                 <option selected>Default Category</option>
 
@@ -154,6 +158,7 @@
 
 												<!--end::Select2-->
 												<!--begin::Description-->
+
 												<div class="text-muted fs-7 mb-7 mt-10">Add product to a category.</div>
 												<!--end::Description-->
 												<!--end::Input group-->
@@ -214,6 +219,7 @@
 														<!--begin::Card body-->
 														<div class="card-body pt-0">
 															<!--begin::Input group-->
+
 															<div class="mb-10 fv-row" >
 																<!--begin::Label-->
 																<label class="required form-label">Product Name</label>
@@ -358,6 +364,7 @@
 																<div class="fv-row w-100 flex-md-root">
 																	<!--begin::Label-->
 																	<label class="form-label">Tax</label>
+
 																<div class="d-flex justify-content-start">
                                                                     <!--begin::Label-->
                                                                     <div class="fw-bold">
@@ -472,6 +479,7 @@
 																	<div class="form-group" v-for="(varient,index) in attributes_varients" :key="index" style="margin-bottom:15px;">
 																		<div data-repeater-list="kt_ecommerce_add_product_options" class="d-flex flex-column gap-3"  >
 																			<div data-repeater-item="" class="form-group d-flex flex-wrap gap-5">
+
 
 																				<!--begin::Select2-->
 																				<div class="w-100 w-md-200px">
@@ -780,6 +788,7 @@ export default {
         acceptedFiles: "image/jpeg,image/png,image/gif,image/jpg"
 
 
+
       },
 
         acceptedFiles:['jpg','png','jpeg','gif'],
@@ -1000,7 +1009,6 @@ export default {
 
     previewVarients()
     {
-
 
          if(this.attributes_varients.length!=0)
          {

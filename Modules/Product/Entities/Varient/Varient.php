@@ -42,8 +42,5 @@ class Varient extends Model
     }
 
 
-    public function groupByatrr()
-    {
-       return $this->attributes()->gruopBy('pivot.attribute_id');
-    }
+
 }

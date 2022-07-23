@@ -834,7 +834,6 @@ export default {
 
 
 
-
           new Tagify(document.getElementById('kt_ecommerce_add_category_meta_keywords'),{
              originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')
          })
@@ -879,7 +878,6 @@ export default {
 
         for(let index in this.product.varients)
         {
-
 
      var object= this.product.varients[index].attributes.reduce( (obj ,item) =>{
         if(!obj[item.name])
@@ -1011,14 +1009,12 @@ export default {
 
         this.product.varients=this.varients
         let arr=[]
-
         for(let key in this.product.images)
          {
               if(this.product.images[key].id==undefined)
               data.append('images['+key+']',this.product.images[key])
               else
               data.append('oldimages['+key+']',this.product.images[key].id)
-
 
          }
          this.product.images=[]

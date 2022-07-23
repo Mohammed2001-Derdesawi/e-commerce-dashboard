@@ -14,10 +14,6 @@ use Modules\Order\Http\Controllers\Order\Api\OrderApiController;
 |
 */
 
-// Route::middleware('auth:api')->get('/order', function (Request $request) {
-//     return $request->user();
-// });
-
 
 Route::prefix('/admin/orders')->group(function (){
     Route::get('/',[OrderApiController::class,'getOrders']);

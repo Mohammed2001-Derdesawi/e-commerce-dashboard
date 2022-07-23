@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+
         Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
@@ -29,6 +30,7 @@ return new class extends Migration
      */
     public function down()
     {
+
         Schema::dropIfExists('comments');
     }
 };

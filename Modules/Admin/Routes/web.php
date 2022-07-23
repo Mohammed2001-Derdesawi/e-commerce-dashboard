@@ -5,6 +5,8 @@ use Modules\Admin\Http\Controllers\Admin\AdminController;
 use Modules\Admin\Http\Controllers\Authentication\AdminLoginController;
 use Modules\Admin\Http\Controllers\Authorzation\RoleController;
 use Modules\Admin\Http\Controllers\Dashboard\AdminHomeController;
+use Modules\Admin\Http\Controllers\Authentication\ResetPasswordController;
+use Modules\Admin\Http\Controllers\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +22,17 @@ use Modules\Admin\Http\Controllers\Dashboard\AdminHomeController;
 Route::prefix('admin')->name('admin.')->group(function() {
 
     Route::middleware('admin')->group(function (){
-     // Main Pgae Dahsboard Controller
-      Route::get('/', [AdminHomeController::class,'index'])->name('dashboard');
-         // End  Main Page Dashboard Controller
+        // Dahsboard Controller
+        Route::get('/', [AdminHomeController::class,'index'])->name('dashboard');
+        // End Dashboard Controller
+
+
+        // begin::User Routes
+        Route::name('user.')->group(function () {
+            Route::get('/users', [UserController::class , 'index'])->name('index');
+        });
+            // end::User Routes
+
          //Start Admin Pages Controller
       Route::get('/admins', [AdminController::class,'index'])->name('index');
       Route::get('/edit/email={email}', [AdminController::class,'edit'])->name('edit');

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Product\Http\Controllers\Cart\Api\CartApiController;
+use Modules\Product\Http\Controllers\WishList\Api\WishListApiController;
 use Modules\Product\Http\Controllers\Rate\RateController;
 use Modules\Product\Http\Controllers\Commnet\CommnetController;
 use Modules\Product\Http\Controllers\Rate\Api\RateApiController;
@@ -37,7 +39,7 @@ Route::name('admin.')->prefix('/admin')->group(function (){
 
 
      // begin::Brand Routes
-     Route::name('brand')->group(function () {
+     Route::name('brand.')->group(function () {
         Route::get('/brands', [BrandApiController::class , 'index'])->name('index');
         Route::post('/brand/create', [BrandApiController::class , 'store'])->name('store');
         Route::delete('/brand/delete/{id}', [BrandApiController::class , 'destroy'])->name('delete');
@@ -47,21 +49,19 @@ Route::name('admin.')->prefix('/admin')->group(function (){
     // end::Brand Routes
 
      // begin::Category Routes
-     Route::name('brand')->prefix('/categories')->group(function () {
+     Route::name('categories.')->prefix('/categories')->group(function () {
      Route::get('/', [CategoryApiController::class , 'index'])->name('index');
      });
 
      //End::Categorie Route
 
 
-     // begin::Product Routes
-     Route::name('products.')->prefix('/products')->group(function () {
+    // begin::Product Routes
+    Route::name('products.')->prefix('/products')->group(function () {
         Route::get('/', [ProductApiController::class , 'index'])->name('index');
         Route::post('/store', [ProductApiController::class , 'store'])->name('store');
         Route::post('/update', [ProductApiController::class , 'update'])->name('update');
-        Route::post('/delete/{id}', [ProductApiController::class , 'destroy'])->name('delete');
         Route::post('/images/info', [ProductApiController::class , 'getFilesInfo'])->name('getimages');
-
     });
     // end::Product Routes
 
@@ -84,5 +84,22 @@ Route::name('admin.')->prefix('/admin')->group(function (){
     //End Commnet Routes
 
 
-
 });
+
+
+
+// begin::Cart Routes
+Route::get('/add-to-cart/{id}', [CartApiController::class , 'store'])->name('store');
+Route::get('/delete-from-cart/{id}', [CartApiController::class , 'destroy'])->name('delete');
+// end::Cart Routes
+
+// begin::WishList Routes
+Route::get('/add-to-wishList/{id}', [WishListApiController::class , 'store'])->name('store');
+Route::get('/delete-from-wishList/{id}', [WishListApiController::class , 'destroy'])->name('delete');
+// end::WishList Routes
+
+
+
+
+
+

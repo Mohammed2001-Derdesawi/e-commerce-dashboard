@@ -7,6 +7,9 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\Product\Repository\Actions\ActionUserInterface;
 use Modules\Product\Repository\Brand\BrandRepository;
+use Modules\Product\Repository\Cart\CartRepository;
+use Modules\Product\Repository\Cart\CartRepositoryInterface;
+use Modules\Product\Repository\WishList\WishListRepository;
 use Modules\Product\Repository\Product\ProductRepository;
 use Modules\Product\Repository\Category\CategoryRepository;
 use Modules\Product\Repository\Attribute\AttributeInterface;
@@ -14,6 +17,7 @@ use Modules\Product\Repository\Attribute\AttributeRepository;
 use Modules\Product\Repository\Brand\BrandRepositoryInterface;
 use Modules\Product\Repository\Product\ProductRepositoryInterface;
 use Modules\Product\Repository\Category\CategoryRepositoryInterface;
+use Modules\Product\Repository\WishList\WishListRepositoryInterface;
 use Modules\Product\Repository\Comment\CommentRepository;
 use Modules\Product\Repository\Comment\CommenttInterface;
 use Modules\Product\Repository\Like\LikeRepository;
@@ -66,6 +70,9 @@ class ProductServiceProvider extends ServiceProvider
 
             return new LikeRepository;
         });
+
+        $this->app->bind(CartRepositoryInterface::class,CartRepository::class);
+        $this->app->bind(WishListRepositoryInterface::class,WishListRepository::class);
     }
 
     /**

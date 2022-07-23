@@ -1,13 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Product\Http\Controllers\Attribute\AttributeController;
+use Modules\Product\Http\Controllers\Product\ProductController;
+
 use Modules\Product\Http\Controllers\Rate\RateController;
 use Modules\Product\Http\Controllers\Brand\BrandController;
 
 use Modules\Product\Http\Controllers\Comment\CommentController;
-use Modules\Product\Http\Controllers\Product\ProductController;
 use Modules\Product\Http\Controllers\Category\CategoryController;
-use Modules\Product\Http\Controllers\Attribute\AttributeController;
+use Modules\Product\Http\Controllers\Cart\CartController;
+use Modules\Product\Http\Controllers\WishList\WishListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +82,17 @@ Route::name('admin.')->prefix('/admin//')->middleware('admin')->group(function()
 
 
 });
+
+// begin::Cart Routes
+Route::get('/add-to-cart/{id}', [CartController::class , 'store'])->name('store');
+Route::get('/delete-from-cart/{id}', [CartController::class , 'destroy'])->name('delete');
+// end::Cart Routes
+
+// begin::WishList Routes
+Route::get('/add-to-wishList/{id}', [WishListController::class , 'store'])->name('store');
+Route::get('/delete-from-wishList/{id}', [WishListController::class , 'destroy'])->name('delete');
+// end::WishList Routes
+
 
 
 Route::name('products.')->prefix('/products')->group(function (){

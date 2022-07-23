@@ -3,8 +3,8 @@
 namespace Modules\Product\Entities\Category;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Product\Entities\Comment;
 use Modules\Product\Entities\Product\Product;
 use Modules\Product\Entities\Rate;

@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('meta_name');
             $table->string('meta_description');
             $table->string('meta_keywords');
-            $table->string('is_tax');
+            $table->integer('is_tax');
             $table->integer('tax')->nullable()->default(0);
 
             $table->unsignedBigInteger('brand_id');

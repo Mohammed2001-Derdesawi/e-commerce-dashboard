@@ -1,0 +1,78 @@
+[33mcommit 10bdf55e56e5d580f8b241021bdf87d286193de8[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31mmohammed/Product[m[33m, [m[1;32mProduct[m[33m)[m
+Author: mohammed Derdesawi <mderdesawi2001@gmail.com>
+Date:   Tue Jul 19 14:15:31 2022 +0300
+
+    add user actions && edit Rate && Comment Repository
+
+[33mcommit 36d0cfeb771c28abab5a864ef7dddd1572df5873[m
+Author: mohammed Derdesawi <mderdesawi2001@gmail.com>
+Date:   Mon Jul 18 10:38:15 2022 +0300
+
+    add user actions && edit Rate && Comment Repository
+
+[33mcommit ffbde186c54cb4fb864dd3167eed0606c6e9ef2b[m
+Author: mohammed Derdesawi <mderdesawi2001@gmail.com>
+Date:   Sat Jul 16 01:42:31 2022 +0300
+
+    Product pages && Comments && Rates feature
+
+[33mcommit 646ad17c12b38864ab1eaedc1e90abbd600c54cc[m
+Merge: 879b6ec 90eab84
+Author: mohammed Derdesawi <mderdesawi2001@gmail.com>
+Date:   Fri Jul 8 03:17:22 2022 +0300
+
+    Make Store Product Request
+
+[33mcommit 879b6ecf9f08be1feec5bc1b90828b7a874889a3[m
+Author: mohammed Derdesawi <mderdesawi2001@gmail.com>
+Date:   Thu Jul 7 13:52:24 2022 +0300
+
+    Product Store Frontend
+
+[33mcommit 90eab8413201ba87c63bb46b3f324187b49bb195[m
+Author: moMostafa2 <aalza459@gmail.com>
+Date:   Wed Jul 6 11:54:49 2022 +0300
+
+    Category update & Brand Crud
+
+[33mcommit 85d2898ffbfe79de81813457625ca77861df942b[m[33m ([m[1;31mmohammed/OrdersMoules[m[33m, [m[1;32mOrdersMoules[m[33m)[m
+Author: mohammed Derdesawi <mderdesawi2001@gmail.com>
+Date:   Sun Jul 3 14:58:36 2022 +0300
+
+    edit admin Repository and user piplines
+
+[33mcommit f018f371adcd5fdd1b834ce5e982ac63ee873c71[m
+Author: moMostafa2 <aalza459@gmail.com>
+Date:   Fri Jul 1 20:44:57 2022 +0300
+
+    Category Crud with helper file
+
+[33mcommit 291c78ad9e56e702e8595e6146820972fdb47278[m[33m ([m[1;31mmohammed/DerdesawiV1[m[33m, [m[1;32mDerdesawiV1[m[33m)[m
+Author: mohammed Derdesawi <mderdesawi2001@gmail.com>
+Date:   Fri Jul 1 16:05:30 2022 +0300
+
+    Edit AuthorizationRepository AdminRepository and make herlpers file
+
+[33mcommit cc34334cdab219404965fb5673a375281a0c25a8[m
+Author: mohammed Derdesawi <mderdesawi2001@gmail.com>
+Date:   Fri Jul 1 02:52:38 2022 +0300
+
+    Create v1 from Modules Authorization And Admin
+
+[33mcommit ab785be3ae293b096d70b5170eabbdd19691d6a9[m
+Author: moMostafa2 <aalza459@gmail.com>
+Date:   Wed Jun 29 14:20:41 2022 +0300
+
+    Reset Password
+
+[33mcommit 6ed7a7132e8c3342a709d9e5ab560b52046f61fc[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: mohammed Derdesawi <mderdesawi2001@gmail.com>
+Date:   Mon Jun 27 15:38:01 2022 +0300
+
+    E-commerce initial version
+
+[33mcommit 7e0fd2172b63b63b69c615f707b9d8b84d9943c6[m
+Author: mohammed Derdesawi <mderdesawi2001@gmail.com>
+Date:   Mon Jun 27 15:34:56 2022 +0300
+
+    E-commerce initial version

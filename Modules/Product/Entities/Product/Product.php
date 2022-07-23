@@ -4,17 +4,17 @@ namespace Modules\Product\Entities\Product;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Product\Entities\Rate\Rate;
-use Modules\Product\Entities\Brand\Brand;
 use Modules\Product\Entities\Comment\Comment;
 use Modules\Product\Entities\Gallery\Gallery;
 use Modules\Product\Entities\Varient\Varient;
-use Modules\Product\Entities\Category\Category;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Product\Entities\Like\Like;
 use Modules\Product\Entities\View\View;
+use Modules\Product\Entities\Brand\Brand;
+use Modules\Product\Entities\Category\Category;
 
 class Product extends Model
 {
