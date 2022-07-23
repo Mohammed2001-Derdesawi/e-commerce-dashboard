@@ -40,13 +40,7 @@ class Varient extends Model
     {
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
-<<<<<<< HEAD
-=======
 
 
-    public function groupByatrr()
-    {
-       return $this->attributes()->gruopBy('pivot.attribute_id');
-    }
->>>>>>> refs/remotes/origin/main
+
 }

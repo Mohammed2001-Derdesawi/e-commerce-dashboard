@@ -1,20 +1,12 @@
 {
-<<<<<<<< HEAD:Modules/User/module.json
     "name": "User",
     "alias": "user",
-========
-    "name": "Order",
-    "alias": "order",
->>>>>>>> refs/remotes/origin/main:Modules/Order/module.json
+
     "description": "",
     "keywords": [],
     "priority": 0,
     "providers": [
-<<<<<<<< HEAD:Modules/User/module.json
         "Modules\\User\\Providers\\UserServiceProvider"
-========
-        "Modules\\Order\\Providers\\OrderServiceProvider"
->>>>>>>> refs/remotes/origin/main:Modules/Order/module.json
     ],
     "aliases": {},
     "files": [],
