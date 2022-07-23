@@ -61,14 +61,10 @@ class ProductServiceProvider extends ServiceProvider
             if(request()->is('api/admin/comments') || request()->is('api/admin/comments/*'))
             return new CommentRepository;
 
-<<<<<<< HEAD
             if(request()->is('api/admin/rates') || request()->is('api/admin/rates/*'))
             return new RateRepository;
 
             return new LikeRepository;
-=======
-            return new RateRepository;
->>>>>>> 10bdf55e56e5d580f8b241021bdf87d286193de8
         });
     }
 

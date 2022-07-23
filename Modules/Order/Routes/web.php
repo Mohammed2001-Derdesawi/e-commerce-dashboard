@@ -17,4 +17,5 @@ use Modules\Order\Http\Controllers\Order\OrderController;
 Route::prefix('/admin/orders')->middleware('admin')->name('admin.orders.')->group(function() {
     Route::get('/', [OrderController::class,'index'])->name('index');
     Route::get('/show/{id}',[OrderController::class,'show'])->name('show');
+    Route::get('/test',[OrderController::class,'test']);
 });

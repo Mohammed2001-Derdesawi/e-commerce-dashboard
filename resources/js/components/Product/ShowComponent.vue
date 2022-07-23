@@ -114,11 +114,11 @@
 									</div>
 									<!--begin::Body-->
 								</div>
-                                 <div class="card mb-5 mb-xl-8">
+                                 <div class="card mb-5 mb-xl-12">
                                     <div class="row">
 
 
-                                <div class="col-xl-6">
+                                <div class="col-xl-6" style="margin-bottom:30px;">
 										<!--begin::Charts Widget 3-->
 										<div class="card card-xl-stretch mb-xl-8">
 											<!--begin::Header-->
@@ -137,7 +137,7 @@
 											</div>
 											<!--end::Header-->
                                             <div class="cart-body" >
-                                               <div  style="height: 350px; min-height: 365px; min-width:526px; margin:0 30px;">
+                                               <div  style="height:100%; width:526px; margin:0 5px;">
                                                 <canvas id="product_views_chart" role="img" style="height: 315.4px;
 width: 533.6px;"></canvas>
                                                 </div>
@@ -145,6 +145,7 @@ width: 533.6px;"></canvas>
 
 										</div>
                                  </div>
+
 
                                       <div class="col-xl-6">
 										<!--begin::Charts Widget 3-->
@@ -188,6 +189,7 @@ export default {
 
    props:{
     prod:Object,
+    data:Object,
   },
   computed: {
   	description() {
@@ -204,26 +206,18 @@ export default {
 
 
 
-let labels = [1,2,3,4,5,6,7];
+let labels =Object.keys(this.data);
 let data = {
   labels: labels,
   datasets: [{
     label: 'Real views',
-    data: [65, 59, 80, 81, 56, 55, 40],
+    data: Object.values(this.data),
     fill: true,
     borderColor: '#753dea ',
     tension: 0.1,
 
   },
-  {
-    label: 'All Views',
-    data: [1,5,6,8,9,4],
-    fill: true,
-    borderColor: '#753dea ',
-    tension: 0.1,
-
-  },
-
+  
   ],
 
 
@@ -245,6 +239,7 @@ let myChart = new Chart(ctx, {
     // },
     scales: {
       y: {
+             beginAtZero: true,
 
           grid: {
                   borderDash: [8, 4],
@@ -332,6 +327,7 @@ ctx.style.backgroundColor = '#fff';
         ],
         varients:[],
             varientsprod:[],
+            chartdata:this.data,
 
         }
 

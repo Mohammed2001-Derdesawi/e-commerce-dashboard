@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Modules\Product\Filters\Product\Search;
 use Modules\Product\Entities\Product\Product;
+use Modules\Product\Entities\View\View;
 
 class ProductRepository implements ProductRepositoryInterface
 {
@@ -96,5 +97,22 @@ class ProductRepository implements ProductRepositoryInterface
     {
         Auth::login(User::find(2));
         return Auth::user();
+    }
+
+    public function getViewdata($product)
+    {
+        $data = View::query()
+        ->where('viewable_id',$product->id)
+        ->where('viewable_type',get_class($product))
+        ->get()
+        ->groupBy(function($item)
+        {
+            return $item->created_at->format('F');
+        })->map(function($item, $key){
+            return $item->count();
+        })->sortBy(function ($item){
+           return $item;
+        });
+        return $data;
     }
 }

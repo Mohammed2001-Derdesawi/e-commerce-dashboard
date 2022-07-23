@@ -15,10 +15,14 @@ return new class extends Migration
     {
         Schema::create('orders_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('product_id');
+            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
+            $table->unsignedBigInteger('varient_id')->nullable();
             $table->integer('price');
             $table->integer('quantity');
+            $table->foreign('varient_id')->on('varients')->references('id')->nullOnDelete();
+
+            
+            
 
             $table->timestamps();
         });

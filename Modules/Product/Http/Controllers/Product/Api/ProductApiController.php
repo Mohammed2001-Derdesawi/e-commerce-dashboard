@@ -34,22 +34,13 @@ class ProductApiController extends Controller
     public function index()
     {
 
-<<<<<<< HEAD
-      
-  
-=======
 
 
->>>>>>> 10bdf55e56e5d580f8b241021bdf87d286193de8
        return ProductResource::collection($this->ProductRepo->index(
         ['id','name','category_id','brand_id'],
           (int)request()->paginate,
           ['category:id,name','brand:id,name','mainimage:path,product_id']
         ));
-<<<<<<< HEAD
-=======
-
->>>>>>> 10bdf55e56e5d580f8b241021bdf87d286193de8
     }
 
 

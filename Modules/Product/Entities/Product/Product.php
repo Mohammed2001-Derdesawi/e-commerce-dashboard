@@ -92,7 +92,7 @@ class Product extends Model
         return $this->morphMany(Like::class,'likeable');
     }
 
-    public function views()
+    public function real_views()
     {
         return $this->morphMany(View::class,'viewable');
     }

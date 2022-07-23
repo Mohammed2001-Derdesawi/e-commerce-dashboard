@@ -47,7 +47,7 @@ class CommentApiController extends Controller
     {
        $product= $this->commentRepo->createorupdate($product_id,$request->body);
        return $this->ReturnMessage( [
-        'product'=>$product,
+        'product'=> $product,
         'message'=>'Comment has been Created for this product with id = '.$product_id
         ]);
     }
@@ -93,7 +93,6 @@ class CommentApiController extends Controller
     {
         $this->commentRepo->delete($id);
         return $this->ReturnMessage( [
-
             'message'=>'Rate has been deleted'
         ]);
 

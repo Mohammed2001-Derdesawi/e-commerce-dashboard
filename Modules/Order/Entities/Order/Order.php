@@ -28,6 +28,7 @@ class Order extends Model
         return $this->hasMany(OrderDetails::class, 'order_id', 'id');
     }
 
+
     /**
      * Get the user that owns the Order
      *

@@ -3,13 +3,17 @@
 namespace Modules\Product\Http\Controllers\Product;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Facade\Ignition\QueryRecorder\Query;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Modules\Product\Entities\Product\Product;
+use Modules\Product\Entities\View\View;
 use Modules\Product\Repository\Product\ProductRepositoryInterface;
 
 class ProductController extends Controller
@@ -54,6 +58,8 @@ class ProductController extends Controller
 
     public function show($id)
     {
+        
+    
         $product = $this->ProductRepo->getByID(
             $id,
             ['*'],
@@ -61,7 +67,11 @@ class ProductController extends Controller
             ['varients.attributes', 'images', 'category:id,name', 'brand:id,name'],
             true
         );
-        return view('product::Product.show', compact('product'));
+        
+       $data=$this->ProductRepo->getViewdata($product);
+
+
+        return view('product::Product.show', compact('product','data'));
     }
 
     public function showuserproduct($id)
