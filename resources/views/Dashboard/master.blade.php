@@ -194,10 +194,6 @@ License: For each use you must have a valid license purchased only from above li
 												<a href="#" class="menu-link px-5">
 													<span class="menu-title position-relative">Language
 													<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/main
 												</a>
 												<!--begin::Menu sub-->
 												<div class="menu-sub menu-sub-dropdown w-175px py-4">
@@ -218,19 +214,11 @@ License: For each use you must have a valid license purchased only from above li
 											<!--end::Menu item-->
 											<!--begin::Menu item-->
 											<div class="menu-item px-5">
-<<<<<<< HEAD
 												<form action="{{ route('admin.logout') }}" method="post">
 													@csrf
 													@method('POST')
 													<button type="submit" class="menu-link px-5">Sign Out</button>
 												</form>
-=======
-                                                <form action="{{route('admin.logout')}}" class="menu-item px-5 my-1" method="post">
-                                                    @csrf
-                                                    @method('POST')
-                                                    <button type="submit" class="menu-link px-5">Sign Out</button>
-                                                </form>
->>>>>>> refs/remotes/origin/main
 
 											</div>
 											<!--end::Menu item-->

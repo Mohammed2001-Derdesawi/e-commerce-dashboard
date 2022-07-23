@@ -14,15 +14,9 @@ use Modules\Order\Http\Controllers\Order\OrderController;
 |
 */
 
-<<<<<<<< HEAD:Modules/User/Routes/web.php
-use Modules\User\Http\Controllers\UserController;
 
-Route::name('user.')->prefix('user/')->group(function() {
-    Route::get('login', [UserController::class , 'login'])->name('login');
-    Route::get('register', [UserController::class , 'register'])->name('register');
-========
+
 Route::prefix('/admin/orders')->middleware('admin')->name('admin.orders.')->group(function() {
     Route::get('/', [OrderController::class,'index'])->name('index');
     Route::get('/show/{id}',[OrderController::class,'show'])->name('show');
->>>>>>>> refs/remotes/origin/main:Modules/Order/Routes/web.php
 });

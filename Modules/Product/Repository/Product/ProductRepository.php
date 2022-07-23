@@ -2,22 +2,19 @@
 
 namespace Modules\Product\Repository\Product;
 
-<<<<<<< HEAD
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Modules\Product\Entities\Attribute\Attribute;
+use Modules\Product\Filters\Product\Search;
 use Modules\Product\Entities\Gallery\Gallery;
 use Modules\Product\Entities\Product\Product;
 use Modules\Product\Entities\Varient\Varient;
+use Modules\Product\Entities\Attribute\Attribute;
 
 class ProductRepository implements ProductRepositoryInterface {
 
     protected $path = 'Gallery/Product/';
 
-    public function index($columns = ['*'], $paginate, $relations=['*'])
-    {
-        return Product::with($relations)->select($columns)->get();
-    }
 
     public function store($data){
 
@@ -194,13 +191,8 @@ class ProductRepository implements ProductRepositoryInterface {
 
 
 
-=======
-use Illuminate\Pipeline\Pipeline;
-use Illuminate\Support\Facades\Storage;
-use Modules\Product\Filters\Product\Search;
-use Modules\Product\Entities\Product\Product;
 
-class ProductRepository implements ProductRepositoryInterface {
+
 
     public function index($columns = ['*'], $paginate, $relations=['*'])
     {
@@ -227,10 +219,7 @@ class ProductRepository implements ProductRepositoryInterface {
         return Product::with($relations)->select($columns)->findOrFail($id);
 
      }
-    public function store($data){
-        dd($data);
-    }
->>>>>>> refs/remotes/origin/main
+
     public function getimagesInfo($request)
     {
         $images=[];
@@ -239,43 +228,22 @@ class ProductRepository implements ProductRepositoryInterface {
         {
 
             array_push($images,['name'=>substr($file['path'],strrpos($file['path'],'/')+1) ,
-<<<<<<< HEAD
                 'size'=>Storage::disk('public')->size($file['path']) ,
                 'lastModified'=> Storage::disk('public')->lastModified($file['path']),
                 'is_main'=>(int)$file['is_main'],
                 'path'=>$file['path'],
                 'id'=>$file['id']
             ]);
-=======
-            'size'=>Storage::disk('public')->size($file['path']) ,
-            'lastModified'=> Storage::disk('public')->lastModified($file['path']),
-            'is_main'=>(int)$file['is_main'],
-            'path'=>$file['path'],
-            'id'=>$file['id']
-
-
-        ]);
->>>>>>> refs/remotes/origin/main
 
         }
         return $images;
 
     }
 
-<<<<<<< HEAD
 
 
 
-    public function getByID($id,$columns=['*'],$relations=[''])
-    {
-        return Product::with($relations)->select($columns)->findOrFail($id);
 
-    }
-
-=======
-    public function update($request){
-          dd($request);
-    }
 
     public function delete($id)
     {
@@ -285,5 +253,4 @@ class ProductRepository implements ProductRepositoryInterface {
     }
 
 
->>>>>>> refs/remotes/origin/main
 }

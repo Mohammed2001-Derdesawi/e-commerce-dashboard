@@ -2,10 +2,6 @@
 
 namespace Modules\Product\Http\Controllers\Product;
 
-<<<<<<< HEAD
-=======
-use Facade\Ignition\QueryRecorder\Query;
->>>>>>> refs/remotes/origin/main
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Contracts\Support\Renderable;
@@ -37,10 +33,6 @@ class ProductController extends Controller
     }
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/main
 
     /**
      * Show the form for editing the specified resource.
@@ -50,16 +42,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product= $this->ProductRepo->getByID($id,
-<<<<<<< HEAD
-            ['*'],
-
-            ['varients.attributes','images']);
-        $product->varients()->get()->groupBy('pivot.attribute_id');
-=======
         ['*'],
 
        ['varients.attributes','images']);
->>>>>>> refs/remotes/origin/main
         return view('product::Product.edit',compact('product'));
     }
 
