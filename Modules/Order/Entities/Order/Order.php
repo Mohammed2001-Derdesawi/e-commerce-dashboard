@@ -11,12 +11,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Order\Database\factories\Order\OrderFactory;
+use Modules\User\Entities\Address\Address;
 
 class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['status','user_id','delivery_date'];
+    protected $fillable = ['status','user_id','delivery_date','total'];
 
     /**
      * Get all of the orderdetails for the Order
@@ -26,6 +27,10 @@ class Order extends Model
     public function ordersdetails(): HasMany
     {
         return $this->hasMany(OrderDetails::class, 'order_id', 'id');
+    }
+
+    public function addresses(){
+        return $this->belongsToMany(Address::class,'address_order','order_id','address_id','id','id');
     }
 
 

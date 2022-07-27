@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('price');
             $table->integer('quantity');
             $table->foreign('varient_id')->on('varients')->references('id')->nullOnDelete();
-
+            
             
             
 

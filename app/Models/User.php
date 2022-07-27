@@ -13,13 +13,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Order\Entities\Order\Order;
+use Modules\User\Entities\Cart\Cart;
 use Modules\Product\Entities\Comment\Comment;
 use Modules\Product\Entities\Like\Like;
 use Modules\Product\Entities\Rate\Rate;
 use Modules\Product\Entities\View\View;
-
-
-
+use Modules\User\Entities\Address\Address;
 
 class User extends Authenticatable
 {
@@ -103,6 +102,15 @@ class User extends Authenticatable
 
     public function comments()
     {
-        $this->hasMany(Comment::class, 'user_id', 'id');
+       return  $this->hasMany(Comment::class, 'user_id', 'id');
+    }
+
+    public function addresses(){
+        return $this->hasMany(Address::class,'user_id','id');
+    }
+
+    public function cart()
+    {
+       return $this->hasOne(Cart::class,'user_id','id');
     }
 }

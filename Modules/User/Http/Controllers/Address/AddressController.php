@@ -1,31 +1,28 @@
 <?php
 
-namespace Modules\Order\Http\Controllers\Order;
+namespace Modules\User\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Order\Entities\Order\Order;
-use Modules\Order\Repositories\Order\OrderInterface;
-use Modules\Order\Transformers\Shippment\RateShippmentResource;
+use Modules\User\Repositories\Address\AddressInterface;
 
-class OrderController extends Controller
+class AddressController extends Controller
 {
-
-    private $orderRepo;
-
-    public function __construct(OrderInterface $orderInterface)
-    {
-        $this->orderRepo=$orderInterface;
-
-    }
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
+
+    private $address;
+
+    public function __construct(AddressInterface $address) {
+        $this->address = $address;
+    }
+
     public function index()
     {
-        return view('order::order.index');
+        return $this->address->index();
     }
 
     /**
@@ -34,7 +31,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('order::create');
+        return view('user::create');
     }
 
     /**
@@ -44,7 +41,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $this->orderRepo->create($request);
+        return $this->address->create($request);
     }
 
     /**
@@ -54,14 +51,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-
-        $order=$this->orderRepo->findOrderById($id,
-        ['user:id,email,name','ordersdetails.product:id,name,sku'],
-        ['id','created_at','updated_at','user_id','status']
-
-
-    );
-        return view('order::order.show',compact('order'));
+        return view('user::show');
     }
 
     /**
@@ -71,7 +61,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        return view('order::edit');
+        return view('user::edit');
     }
 
     /**
@@ -82,7 +72,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->address->update($request,$id);
     }
 
     /**
@@ -92,14 +82,7 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-
-
-
-    
-    public function getrates(){
-        return RateShippmentResource::collection($this->orderRepo->rates(1,[],'shippo'));
+        return $this->address->delete($id);
 
     }
 }

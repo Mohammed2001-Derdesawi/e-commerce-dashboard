@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('carts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->enum('status',['cancelled','completed','denied','expired','failed','pending','processing','refunded','delivered','delivering'])->default('processing');
             $table->unsignedBigInteger('user_id');
-            $table->date('delivery_date')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->float('total');
-             $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
-           
             $table->timestamps();
+
         });
     }
 
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('carts');
     }
 };
