@@ -2,9 +2,9 @@
 
 namespace Modules\Order\Http\Controllers\Payment;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Contracts\Support\Renderable;
 use Modules\Order\Repositories\Order\OrderInterface;
 
 class PaymentController extends Controller
@@ -14,6 +14,11 @@ class PaymentController extends Controller
     {
         $this->orderRepo = $payment;
     }
+
+  public function index()
+  {
+    return view('order::PaymentMethods.index');
+  }
   public function payment(Request $request)
   {
     return $this->orderRepo->payment($request);
@@ -21,5 +26,12 @@ class PaymentController extends Controller
   public function success(Request $request)
   {
     return $this->orderRepo->paymentConfirm($request);
+  }
+
+  public function getUserOrder($id){
+    return $this->orderRepo->getUserOrder($id);
+  }
+  public function getUserOrders(){
+    return $this->orderRepo->getUserOrders();
   }
 }

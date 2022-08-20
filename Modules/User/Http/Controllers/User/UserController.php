@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use Modules\User\Emails\sendForgetPasswordUser;
+use Modules\User\Emails\SendForgetPasswordUser;
 use Modules\User\Http\Requests\User\LoginUserRequest;
 use Modules\User\Http\Requests\User\RegisterUserRequest;
 
@@ -62,7 +62,7 @@ class UserController extends Controller
             'email' => $email,
         );
 
-        Mail::to('testmailderdesawi@gmail.com')->send(new sendForgetPasswordUser($data));
+        Mail::to('testmailderdesawi@gmail.com')->send(new SendForgetPasswordUser($data));
 //        return back()->with('message', 'We have e-mailed your password reset link!');
     }
 }

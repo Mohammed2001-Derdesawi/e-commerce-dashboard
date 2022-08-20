@@ -15,7 +15,7 @@ return new class extends Migration
     {
 
         Schema::create('orders_details', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
             $table->unsignedBigInteger('varient_id')->nullable();
             $table->integer('price');

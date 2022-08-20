@@ -17,7 +17,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['status','user_id','delivery_date','total'];
+    protected $fillable = ['status','user_id','delivery_date','total','shipment_id','payment_id','invoice_number','shipment_number'];
 
     /**
      * Get all of the orderdetails for the Order

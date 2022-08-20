@@ -1167,6 +1167,23 @@ License: For each use you must have a valid license purchased only from above li
 												</div>
 											</div>
 										</div>
+
+                                        <div class="menu-item">
+											<a class="menu-link" href="{{route('admin.shipment.methods.index')}}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Shipment Method</span>
+											</a>
+										</div>
+                                        <div class="menu-item">
+											<a class="menu-link" href="{{route('admin.payment.methods.index')}}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Payment Method</span>
+											</a>
+										</div>
                                         <div class="menu-item">
 											<a class="menu-link" href="{{route('admin.attribute.index')}}">
 												<span class="menu-bullet">

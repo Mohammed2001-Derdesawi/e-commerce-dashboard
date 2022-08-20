@@ -3,10 +3,10 @@
 namespace Modules\Order\Http\Controllers\Order\Api;
 
 use Illuminate\Routing\Controller;
-use Modules\Order\Entities\Order\Order;
-use Modules\Order\Entities\Order\OrderDetails;
-use Modules\Order\Repositories\Order\OrderInterface;
+use Illuminate\Http\Request;
 use Modules\Order\Transformers\Order\OrderResource;
+use Modules\Order\Repositories\Order\OrderInterface;
+use Modules\Order\Transformers\Shipment\RateShippmentResource;
 
 class OrderApiController extends Controller
 {
@@ -30,6 +30,10 @@ class OrderApiController extends Controller
 
 
         ));
+
+    }
+    public function getrates(Request $request){
+        return RateShippmentResource::collection($this->orderRepo->rates($request->address,[],'shippo'));
 
     }
 

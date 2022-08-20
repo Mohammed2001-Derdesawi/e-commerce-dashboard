@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Order\Http\Controllers\Order\OrderController;
 use Modules\Order\Http\Controllers\Payment\PaymentController;
+use Modules\Order\Http\Controllers\Shipment\ShipmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +23,33 @@ Route::prefix('/admin/orders')->middleware('admin')->name('admin.orders.')->grou
     Route::get('/show/{id}',[OrderController::class,'show'])->name('show');
 });
 
-Route::prefix('/orders')->middleware('web')->name('shipment.')->group(function() {
-Route::get('/rates',[OrderController::class,'getrates']);
-// Route::get('/create',[OrderController::class,'store'])->name('orders.create');
+//Start user Order Routes
+Route::prefix('/orders')->middleware('web')->name('orders.')->group(function() {
+ Route::get('/track',[OrderController::class,'track'])->name('track');
 Route::get('/payment',[PaymentController::class,'payment'])->name('payment');
 Route::post('/payment/cancel',[PaymentController::class,'cancel'])->name('payment.cancel');
-Route::get('/payment/success/',[PaymentController::class,'success'])->name('payment.success');
+Route::any('/payment/success/',[PaymentController::class,'success'])->name('payment.success');
+Route::get('/user/order/{id}',[PaymentController::class,'getUserOrder'])->name('user.order');
+Route::get('/user/orders',[PaymentController::class,'getUserOrders'])->name('user.orders');
+
+
+});
+
+//End user Order Routes
+
+
+Route::name('admin.')->prefix('admin/')->group(function (){
+    Route::prefix('shipments/')->name('shipment.')->group(function (){
+        Route::get('/methods',[ShipmentController::class,'index'])->name('methods.index');
+       
+        
+    
+
+    });
+    Route::prefix('payments/')->name('payment.')->group(function (){
+        Route::get('/methods',[PaymentController::class,'index'])->name('methods.index');
+
+
+    });
 
 });

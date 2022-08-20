@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Order\Transformers\Shippment;
+namespace Modules\Order\Transformers\Shipment;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

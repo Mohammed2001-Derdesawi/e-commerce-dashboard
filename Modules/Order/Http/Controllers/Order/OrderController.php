@@ -2,12 +2,12 @@
 
 namespace Modules\Order\Http\Controllers\Order;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Order\Entities\Order\Order;
+use Illuminate\Contracts\Support\Renderable;
 use Modules\Order\Repositories\Order\OrderInterface;
-use Modules\Order\Transformers\Shippment\RateShippmentResource;
+use Modules\Order\Transformers\Shipment\RateShippmentResource;
 
 class OrderController extends Controller
 {
@@ -37,15 +37,6 @@ class OrderController extends Controller
         return view('order::create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        $this->orderRepo->create($request);
-    }
 
     /**
      * Show the specified resource.
@@ -62,6 +53,11 @@ class OrderController extends Controller
 
     );
         return view('order::order.show',compact('order'));
+    }
+
+    public function track()
+    {
+        $this->orderRepo->track(1);
     }
 
     /**
@@ -97,9 +93,6 @@ class OrderController extends Controller
 
 
 
-    
-    public function getrates(){
-        return RateShippmentResource::collection($this->orderRepo->rates(1,[],'shippo'));
 
-    }
+
 }

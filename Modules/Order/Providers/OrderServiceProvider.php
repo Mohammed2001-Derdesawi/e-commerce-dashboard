@@ -5,6 +5,7 @@ namespace Modules\Order\Providers;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Order\Entities\Shipment\Shipment;
 use Modules\Order\Repositories\Order\OrderInterface;
 use Modules\Order\Repositories\Order\OrderRepository;
 
@@ -31,7 +32,7 @@ class OrderServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
-        \Shippo::setApiKey(config('services.shippo.key'));
+        \Shippo::setApiKey(request()->key??Shipment::where('name','Shippo')->select('key')->first()->key);
 
     }
 
