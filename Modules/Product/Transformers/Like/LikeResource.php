@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Product\Transformers\Rate;
+namespace Modules\Product\Transformers\Like;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RateResource extends JsonResource
+class LikeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,14 +14,13 @@ class RateResource extends JsonResource
      */
     public function toArray($request)
     {
-        
         return [
             
           
             'id'=>$this->id,
             'user'=>$this->user,
-            'rate'=>(int)$this->rate,
-            'product'=>$this->rateable
+            'like'=>(int)$this->like,
+            'product'=>$this->likeable
         ];
     }
 }

@@ -66,6 +66,9 @@ Vue.component('roleslist-component',require('./components/Roles/RoleslistCompone
  // Start Rate Component
  Vue.component('rate-component', require('./components/Rate/RateComponent.vue').default);
  // End Rate Component
+ // Start Like Component
+ Vue.component('like-component', require('./components/Like/LikeComponent.vue').default);
+ // End Like Component
 
  // Start Comment Component
  Vue.component('comment-component', require('./components/Comment/CommentComponent.vue').default);

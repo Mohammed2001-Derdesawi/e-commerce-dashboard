@@ -45,6 +45,11 @@ class LikeRepository implements ActionUserInterface{
         return Auth::user();
     }
 
+  
+    public function admindelete($id)
+    {
+        
+    }
     
 }
 

@@ -44,29 +44,17 @@ class RateApiController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request, $product_id)
+    public function createOrUpdate(Request $request, $product_id)
     {
-       $product= $this->rateRepo->createorupdate($product_id,$request->rate);
+       list($product,$message)= $this->rateRepo->createorupdate($product_id,$request->rate);
        return $this->ReturnMessage( [
         'product'=>$product,
-        'message'=>'Rate has been Created for this product with id = '.$product_id
+        'message'=>'Rate has been '.$message.' for this product with id = '.$product_id
         ]);
     }
 
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $product_id)
-    {
-        $this->rateRepo->createorupdate($product_id,$request->rate);
-        return $this->ReturnMessage( [
-            'message'=>'Rate has been updated for this product with id = '.$product_id
-        ]);
-    }
+  
 
     public function userdelete($id)
     {

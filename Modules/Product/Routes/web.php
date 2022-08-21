@@ -10,6 +10,7 @@ use Modules\Product\Http\Controllers\Brand\BrandController;
 use Modules\Product\Http\Controllers\Comment\CommentController;
 use Modules\Product\Http\Controllers\Category\CategoryController;
 use Modules\Product\Http\Controllers\Cart\CartController;
+use Modules\Product\Http\Controllers\Like\LikeController;
 use Modules\Product\Http\Controllers\WishList\WishListController;
 
 /*
@@ -74,7 +75,14 @@ Route::name('admin.')->prefix('/admin//')->middleware('admin')->group(function()
         Route::get('/', [CommentController::class , 'index'])->name('index');
 
     });
-    //End Commnet Routes
+    //End Like Routes
+
+    //Start Comment Routes
+    Route::name('likes.')->prefix('/likes')->group(function () {
+        Route::get('/', [LikeController::class , 'index'])->name('index');
+
+    });
+    //End Like Routes
 
 
 
