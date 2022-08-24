@@ -43,30 +43,17 @@ class CommentApiController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request,$product_id)
+    public function createOrUpdate(Request $request,$product_id)
     {
-       $product= $this->commentRepo->createorupdate($product_id,$request->body);
+        list($product,$message)= $this->commentRepo->createorupdate($product_id,$request->body);
        return $this->ReturnMessage( [
-        'product'=>$product,
-        'message'=>'Comment has been Created for this product with id = '.$product_id
+        'product'=> $product,
+        'message'=>'Comment has been '.$message.' for this product with id = '.$product_id
         ]);
     }
 
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $product_id)
-    {
-        $product=$this->commentRepo->createorupdate($product_id,$request->body);
-        return $this->ReturnMessage( [
-            'product'=>$product,
-            'message'=>'Comment has been updated for this product with id = '.$product_id
-        ]);
-    }
+   
 
     /**
      * Remove the specified resource from storage.
@@ -93,7 +80,6 @@ class CommentApiController extends Controller
     {
         $this->commentRepo->delete($id);
         return $this->ReturnMessage( [
-
             'message'=>'Rate has been deleted'
         ]);
 

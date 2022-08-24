@@ -66,13 +66,21 @@ Vue.component('roleslist-component',require('./components/Roles/RoleslistCompone
  // Start Rate Component
  Vue.component('rate-component', require('./components/Rate/RateComponent.vue').default);
  // End Rate Component
+ // Start Like Component
+ Vue.component('like-component', require('./components/Like/LikeComponent.vue').default);
+ // End Like Component
 
  // Start Comment Component
  Vue.component('comment-component', require('./components/Comment/CommentComponent.vue').default);
  // End Comment Component
 
+// Start payment method
+Vue.component('payment-method',require('./components/Payment/PaymentMethod').default);
+// End payment method
 
-
+// Start shipment method
+Vue.component('shipment-method',require('./components/Shipment/ShipmentMethod').default);
+// End shipment method
 // require('./../../Modules/Admin/Resources/assets/js/app')
 
 
@@ -103,7 +111,6 @@ window.Toast = Toast
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 
-<<<<<<< HEAD
 Vue.component('brand-component', require('./components/Product/Brand/BrandComponent.vue').default);
 Vue.component('createbrand-component', require('./components/Product/Brand/CreateComponent.vue').default);
 Vue.component('editbrand-component', require('./components/Product/Brand/EditComponent.vue').default);
@@ -111,9 +118,6 @@ Vue.component('storeproduct-component', require('./components/Product/Storeprodu
 Vue.component('attribute-component',require('./components/Attribute/AttributeComponent').default);
 Vue.component('updateproduct-component',require('./components/Product/UpdateproductComponent').default);
 Vue.component('user-component',require('./components/User/UserComponent').default);
-=======
-
->>>>>>> refs/remotes/origin/main
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

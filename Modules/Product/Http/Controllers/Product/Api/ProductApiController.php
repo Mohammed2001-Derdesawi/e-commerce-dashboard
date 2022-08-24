@@ -64,7 +64,6 @@ class ProductApiController extends Controller
           (int)request()->paginate,
           ['category:id,name','brand:id,name','mainimage:path,product_id']
         ));
-
     }
 
 

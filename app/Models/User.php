@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\CanLike;
 use App\Traits\CanComment;
 use App\Traits\CanRate;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -12,10 +13,16 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Order\Entities\Order\Order;
+use Modules\User\Entities\Cart\Cart;
+use Modules\Product\Entities\Comment\Comment;
+use Modules\Product\Entities\Like\Like;
+use Modules\Product\Entities\Rate\Rate;
+use Modules\Product\Entities\View\View;
+use Modules\User\Entities\Address\Address;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, CanRate, CanComment;
+    use HasApiTokens, HasFactory, Notifiable, CanRate, CanComment,CanLike;
 
     /**
      * The attributes that are mass assignable.
@@ -75,6 +82,19 @@ class User extends Authenticatable
         return $this->hasMany(Order::class, 'user_id', 'id');
     }
 
+    public function views()
+    {
+       return $this->hasMany(View::class,'user_id','id');
+    }
+    public function likes()
+    {
+        return $this->hasMany(Like::class,'user_id','id');
+    }
+
+    public function hasSeethisProduct($product)
+    {
+        return $this->views()->where('viewable_id',$product->id)->where('viewable_type',get_class($product))->first()?true: false;
+    }
     public function rates()
     {
         return $this->hasMany(Rate::class, 'user_id', 'id');
@@ -82,6 +102,15 @@ class User extends Authenticatable
 
     public function comments()
     {
-        $this->hasMany(Comment::class, 'user_id', 'id');
+       return  $this->hasMany(Comment::class, 'user_id', 'id');
+    }
+
+    public function addresses(){
+        return $this->hasMany(Address::class,'user_id','id');
+    }
+
+    public function cart()
+    {
+       return $this->hasOne(Cart::class,'user_id','id');
     }
 }

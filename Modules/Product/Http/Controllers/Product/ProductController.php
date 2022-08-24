@@ -2,15 +2,11 @@
 
 namespace Modules\Product\Http\Controllers\Product;
 
-<<<<<<< HEAD
-=======
-use Facade\Ignition\QueryRecorder\Query;
->>>>>>> refs/remotes/origin/main
+
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
+
 use Modules\Product\Repository\Product\ProductRepositoryInterface;
 
 class ProductController extends Controller
@@ -37,10 +33,6 @@ class ProductController extends Controller
     }
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/main
 
     /**
      * Show the form for editing the specified resource.
@@ -49,30 +41,52 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product= $this->ProductRepo->getByID($id,
-<<<<<<< HEAD
+        $product = $this->ProductRepo->getByID($id,
             ['*'],
-
-            ['varients.attributes','images']);
-        $product->varients()->get()->groupBy('pivot.attribute_id');
-=======
-        ['*'],
-
-       ['varients.attributes','images']);
->>>>>>> refs/remotes/origin/main
-        return view('product::Product.edit',compact('product'));
+            ['varients.attributes', 'images'],false
+        );
+        return view('product::Product.edit', compact('product'));
     }
 
     public function show($id)
     {
-        $product= $this->ProductRepo->getByID($id,
-        ['*'],
+        
+    
+        $product = $this->ProductRepo->getByID(
+            $id,
+            ['*'],
 
-       ['varients.attributes','images','category:id,name','brand:id,name'],true);
-        return view('product::Product.show',compact('product'));
+            ['varients.attributes', 'images', 'category:id,name', 'brand:id,name'],
+            true
+        );
+        
+       $data=$this->ProductRepo->getViewdata($product);
 
 
+        return view('product::Product.show', compact('product','data'));
     }
 
+    public function showuserproduct($id)
+    {
+        //  Auth::login(User::find(2));
 
+        $product=$this->ProductRepo->view($id);
+      
+         dd($product);
+        // return view('product.show',compact('product'));
+      
+
+        }
+
+        
+      
+        
+
+
+        
+
+
+
+
+    
 }

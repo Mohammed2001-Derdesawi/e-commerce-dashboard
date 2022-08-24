@@ -20,6 +20,18 @@ class Varient extends Model
         return \Modules\Product\Database\factories\Varient\VarientFactory::new();
     }
 
+    public function isInStore()
+    {
+        return $this->quantity > 0 ? true : false;
+
+    }
+
+    public function hasQuantity($quantity)
+    {
+        return $this->quantity >= $quantity  ? true : false;
+
+    }
+
     /**
      * The roles that belong to the Attribute
      *
@@ -40,13 +52,7 @@ class Varient extends Model
     {
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
-<<<<<<< HEAD
-=======
 
 
-    public function groupByatrr()
-    {
-       return $this->attributes()->gruopBy('pivot.attribute_id');
-    }
->>>>>>> refs/remotes/origin/main
+
 }

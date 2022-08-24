@@ -3,16 +3,11 @@
 namespace Modules\Product\Entities\Category;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-<<<<<<< HEAD
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Modules\Product\Entities\Product\Product;
-=======
 use Modules\Product\Entities\Comment;
 use Modules\Product\Entities\Product\Product;
 use Modules\Product\Entities\Rate;
->>>>>>> refs/remotes/origin/main
 
 class Category extends Model
 {
@@ -23,11 +18,6 @@ class Category extends Model
     protected static function newFactory()
     {
         return \Modules\Product\Database\factories\CategoryFactory::new();
-    }
-
-    public function products()
-    {
-        return $this->hasMany(Product::class, 'category_id', 'id');
     }
 
 
@@ -65,8 +55,6 @@ class Category extends Model
         });
     }
 
-
-
     public  function getParents () {
         $parent = $this->parent;
         $parents = collect([]);
@@ -74,9 +62,7 @@ class Category extends Model
             $parents->push($parent);
             $parent = $parent->parent;
         }
-
         return $parents ;
-
     }
 
     public function treeCount(){
@@ -94,7 +80,4 @@ class Category extends Model
     {
         return $this->morphMany(Rate::class,'rateable');
     }
-
-
-
 }

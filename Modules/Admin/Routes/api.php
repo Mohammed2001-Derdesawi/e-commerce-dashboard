@@ -1,13 +1,9 @@
 <?php
 
-<<<<<<< HEAD
-use Modules\Admin\Http\Controllers\User\UserApiController;
-=======
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\Admin\Api\AdminApiController;
 use Modules\Admin\Http\Controllers\Authorzation\Api\RoleApiController;
->>>>>>> refs/remotes/origin/main
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +16,6 @@ use Modules\Admin\Http\Controllers\Authorzation\Api\RoleApiController;
 |
 */
 
-<<<<<<< HEAD
 Route::name('admin.')->prefix('/admin')->group(function (){
 
     // begin::User Routes
@@ -30,12 +25,8 @@ Route::name('admin.')->prefix('/admin')->group(function (){
         Route::get('/user/changeStatus/{id}', [UserApiController::class , 'changeStatus'])->name('changeStatus');
     });
     // end::User Routes
-});
-=======
-// Route::middleware('auth:api')->get('/admin', function (Request $request) {
-//     return $request->user();
-// });
-Route::prefix('/admin')->group(function (){
+
+    // Start Admin api
     Route::get('/getadmins',[AdminApiController::class,'getAdmins']);
     Route::post('/delete',[AdminApiController::class,'deleteAdmin']);
     Route::post('//changestaus/',[AdminApiController::class,'changeStatusAdmin']);
@@ -55,7 +46,11 @@ Route::prefix('/admin')->group(function (){
 
 
     // End Roles Api
+
+
+
 });
 
 
->>>>>>> refs/remotes/origin/main
+
+

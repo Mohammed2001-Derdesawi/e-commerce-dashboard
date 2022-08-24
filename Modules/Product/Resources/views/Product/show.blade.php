@@ -40,7 +40,7 @@
 
 
 @section('content')
-<show-component :prod="{{$product}}"></show-component>
+<show-component :prod="{{$product}}" :data="{{ $data }}"></show-component>
 
 
 @endsection

@@ -18,63 +18,43 @@ class RateApiController extends Controller
      protected $rateRepo;
     public function __construct(ActionUserInterface $rateInterface)
     {
-        $this->rateRepo=$rateInterface;
-
+        $this->rateRepo = $rateInterface;
     }
     public function index()
     {
         return RateResource::collection($this->rateRepo->index(
-            ['id','rate','user_id','rateable_id','rateable_type'],
-            ['user:id,name','rateable'
-            =>function (MorphTo $morphTo) {
-                $morphTo->constrain([
-                    Product::class => function (Builder $query) {
-                        $query->select(['id','name']);
-                    },
+            ['id', 'rate', 'user_id', 'rateable_id', 'rateable_type'],
+            [
+                'user:id,name', 'rateable'
+                => function (MorphTo $morphTo) {
+                    $morphTo->constrain([
+                        Product::class => function (Builder $query) {
+                            $query->select(['id', 'name']);
+                        },
 
-                ]);
-            }
-
-
-
-
-
-        ],
+                    ]);
+                }
+            ],
             request()->paginate,
         ));
-
     }
-
-
 
     /**
      * Store a newly created resource in storage.
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request,$product_id)
+    public function createOrUpdate(Request $request, $product_id)
     {
-       $product= $this->rateRepo->createorupdate($product_id,$request->rate);
+       list($product,$message)= $this->rateRepo->createorupdate($product_id,$request->rate);
        return $this->ReturnMessage( [
         'product'=>$product,
-        'message'=>'Rate has been Created for this product with id = '.$product_id
+        'message'=>'Rate has been '.$message.' for this product with id = '.$product_id
         ]);
     }
 
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $product_id)
-    {
-        $this->rateRepo->createorupdate($product_id,$request->rate);
-        return $this->ReturnMessage( [
-            'message'=>'Rate has been updated for this product with id = '.$product_id
-        ]);
-    }
+  
 
     public function userdelete($id)
     {
@@ -95,16 +75,13 @@ class RateApiController extends Controller
     {
         $this->rateRepo->admindelete($id);
         return response()->json([
-            'message'=>'Rate has been Deleted'
+            'message' => 'Rate has been Deleted'
 
         ]);
-
     }
 
     public function ReturnMessage($json)
     {
         return response()->json($json);
-
-
     }
 }

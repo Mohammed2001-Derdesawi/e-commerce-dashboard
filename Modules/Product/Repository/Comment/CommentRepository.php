@@ -15,7 +15,10 @@ use Modules\Product\Repository\Product\ProductRepositoryInterface;
 
 class CommentRepository implements ActionUserInterface{
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 10bdf55e56e5d580f8b241021bdf87d286193de8
     public function index($columns=['*'],$relations=[''],$paginate=25){
         return app(Pipeline::class)
         ->send(Comment::query())

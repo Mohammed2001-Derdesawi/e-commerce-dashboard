@@ -20,6 +20,7 @@ use Modules\Product\Repository\Category\CategoryRepositoryInterface;
 use Modules\Product\Repository\WishList\WishListRepositoryInterface;
 use Modules\Product\Repository\Comment\CommentRepository;
 use Modules\Product\Repository\Comment\CommenttInterface;
+use Modules\Product\Repository\Like\LikeRepository;
 use Modules\Product\Repository\Rate\RateInterface;
 use Modules\Product\Repository\Rate\RateRepository;
 
@@ -64,7 +65,10 @@ class ProductServiceProvider extends ServiceProvider
             if(request()->is('api/admin/comments') || request()->is('api/admin/comments/*'))
             return new CommentRepository;
 
+            if(request()->is('api/admin/rates') || request()->is('api/admin/rates/*'))
             return new RateRepository;
+
+            return new LikeRepository;
         });
 
         $this->app->bind(CartRepositoryInterface::class,CartRepository::class);

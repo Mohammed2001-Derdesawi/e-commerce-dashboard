@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\Order\Entities\Order\Product;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Product\Entities\Varient\Varient;
 
 class OrderDetails extends Model
 {
     use HasFactory;
     protected $table='orders_details';
 
-    protected $fillable = ['order_id','product_id','price','quantity'];
+    protected $fillable = ['order_id','varient_id','price','quantity'];
     Protected $appends=['total'];
 
 
@@ -29,7 +30,7 @@ class OrderDetails extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class,'product_id','id');
+        return $this->belongsTo(Varient::class,'varient_id','id');
     }
 
     public function getTotalAttribute()

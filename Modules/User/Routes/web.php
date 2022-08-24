@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Order\Http\Controllers\Order\OrderController;
+use Modules\User\Http\Controllers\AddressController;
+use Modules\User\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,15 +15,20 @@ use Modules\Order\Http\Controllers\Order\OrderController;
 |
 */
 
-<<<<<<<< HEAD:Modules/User/Routes/web.php
-use Modules\User\Http\Controllers\UserController;
 
-Route::name('user.')->prefix('user/')->group(function() {
-    Route::get('login', [UserController::class , 'login'])->name('login');
-    Route::get('register', [UserController::class , 'register'])->name('register');
-========
-Route::prefix('/admin/orders')->middleware('admin')->name('admin.orders.')->group(function() {
-    Route::get('/', [OrderController::class,'index'])->name('index');
-    Route::get('/show/{id}',[OrderController::class,'show'])->name('show');
->>>>>>>> refs/remotes/origin/main:Modules/Order/Routes/web.php
+Route::name('user.')->prefix('user/')->group(function () {
+    Route::get('login', [UserController::class, 'login'])->name('login');
+    Route::get('register', [UserController::class, 'register'])->name('register');
 });
+
+
+// begin::Address Routes
+Route::name('address.')->prefix('admin/')->group(function () {
+    Route::get('address', [AddressController::class, 'index'])->name('index');
+    Route::get('address/create', [AddressController::class, 'create'])->name('create');
+    Route::post('address/create', [AddressController::class, 'store'])->name('store');
+    Route::get('address/{id}/edit', [AddressController::class, 'edit'])->name('edit');
+    Route::post('address/{id}/edit', [AddressController::class, 'update'])->name('update');
+    Route::get('address/delete/{id}', [AddressController::class, 'destroy'])->name('delete');
+});
+// end::Address Routes

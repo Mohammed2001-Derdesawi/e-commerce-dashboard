@@ -26,7 +26,6 @@ class RateRepository implements ActionUserInterface{
         ->select($columns)
         ->with($relations)
         ->paginate($paginate);
-
     }
 
     public function createorupdate($id, $value) // $id for entity id
@@ -34,24 +33,22 @@ class RateRepository implements ActionUserInterface{
         $user=$this->getUser();
         $rate=$user->rate($id,$value);
         return $rate;
-
     }
+
     public function delete($id){    // $id for rate id
         $user=$this->getUser();
          $user->unrate($id)->delete();
-
-
     }
+
     public function getUser()
     {
         return Auth::user();
     }
+
     public function  admindelete($id)
     {
         $rate=findById($id,new Rate,[]);
         $rate->delete();
         return;
-
     }
 }
-

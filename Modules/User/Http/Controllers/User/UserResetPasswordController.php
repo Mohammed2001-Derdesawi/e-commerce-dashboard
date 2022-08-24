@@ -2,17 +2,18 @@
 
 namespace Modules\User\Http\Controllers\User;
 
-use Illuminate\Contracts\Support\Renderable;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Modules\Admin\Entities\Admin\Admin;
+use Illuminate\Contracts\Support\Renderable;
 
 class UserResetPasswordController extends Controller
 {
 
-    
+
     public function updatePassword (Request $request) {
         $validate = $request->validate([
             'password' => 'required|min:8|max:15',

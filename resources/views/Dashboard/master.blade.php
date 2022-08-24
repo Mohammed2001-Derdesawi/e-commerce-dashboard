@@ -194,10 +194,6 @@ License: For each use you must have a valid license purchased only from above li
 												<a href="#" class="menu-link px-5">
 													<span class="menu-title position-relative">Language
 													<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/main
 												</a>
 												<!--begin::Menu sub-->
 												<div class="menu-sub menu-sub-dropdown w-175px py-4">
@@ -218,19 +214,11 @@ License: For each use you must have a valid license purchased only from above li
 											<!--end::Menu item-->
 											<!--begin::Menu item-->
 											<div class="menu-item px-5">
-<<<<<<< HEAD
 												<form action="{{ route('admin.logout') }}" method="post">
 													@csrf
 													@method('POST')
 													<button type="submit" class="menu-link px-5">Sign Out</button>
 												</form>
-=======
-                                                <form action="{{route('admin.logout')}}" class="menu-item px-5 my-1" method="post">
-                                                    @csrf
-                                                    @method('POST')
-                                                    <button type="submit" class="menu-link px-5">Sign Out</button>
-                                                </form>
->>>>>>> refs/remotes/origin/main
 
 											</div>
 											<!--end::Menu item-->
@@ -1075,109 +1063,27 @@ License: For each use you must have a valid license purchased only from above li
 														<span class="menu-title">Orders Listing</span>
 													</a>
 												</div>
-												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/sales/details.html">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Order Details</span>
-													</a>
-												</div>
-												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/sales/add-order.html">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Add Order</span>
-													</a>
-												</div>
-												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/sales/edit-order.html">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Edit Order</span>
-													</a>
-												</div>
+
 											</div>
 										</div>
-										<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-											<span class="menu-link">
+
+
+
+                                        <div class="menu-item">
+											<a class="menu-link" href="{{route('admin.shipment.methods.index')}}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">Customers</span>
-												<span class="menu-arrow"></span>
-											</span>
-											<div class="menu-sub menu-sub-accordion">
-												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/customers/listing.html">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Customer Listing</span>
-													</a>
-												</div>
-												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/customers/details.html">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Customer Details</span>
-													</a>
-												</div>
-											</div>
+												<span class="menu-title">Shipment Method</span>
+											</a>
 										</div>
-										<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-											<span class="menu-link">
+                                        <div class="menu-item">
+											<a class="menu-link" href="{{route('admin.payment.methods.index')}}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">Reports</span>
-												<span class="menu-arrow"></span>
-											</span>
-											<div class="menu-sub menu-sub-accordion">
-												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/reports/view.html">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Products Viewed</span>
-													</a>
-												</div>
-												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/reports/sales.html">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Sales</span>
-													</a>
-												</div>
-												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/reports/returns.html">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Returns</span>
-													</a>
-												</div>
-												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/reports/customer-orders.html">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Customer Orders</span>
-													</a>
-												</div>
-												<div class="menu-item">
-													<a class="menu-link" href="../../demo8/dist/apps/ecommerce/reports/shipping.html">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Shipping</span>
-													</a>
-												</div>
-											</div>
+												<span class="menu-title">Payment Method</span>
+											</a>
 										</div>
                                         <div class="menu-item">
 											<a class="menu-link" href="{{route('admin.attribute.index')}}">
@@ -1196,6 +1102,14 @@ License: For each use you must have a valid license purchased only from above li
 											</a>
 										</div>
                                         <div class="menu-item">
+											<a class="menu-link" href="{{route('admin.likes.index')}}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Likes</span>
+											</a>
+										</div>
+                                        <div class="menu-item">
 											<a class="menu-link" href="{{route('admin.comments.index')}}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
@@ -1204,7 +1118,7 @@ License: For each use you must have a valid license purchased only from above li
 											</a>
 										</div>
 										<div class="menu-item">
-											<a class="menu-link" href="../../demo8/dist/apps/ecommerce/settings.html">
+											<a class="menu-link" href="#">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>

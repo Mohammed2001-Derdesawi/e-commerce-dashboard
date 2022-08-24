@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Order\Http\Controllers\Order\Api\OrderApiController;
+use Modules\Order\Http\Controllers\Payment\Api\PaymentApiController;
+use Modules\Order\Http\Controllers\Shipment\Api\ShipmentApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,18 +16,27 @@ use Modules\Order\Http\Controllers\Order\Api\OrderApiController;
 |
 */
 
-<<<<<<<< HEAD:Modules/User/Routes/api.php
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::prefix('/admin//')->group(function (){
+    Route::prefix('orders/')->group(function (){
+        Route::get('/',[OrderApiController::class,'getOrders']);
+        Route::get('/rates',[OrderApiController::class,'getrates']);
+
+
+    });
+
+    Route::prefix('shipments')->group(function(){
+        Route::get('/methods',[ShipmentApiController::class,'index']);
+        Route::post('/method/update/{id}',[ShipmentApiController::class,'update']);
+        Route::post('/method/change/status/{id}',[ShipmentApiController::class,'changestatus']);
+
+    });
+    Route::prefix('payments')->group(function(){
+        Route::get('/methods',[PaymentApiController::class,'index']);
+        Route::post('/method/update/{id}',[PaymentApiController::class,'update']);
+        Route::post('/method/change/status/{id}',[PaymentApiController::class,'changestatus']);
+
+    });
+
+
 });
-========
-// Route::middleware('auth:api')->get('/order', function (Request $request) {
-//     return $request->user();
-// });
-
-
-Route::prefix('/admin/orders')->group(function (){
-    Route::get('/',[OrderApiController::class,'getOrders']);
-
-});
->>>>>>>> refs/remotes/origin/main:Modules/Order/Routes/api.php
